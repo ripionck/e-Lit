@@ -165,7 +165,7 @@ const CustomNavbar = () => {
           <Navbar.Link href="services" className="text-lg">
             Services
           </Navbar.Link>
-          <Navbar.Link href="#" className="text-lg">
+          <Navbar.Link href="contact" className="text-lg">
             Contact
           </Navbar.Link>
 
