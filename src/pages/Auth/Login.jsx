@@ -1,9 +1,6 @@
-'use client';
-
-import { Button, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
+import { Button, Label, TextInput, Alert } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
-import CustomToast from '../../components/toast/Toast';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,6 +8,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [loginStatus, setLoginStatus] = useState(null); // State to track login status
 
   const handleChange = (e) => {
     setFormData({
@@ -45,15 +43,24 @@ const Login = () => {
         //save the token to localStorage
         localStorage.setItem('access_token', access);
         localStorage.setItem('refresh_token', refresh);
-        <CustomToast />;
+
+        // Set login status to 'success'
+        setLoginStatus('success');
+
         navigate('/');
       } else {
         // Handle error response
-        const errorData = await response.json(); // Assuming server returns error details in JSON format
+        const errorData = await response.json();
         console.error('Login failed:', errorData);
+
+        // Set login status to 'failure'
+        setLoginStatus('failure');
       }
     } catch (error) {
       console.error('Error during login:', error);
+
+      // Set login status to 'failure'
+      setLoginStatus('failure');
     }
   };
 
@@ -92,6 +99,18 @@ const Login = () => {
 
         <Button type="submit">Login</Button>
       </form>
+      {loginStatus === 'success' && (
+        <Alert color="success">
+          <span className="text-green-700 font-medium">Login successful!</span>
+        </Alert>
+      )}
+      {loginStatus === 'failure' && (
+        <Alert color="error">
+          <span className="text-red-700 font-medium">
+            Login failed! Please try again.
+          </span>
+        </Alert>
+      )}
     </div>
   );
 };
