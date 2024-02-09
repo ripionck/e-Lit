@@ -141,7 +141,7 @@ const CustomNavbar = () => {
           </div>
         </Modal.Body>
       </Modal>
-      <Navbar fluid rounded>
+      <Navbar fluid rounded className="bg-gray-100">
         <Navbar.Brand>
           <img
             src="/src/assets/logo.png"
