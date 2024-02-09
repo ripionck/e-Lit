@@ -4,8 +4,8 @@ import { Accordion, Button, Card } from 'flowbite-react';
 
 const HomeAccordion = () => {
   return (
-    <div className="flex gap-4 mt-8">
-      <Accordion className="w-full">
+    <div className="flex flex-col lg:flex-row gap-4 mt-8">
+      <Accordion className="w-full lg:w-2/3">
         <Accordion.Panel>
           <Accordion.Title>What is Flowbite?</Accordion.Title>
           <Accordion.Content>
@@ -112,7 +112,7 @@ const HomeAccordion = () => {
         </Accordion.Panel>
       </Accordion>
       <Card
-        className="w-full h2/3"
+        className="w-full lg:w-1/3"
         imgAlt="Meaningful alt text for an image that is not purely decorative"
         imgSrc="/src/assets/books/book3.jpg"
       >
