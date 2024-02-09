@@ -44,7 +44,7 @@ const CustomNavbar = () => {
     <>
       <Modal
         show={openProfileModal}
-        size="md"
+        size="xl"
         onClose={onCloseProfileModal}
         popup
       >
@@ -66,32 +66,46 @@ const CustomNavbar = () => {
                 required
               />
             </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="firstName" value="First Name" />
+            <div className="flex gap-4">
+              <div className="w-full">
+                <div className="mb-2 block">
+                  <Label htmlFor="firstName" value="First Name" />
+                </div>
+                <TextInput
+                  id="firstName"
+                  placeholder="Your first name"
+                  // value={firstName} // assuming you have 'firstName' state
+                  // onChange={(event) => setFirstName(event.target.value)}
+                  required
+                />
               </div>
-              <TextInput
-                id="firstName"
-                placeholder="Your first name"
-                // value={firstName} // assuming you have 'firstName' state
-                // onChange={(event) => setFirstName(event.target.value)}
-                required
-              />
+              <div className="w-full">
+                <div className="mb-2 block">
+                  <Label htmlFor="lastName" value="Last Name" />
+                </div>
+                <TextInput
+                  id="lastName"
+                  placeholder="Your last name"
+                  // value={lastName} // assuming you have 'lastName' state
+                  // onChange={(event) => setLastName(event.target.value)}
+                  required
+                />
+              </div>
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="lastName" value="Last Name" />
+                <Label htmlFor="lastName" value="Your Email" />
               </div>
               <TextInput
                 id="lastName"
-                placeholder="Your last name"
+                placeholder="Your Email"
                 // value={lastName} // assuming you have 'lastName' state
                 // onChange={(event) => setLastName(event.target.value)}
                 required
               />
             </div>
             <div>
-              <div className="mb-2 block">
+              <div className="block">
                 <Label htmlFor="image" value="Profile Image URL" />
               </div>
               <TextInput
@@ -115,12 +129,14 @@ const CustomNavbar = () => {
               />
             </div>
             <div className="w-full">
-              {/* <Button onClick={handleChangePassword}>Change Password</Button> */}
-              <Button>Change Password</Button>
+              {/* <Button onClick={handleUpdateProfile}>Change Password</Button> */}
+              <Button>Update Now</Button>
             </div>
             <div className="w-full">
-              {/* <Button onClick={handleUpdateProfile}>Update Profile</Button> */}
-              <Button>Update Profile</Button>
+              {/* <Button onClick={handleChangePassword}>Update Profile</Button> */}
+              <a href="#" className="hover:underline">
+                Change password?
+              </a>
             </div>
           </div>
         </Modal.Body>
