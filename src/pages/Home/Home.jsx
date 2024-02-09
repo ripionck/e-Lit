@@ -1,5 +1,11 @@
+import CustomCarousel from './Carousel/Carousel';
+
 const Home = () => {
-  return <div className="text-2xl">Home</div>;
+  return (
+    <>
+      <CustomCarousel />
+    </>
+  );
 };
 
 export default Home;
