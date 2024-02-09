@@ -159,7 +159,7 @@ const CustomNavbar = () => {
           <Navbar.Link href="/" className="text-lg">
             Home
           </Navbar.Link>
-          <Navbar.Link href="#" className="text-lg">
+          <Navbar.Link href="about" className="text-lg">
             About
           </Navbar.Link>
           <Navbar.Link href="services" className="text-lg">

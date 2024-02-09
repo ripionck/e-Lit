@@ -7,6 +7,7 @@ import Profile from '../pages/Profile/Profile';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import BookList from '../pages/BookList/BookList';
 import Services from '../pages/Services/Services';
+import About from '../pages/About/About';
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: 'services',
         element: <Services />,
+      },
+      {
+        path: 'About',
+        element: <About />,
       },
     ],
   },
