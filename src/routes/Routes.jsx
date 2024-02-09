@@ -5,6 +5,7 @@ import Register from '../pages/Auth/Register';
 import Login from '../pages/Auth/Login';
 import Profile from '../pages/Profile/Profile';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import BookList from '../pages/BookList/BookList';
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: 'book-list',
+        element: <BookList />,
       },
     ],
   },

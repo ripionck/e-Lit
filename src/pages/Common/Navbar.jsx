@@ -69,7 +69,7 @@ const CustomNavbar = () => {
       <Navbar.Toggle />
 
       <Navbar.Collapse>
-        <Navbar.Link href="/" active className="text-lg">
+        <Navbar.Link href="/" className="text-lg">
           Home
         </Navbar.Link>
         <Navbar.Link href="#" className="text-lg">
@@ -77,9 +77,6 @@ const CustomNavbar = () => {
         </Navbar.Link>
         <Navbar.Link href="#" className="text-lg">
           Services
-        </Navbar.Link>
-        <Navbar.Link href="#" className="text-lg">
-          Pricing
         </Navbar.Link>
         <Navbar.Link href="#" className="text-lg">
           Contact
@@ -110,7 +107,9 @@ const CustomNavbar = () => {
               <Dropdown.Item href="profile" icon={HiUser}>
                 Profile
               </Dropdown.Item>
-              <Dropdown.Item icon={HiOutlineViewList}>Book List</Dropdown.Item>
+              <Dropdown.Item href="book-list" icon={HiOutlineViewList}>
+                Book List
+              </Dropdown.Item>
               <Dropdown.Item icon={HiOutlinePlusCircle}>Add Book</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item onClick={logout} icon={HiArrowSmRight}>
