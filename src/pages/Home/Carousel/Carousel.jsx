@@ -9,13 +9,39 @@ const CustomCarousel = () => {
         onSlideChange={(index) => console.log('onSlideChange()', index)}
       >
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-          Slide 1
+          <img
+            src="/src/assets/books/book1.jpg"
+            alt="slide 1"
+            className="w-full"
+          />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-          Slide 2
+          <img
+            src="/src/assets/books/book2.jpg"
+            alt="slide 2"
+            className="w-full"
+          />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-          Slide 3
+          <img
+            src="/src/assets/books/book3.jpg"
+            alt="slide 3"
+            className="w-full"
+          />
+        </div>
+        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
+          <img
+            src="/src/assets/books/book4.jpg"
+            alt="slide 4"
+            className="w-full"
+          />
+        </div>
+        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
+          <img
+            src="/src/assets/books/book5.jpg"
+            alt="slide 5"
+            className="w-full"
+          />
         </div>
       </Carousel>
     </div>

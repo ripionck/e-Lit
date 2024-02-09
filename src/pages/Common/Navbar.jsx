@@ -1,6 +1,13 @@
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  HiArrowSmRight,
+  HiChartPie,
+  HiUser,
+  HiOutlineViewList,
+  HiOutlinePlusCircle,
+} from 'react-icons/hi';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
@@ -48,27 +55,35 @@ const CustomNavbar = () => {
 
   return (
     <Navbar fluid rounded>
-      <Navbar.Brand href="https://flowbite-react.com">
+      <Navbar.Brand>
         <img
-          src="/favicon.svg"
-          className="mr-3 h-6 sm:h-9"
-          alt="Flowbite React Logo"
+          src="/src/assets/logo.png"
+          className="mr-3 lg:h-20 h-12"
+          alt="Logo"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite React
+        <span className="self-center whitespace-nowrap text-2xl  font-semibold dark:text-white">
+          E-Lit Emporium
         </span>
       </Navbar.Brand>
 
       <Navbar.Toggle />
 
       <Navbar.Collapse>
-        <Navbar.Link href="/" active>
+        <Navbar.Link href="/" active className="text-lg">
           Home
         </Navbar.Link>
-        <Navbar.Link href="#">About</Navbar.Link>
-        <Navbar.Link href="#">Services</Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Contact</Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          About
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          Services
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          Pricing
+        </Navbar.Link>
+        <Navbar.Link href="#" className="text-lg">
+          Contact
+        </Navbar.Link>
 
         {isAuthenticated() ? (
           <div className="flex md:order-2">
@@ -76,30 +91,41 @@ const CustomNavbar = () => {
               arrowIcon={false}
               inline
               label={
-                <Avatar
-                  alt="User settings"
-                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  rounded
-                />
+                userData && userData.avatar ? (
+                  <Avatar alt="User Avatar" img={userData.avatar} rounded />
+                ) : (
+                  <Avatar rounded />
+                )
               }
             >
               <Dropdown.Header>
-                <span className="block text-sm">{userData.username}</span>
+                {/* <span className="block text-sm">{userData.username}</span>
                 <span className="block truncate text-sm font-medium">
                   {userData.email}
-                </span>
+                </span> */}
               </Dropdown.Header>
-              <Dropdown.Item>Dashboard</Dropdown.Item>
-              <Dropdown.Item>Profile</Dropdown.Item>
-              <Dropdown.Item>Earnings</Dropdown.Item>
+              <Dropdown.Item href="dashboard" icon={HiChartPie}>
+                Dashboard
+              </Dropdown.Item>
+              <Dropdown.Item href="profile" icon={HiUser}>
+                Profile
+              </Dropdown.Item>
+              <Dropdown.Item icon={HiOutlineViewList}>Book List</Dropdown.Item>
+              <Dropdown.Item icon={HiOutlinePlusCircle}>Add Book</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
+              <Dropdown.Item onClick={logout} icon={HiArrowSmRight}>
+                Logout
+              </Dropdown.Item>
             </Dropdown>
           </div>
         ) : (
-          <div>
-            <Navbar.Link href="/register">Register</Navbar.Link>
-            <Navbar.Link href="/login">Login</Navbar.Link>
+          <div className="lg:flex gap-4">
+            <Navbar.Link href="/register" className="text-lg">
+              Register
+            </Navbar.Link>
+            <Navbar.Link href="/login" className="text-lg">
+              Login
+            </Navbar.Link>
           </div>
         )}
       </Navbar.Collapse>

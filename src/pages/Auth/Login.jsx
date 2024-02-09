@@ -3,6 +3,7 @@
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CustomToast from '../../components/toast/Toast';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Login = () => {
         //save the token to localStorage
         localStorage.setItem('access_token', access);
         localStorage.setItem('refresh_token', refresh);
-
+        <CustomToast />;
         navigate('/');
       } else {
         // Handle error response
