@@ -49,6 +49,7 @@ const ForgotPassword = () => {
                         className="peer block w-full rounded-md border border-gray-200 bg-gray-50 py-3 px-4 text-sm outline-none ring-offset-1 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500"
                         required
                         aria-describedby="email-error"
+                        placeholder="example@gmail.com"
                       />
                       <p
                         className="mt-2 hidden text-xs text-rose-600 peer-invalid:block"
@@ -81,7 +82,7 @@ const ForgotPassword = () => {
               className="font-medium text-blue-600 decoration-2 hover:underline"
               href="login"
             >
-              Sign in here
+              Login here
             </a>
           </span>
           <a

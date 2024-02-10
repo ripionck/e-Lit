@@ -134,7 +134,10 @@ const CustomNavbar = () => {
             </div>
             <div className="w-full">
               {/* <Button onClick={handleChangePassword}>Update Profile</Button> */}
-              <a href="#" className="hover:underline">
+              <a
+                href="change-password"
+                className="hover:underline cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"
+              >
                 Change password?
               </a>
             </div>

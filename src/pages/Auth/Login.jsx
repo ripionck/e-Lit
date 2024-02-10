@@ -83,7 +83,7 @@ const Login = () => {
                 <TextInput
                   id="email2"
                   type="email"
-                  placeholder="name@flowbite.com"
+                  placeholder="example@gmail.com"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}

@@ -97,7 +97,7 @@ const Register = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="name@flowbite.com"
+                placeholder="example@gmail.com"
                 required
                 shadow
               />
