@@ -62,79 +62,99 @@ const Register = () => {
   };
 
   return (
-    <div className="w-1/2 mx-auto my-12">
-      <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit}>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="username" value="Username" />
-          </div>
-          <TextInput
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            shadow
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="email2" value="Email" />
-          </div>
-          <TextInput
-            type="email"
-            id="email2"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="name@flowbite.com"
-            required
-            shadow
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="password1" value="Password" />
-          </div>
-          <TextInput
-            type="password"
-            id="password1"
-            name="password1"
-            value={formData.password1}
-            onChange={handleChange}
-            required
-            shadow
-          />
-        </div>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="password2" value="Confirm password" />
-          </div>
-          <TextInput
-            id="password2"
-            type="password"
-            name="password2"
-            value={formData.password2}
-            onChange={handleChange}
-            required
-            shadow
-          />
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="agree" />
-          <Label htmlFor="agree" className="flex">
-            I agree with the&nbsp;
+    <div className="h-screen mx-auto max-w-md mt-8">
+      <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div className="p-4 sm:p-7">
+          <h3 className="text-xl font-black text-slate-700">Register</h3>
+          <p className="mt-2 mb-5 text-base leading-tight text-gray-600">
+            Create an account to get access E-Lit Emporium
+          </p>
+          <form
+            className="flex max-w-md flex-col gap-4"
+            onSubmit={handleSubmit}
+          >
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="username" value="Username" />
+              </div>
+              <TextInput
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+                shadow
+              />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="email2" value="Email" />
+              </div>
+              <TextInput
+                type="email"
+                id="email2"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="name@flowbite.com"
+                required
+                shadow
+              />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="password1" value="Password" />
+              </div>
+              <TextInput
+                type="password"
+                id="password1"
+                name="password1"
+                value={formData.password1}
+                onChange={handleChange}
+                required
+                shadow
+              />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="password2" value="Confirm password" />
+              </div>
+              <TextInput
+                id="password2"
+                type="password"
+                name="password2"
+                value={formData.password2}
+                onChange={handleChange}
+                required
+                shadow
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <Checkbox id="agree" />
+              <Label htmlFor="agree" className="flex">
+                I agree with the&nbsp;
+                <a
+                  href="#"
+                  className="text-cyan-600 hover:underline dark:text-cyan-500"
+                >
+                  terms and conditions
+                </a>
+              </Label>
+            </div>
+            <Button type="submit">Register new account</Button>
+          </form>
+          <p className="my-4">
+            Already have an account?
             <a
-              href="#"
-              className="text-cyan-600 hover:underline dark:text-cyan-500"
+              href="login"
+              className="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"
             >
-              terms and conditions
+              Login here
             </a>
-          </Label>
+          </p>
         </div>
-        <Button type="submit">Register new account</Button>
-      </form>
+      </div>
     </div>
   );
 };
