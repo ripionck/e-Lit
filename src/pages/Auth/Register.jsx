@@ -10,7 +10,7 @@ const Register = () => {
     password2: '',
     email: '',
   });
-  console.log(formData);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
