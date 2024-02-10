@@ -1,7 +1,56 @@
+import { Alert } from 'flowbite-react';
+import { useState } from 'react';
+
 const ForgotPassword = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+  });
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const apiUrl =
+      'https://e-library-z7s7.onrender.com/accounts/password/reset/';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Email sent successfully, show success alert
+        setShowSuccessAlert(true);
+        // Reset form data
+        setFormData({ email: '' });
+      } else {
+        // Handle error response
+        const errorData = await response.json();
+        console.error('Password change failed:', errorData);
+      }
+    } catch (error) {
+      console.error('Error during change password:', error);
+    }
+  };
   return (
     <>
       <div className="h-screen mx-auto max-w-md mt-8">
+        {showSuccessAlert && (
+          <Alert color="success" onDismiss={() => setShowSuccessAlert(false)}>
+            <span className="font-medium mb-4">
+              Password reset e-mail has been sent.
+            </span>
+          </Alert>
+        )}
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
           <div className="p-4 sm:p-7">
             <div className="text-center">
@@ -31,7 +80,7 @@ const ForgotPassword = () => {
 
             <div className="mt-6">
               {/* <!-- Form --> */}
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="grid gap-y-4">
                   {/* <!-- Form Group --> */}
                   <div>
@@ -46,6 +95,8 @@ const ForgotPassword = () => {
                         type="email"
                         id="email"
                         name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         className="peer block w-full rounded-md border border-gray-200 bg-gray-50 py-3 px-4 text-sm outline-none ring-offset-1 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500"
                         required
                         aria-describedby="email-error"
