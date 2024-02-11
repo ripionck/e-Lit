@@ -33,7 +33,7 @@ const Dashboard = () => {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
-      <div className="flex-1 p-5">
+      <div className="flex-1 p-2">
         <Outlet />
       </div>
     </div>
