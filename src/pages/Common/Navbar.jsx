@@ -21,7 +21,6 @@ import {
 const CustomNavbar = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [openProfileModal, setOpenProfileModal] = useState(false);
   const [values, setValues] = useState({
     username: '',
@@ -93,13 +92,11 @@ const CustomNavbar = () => {
     })
       .then((res) => {
         console.log(res);
-        setUpdateSuccess(true);
         onCloseProfileModal();
         navigate('/');
       })
       .catch((error) => {
         console.log(error);
-        setUpdateSuccess(false);
       });
   };
 
@@ -312,7 +309,10 @@ const CustomNavbar = () => {
                 <Dropdown.Item href="book-list" icon={HiOutlineViewList}>
                   Book List
                 </Dropdown.Item>
-                <Dropdown.Item icon={HiOutlinePlusCircle}>
+                <Dropdown.Item href="add-author" icon={HiOutlinePlusCircle}>
+                  Add Author
+                </Dropdown.Item>
+                <Dropdown.Item href="add-book" icon={HiOutlinePlusCircle}>
                   Add Book
                 </Dropdown.Item>
                 <Dropdown.Item onClick={logout} icon={HiArrowSmRight}>

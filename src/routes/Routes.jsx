@@ -11,6 +11,8 @@ import About from '../pages/About/About';
 import Contact from '../pages/Contact/Contact';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import ChangePassword from '../pages/Auth/ChangePassword';
+import AddBook from '../pages/AddBook/AddBook';
+import AddAuthor from '../pages/AddAuthor/AddAuthor';
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ export const router = createBrowserRouter([
       {
         path: 'book-list',
         element: <BookList />,
+      },
+      {
+        path: 'add-book',
+        element: <AddBook />,
+      },
+      {
+        path: 'add-author',
+        element: <AddAuthor />,
       },
       {
         path: 'services',
