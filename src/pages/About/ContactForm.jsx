@@ -1,9 +1,6 @@
-import Feature from './Feature';
-
-const Contact = () => {
+const ContactForm = () => {
   return (
     <>
-      <Feature />
       <div className="sm:p-10 my-auto">
         <section className="mx-auto max-w-screen-xl md:rounded-md md:border md:shadow-lg">
           <div className="grid grid-cols-4 text-gray-800 lg:grid-cols-3">
@@ -148,4 +145,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactForm;

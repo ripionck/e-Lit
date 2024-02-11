@@ -8,7 +8,6 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import BookList from '../pages/BookList/BookList';
 import Services from '../pages/Services/Services';
 import About from '../pages/About/About';
-import Contact from '../pages/Contact/Contact';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import ChangePassword from '../pages/Auth/ChangePassword';
 import AddBook from '../pages/AddBook/AddBook';
@@ -66,10 +65,6 @@ export const router = createBrowserRouter([
       {
         path: 'about',
         element: <About />,
-      },
-      {
-        path: 'contact',
-        element: <Contact />,
       },
     ],
   },
