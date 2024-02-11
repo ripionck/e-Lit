@@ -16,6 +16,8 @@ import Books from '../pages/Dashboard/Books/Books';
 import Categories from '../pages/Dashboard/Categories/Categories';
 import AddBook from '../pages/Dashboard/Books/AddBook/AddBook';
 import AddAuthor from '../pages/Dashboard/Authors/AddAuthor/AddAuthor';
+import EditBook from '../pages/Dashboard/Books/EditBook/EditBook';
+import EditAuthor from '../pages/Dashboard/Authors/EditAuthor/EditAuthor';
 
 export const router = createBrowserRouter([
   {
@@ -81,8 +83,16 @@ export const router = createBrowserRouter([
         element: <AddBook />,
       },
       {
+        path: '/edit-book/:id',
+        element: <EditBook />,
+      },
+      {
         path: 'add-author',
         element: <AddAuthor />,
+      },
+      {
+        path: '/edit-author/:id',
+        element: <EditAuthor />,
       },
       {
         path: 'about',

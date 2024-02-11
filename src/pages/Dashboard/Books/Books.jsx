@@ -22,7 +22,7 @@ const Books = () => {
   }, []);
 
   return (
-    <div className="h-screen overflow-x-auto mt-2">
+    <div className="h-screen overflow-x-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Cover</Table.HeadCell>
@@ -53,7 +53,7 @@ const Books = () => {
               <Table.Cell>{book.quantity}</Table.Cell>
               <Table.Cell>
                 <a
-                  href="#"
+                  href={`/edit-book/${book.id}`}
                   className="font-medium mx-4 text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                   Edit

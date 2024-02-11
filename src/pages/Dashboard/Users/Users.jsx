@@ -7,7 +7,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(' https://e-library-z7s7.onrender.com/accounts/user/')
+    fetch(' https://e-library-z7s7.onrender.com/accounts/all-user/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -22,7 +22,7 @@ const Users = () => {
       });
   }, []);
   return (
-    <div className="h-screen overflow-x-auto mt-6">
+    <div className="h-screen overflow-x-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Avatar</Table.HeadCell>

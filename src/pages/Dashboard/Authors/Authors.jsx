@@ -7,7 +7,7 @@ const Authors = () => {
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
-    fetch(' https://e-library-z7s7.onrender.com/author/')
+    fetch('https://e-library-z7s7.onrender.com/author/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -21,8 +21,29 @@ const Authors = () => {
         console.error('Error:', error);
       });
   }, []);
+
+  const token = localStorage.getItem('access_token');
+  const handleDelete = (id) => {
+    fetch(`https://e-library-z7s7.onrender.com/author/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to delete author');
+        }
+        // Remove the deleted author from the state
+        setAuthors(authors.filter((author) => author.id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting author:', error);
+      });
+  };
+
   return (
-    <div className="h-screen overflow-x-auto mt-6">
+    <div className="h-screen overflow-x-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Avatar</Table.HeadCell>
@@ -33,16 +54,16 @@ const Authors = () => {
           </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {authors.map((author, id) => (
+          {authors.map((author) => (
             <Table.Row
-              key={id}
+              key={author.id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <Table.Cell>
                 <img
                   className="h-8 w-8"
-                  src={author.avater}
-                  alt={author.title}
+                  src={author.avatar}
+                  alt={author.first_name}
                 />
               </Table.Cell>
               <Table.Cell>
@@ -50,18 +71,20 @@ const Authors = () => {
               </Table.Cell>
               <Table.Cell>{author.description}</Table.Cell>
               <Table.Cell>
-                <a
-                  href="#"
-                  className="font-medium mx-4 text-cyan-600 hover:underline dark:text-cyan-500"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
-                  className="font-medium text-red-600 hover:underline dark:text-red-500"
-                >
-                  Delete
-                </a>
+                <div className="flex gap-4">
+                  <a
+                    href={`/edit-author/${author.id}`}
+                    className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                  >
+                    Edit
+                  </a>
+                  <button
+                    className="font-medium text-red-600 hover:underline dark:text-red-500"
+                    onClick={() => handleDelete(author.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </Table.Cell>
             </Table.Row>
           ))}
@@ -70,4 +93,5 @@ const Authors = () => {
     </div>
   );
 };
+
 export default Authors;

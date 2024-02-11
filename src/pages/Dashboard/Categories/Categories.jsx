@@ -7,7 +7,7 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(' https://e-library-z7s7.onrender.com/author/')
+    fetch(' https://e-library-z7s7.onrender.com/category/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -22,7 +22,7 @@ const Categories = () => {
       });
   }, []);
   return (
-    <div className="h-screen overflow-x-auto mt-6">
+    <div className="h-screen overflow-x-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Category Name</Table.HeadCell>
