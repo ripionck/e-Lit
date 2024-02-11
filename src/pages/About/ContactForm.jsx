@@ -5,7 +5,7 @@ const ContactForm = () => {
         <section className="mx-auto max-w-screen-xl md:rounded-md md:border md:shadow-lg">
           <div className="grid grid-cols-4 text-gray-800 lg:grid-cols-3">
             <div className="col-span-4 bg-gray-50 px-8 py-10 text-gray-800 md:col-span-2 md:border-r md:px-10 md:py-12 lg:col-span-1">
-              <h2 className="mb-8 text-2xl font-black">Contact me</h2>
+              <h2 className="mb-8 text-2xl font-black">Contact Us</h2>
               <ul>
                 <li className="mb-6 flex items-start text-left">
                   <svg

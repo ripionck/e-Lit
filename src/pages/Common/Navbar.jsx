@@ -255,7 +255,7 @@ const CustomNavbar = () => {
 
         <Navbar.Toggle />
 
-        <Navbar.Collapse>
+        <Navbar.Collapse className="px-8">
           <Navbar.Link href="/" className="text-lg">
             Home
           </Navbar.Link>
