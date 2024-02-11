@@ -274,8 +274,11 @@ const CustomNavbar = () => {
           <Navbar.Link href="about" className="text-lg">
             About
           </Navbar.Link>
+          <Navbar.Link href="about" className="text-lg">
+            Category
+          </Navbar.Link>
           <Navbar.Link href="services" className="text-lg">
-            Services
+            Books
           </Navbar.Link>
           <Navbar.Link href="contact" className="text-lg">
             Contact
