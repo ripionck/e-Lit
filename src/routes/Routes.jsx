@@ -9,13 +9,13 @@ import BookList from '../pages/BookList/BookList';
 import About from '../pages/About/About';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import ChangePassword from '../pages/Auth/ChangePassword';
-import AddBook from '../pages/AddBook/AddBook';
-import AddAuthor from '../pages/AddAuthor/AddAuthor';
 import Authors from '../pages/Dashboard/Authors/Authors';
 import Publishers from '../pages/Dashboard/Publishers/Publishers';
 import Users from '../pages/Dashboard/Users/Users';
 import Books from '../pages/Dashboard/Books/Books';
 import Categories from '../pages/Dashboard/Categories/Categories';
+import AddBook from '../pages/Dashboard/Books/AddBook/AddBook';
+import AddAuthor from '../pages/Dashboard/Authors/AddAuthor/AddAuthor';
 
 export const router = createBrowserRouter([
   {

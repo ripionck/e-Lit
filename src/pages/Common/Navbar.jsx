@@ -258,10 +258,10 @@ const CustomNavbar = () => {
           <Navbar.Link href="/" className="text-lg">
             Home
           </Navbar.Link>
-          <Navbar.Link href="about" className="text-lg">
+          <Navbar.Link href="/about" className="text-lg">
             About
           </Navbar.Link>
-          <Navbar.Link href="services" className="text-lg">
+          <Navbar.Link href="/books" className="text-lg">
             All Books
           </Navbar.Link>
 
@@ -287,17 +287,20 @@ const CustomNavbar = () => {
                 <Dropdown.Item onClick={handleProfileClick} icon={HiUser}>
                   Profile
                 </Dropdown.Item>
-                <Dropdown.Item href="book-list" icon={HiOutlineViewList}>
+                <Dropdown.Item href="/book-list" icon={HiOutlineViewList}>
                   Book List
                 </Dropdown.Item>
 
-                <Dropdown.Item href="add-author" icon={HiOutlinePlusCircle}>
+                <Dropdown.Item href="/add-author" icon={HiOutlinePlusCircle}>
                   Add Author
                 </Dropdown.Item>
-                <Dropdown.Item href="add-book" icon={HiOutlinePlusCircle}>
+                <Dropdown.Item href="/add-book" icon={HiOutlinePlusCircle}>
                   Add Book
                 </Dropdown.Item>
-                <Dropdown.Item href="/dashboard" icon={HiOutlinePlusCircle}>
+                <Dropdown.Item
+                  href="/dashboard/authors"
+                  icon={HiOutlinePlusCircle}
+                >
                   Dashboard
                 </Dropdown.Item>
 
