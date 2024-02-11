@@ -7,8 +7,6 @@ import {
   Label,
   TextInput,
   Button,
-  FileInput,
-  Alert,
   Spinner,
 } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
@@ -22,30 +20,17 @@ import {
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [openProfileModal, setOpenProfileModal] = useState(false);
-  const [formData, setFormData] = useState({
+  const [values, setValues] = useState({
     username: '',
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     phone: '',
-    avater: null,
     balance: 0,
   });
-  console.log(formData);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
 
   const isAuthenticated = () => {
     return !!localStorage.getItem('access_token');
@@ -66,77 +51,62 @@ const CustomNavbar = () => {
   const token = localStorage.getItem('access_token');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          'https://e-library-z7s7.onrender.com/accounts/user/',
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+    fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        const data = await response.json();
-
-        setUser(data);
-        setFormData(data);
-      } catch (error) {
-        setError(error);
-      } finally {
+        return response.json();
+      })
+      .then((data) => {
         setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [token]);
+        setValues({
+          ...values,
+          username: data.username,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          phone: data.phone,
+        });
+      })
+      .catch((error) => {
+        setLoading(true);
+        console.error('Error:', error);
+      });
+  }, []);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch(
-        'https://e-library-z7s7.onrender.com/accounts/user/',
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      const result = await response.json();
-      console.log('Success:', result);
-      if (!response.ok) {
-        throw new Error('Failed to update user information');
-      }
-      setSuccessMessage('User information updated successfully');
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-      setErrorMessage(error.message);
-    }
+
+    await fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => {
+        console.log(res);
+        setUpdateSuccess(true);
+        onCloseProfileModal();
+        navigate('/');
+      })
+      .catch((error) => {
+        console.log(error);
+        setUpdateSuccess(false);
+      });
   };
 
   if (loading) {
     return (
       <div className="flex justify-center">
         <Spinner aria-label="Default status example" />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        <Alert color="error">
-          <span className="text-red-700 font-medium">
-            Profile update failed! Please try again.
-          </span>
-        </Alert>
       </div>
     );
   }
@@ -155,103 +125,126 @@ const CustomNavbar = () => {
             <h3 className="text-xl font-medium text-gray-900 dark:text-white">
               Your Profile
             </h3>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="username" value="Username" />
-              </div>
-              <TextInput
-                id="username"
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={user?.username}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex gap-4">
-              <div className="w-full">
+            <form onSubmit={handleUpdate}>
+              <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="firstName" value="First Name" />
+                  <Label htmlFor="username" value="Username" />
                 </div>
                 <TextInput
-                  id="firstName"
-                  name="first_name"
-                  placeholder="First name"
-                  value={user?.first_name}
-                  onChange={handleChange}
+                  id="username"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={values?.username}
+                  onChange={(e) =>
+                    setValues({ ...values, username: e.target.value })
+                  }
+                  required
                 />
               </div>
-              <div className="w-full">
+              <div className="flex gap-4">
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="first_name" value="First Name" />
+                  </div>
+                  <TextInput
+                    id="first_name"
+                    name="first_name"
+                    type="text"
+                    placeholder="First name"
+                    value={values?.first_name}
+                    onChange={(e) =>
+                      setValues({ ...values, first_name: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="last_name" value="Last Name" />
+                  </div>
+                  <TextInput
+                    id="last_name"
+                    type="text"
+                    name="last_name"
+                    placeholder="Last name"
+                    value={values?.last_name}
+                    onChange={(e) =>
+                      setValues({ ...values, last_name: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+              </div>
+              <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="lastName" value="Last Name" />
+                  <Label htmlFor="email" value="Email Address" />
                 </div>
                 <TextInput
-                  id="lastName"
-                  name="last_name"
-                  placeholder="Last name"
-                  value={user?.last_name}
-                  onChange={handleChange}
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="example@gmail.com"
+                  value={values?.email}
+                  onChange={(e) =>
+                    setValues({ ...values, email: e.target.value })
+                  }
+                  required
                 />
               </div>
-            </div>
-            <div>
-              <div className="mb-2 block">
-                <Label htmlFor="email" value="Email Address" />
-              </div>
-              <TextInput
-                id="email"
-                name="email"
-                placeholder="example@gmail.com"
-                value={user?.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="flex gap-4">
-              <div className="w-full">
-                <div className="mb-2 block">
-                  <Label htmlFor="phone" value="Phone Number" />
+              <div className="flex gap-4">
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="phone" value="Phone Number" />
+                  </div>
+                  <TextInput
+                    id="phone"
+                    type="number"
+                    name="phone"
+                    value={values?.phone}
+                    onChange={(e) =>
+                      setValues({ ...values, phone: e.target.value })
+                    }
+                    required
+                  />
                 </div>
-                <TextInput
-                  id="phone"
-                  name="phone"
-                  value={user?.phone}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="w-full">
-                <div className="mb-2 block">
-                  <Label htmlFor="balance" value="Account Balance" />
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="balance" value="Account Balance" />
+                  </div>
+                  <TextInput
+                    id="balance"
+                    type="number"
+                    name="balance"
+                    value={values?.balance}
+                    onChange={(e) =>
+                      setValues({ ...values, balance: e.target.value })
+                    }
+                    required
+                  />
                 </div>
-                <TextInput
-                  id="balance"
-                  name="balance"
-                  value={user?.balance}
-                  onChange={handleChange}
+              </div>
+              {/* <div>
+                <div className="block mb-2">
+                  <Label htmlFor="multiple-file-upload" value="Profile Image" />
+                </div>
+                <FileInput
+                  id="multiple-file-upload"
+                  name="avater"
+                  type="file"
+                  value={values?.avater}
+                  onChange={(e) =>
+                    setValues({ ...values, avater: e.target.value })
+                  }
+                  multiple
                 />
-              </div>
-            </div>
-            <div>
-              <div className="block mb-2">
-                <Label htmlFor="multiple-file-upload" value="Profile Image" />
-              </div>
-              <FileInput
-                id="multiple-file-upload"
-                name="avater"
-                type="file"
-                onChange={handleChange}
-                multiple
-              />
-            </div>
+              </div> */}
 
-            <div className="w-full mt-4">
-              <Button onClick={handleUpdate}>Update Now</Button>
-            </div>
+              <div className="w-full mt-4">
+                <Button type="submit">Update Now</Button>
+              </div>
+            </form>
 
-            {successMessage && (
-              <span className="text-green-700 font-medium">
-                Profile update successful!
-              </span>
-            )}
             <div className="w-full">
               <a
                 href="change-password"
@@ -297,17 +290,17 @@ const CustomNavbar = () => {
                 arrowIcon={false}
                 inline
                 label={
-                  user && user.avater ? (
-                    <Avatar alt="User Avatar" src={user?.avater} rounded />
+                  values && values?.avater ? (
+                    <img src={values?.avater} alt="User Avatar" />
                   ) : (
                     <Avatar rounded />
                   )
                 }
               >
                 <Dropdown.Header>
-                  <span className="block text-sm">{user?.username}</span>
+                  <span className="block text-sm">{values?.username}</span>
                   <span className="block truncate text-sm font-medium">
-                    {user?.email}
+                    {values?.email}
                   </span>
                 </Dropdown.Header>
                 <Dropdown.Item href="dashboard" icon={HiChartPie}>
