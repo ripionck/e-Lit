@@ -1,6 +1,7 @@
 'use client';
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
+import PaginationX from '../../components/Pagination';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -55,6 +56,7 @@ const BookList = () => {
           ))}
         </Table.Body>
       </Table>
+      <PaginationX />
     </div>
   );
 };

@@ -2,6 +2,7 @@
 
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
+import PaginationX from '../../../components/Pagination';
 
 const Authors = () => {
   const [authors, setAuthors] = useState([]);
@@ -90,6 +91,7 @@ const Authors = () => {
           ))}
         </Table.Body>
       </Table>
+      <PaginationX />
     </div>
   );
 };

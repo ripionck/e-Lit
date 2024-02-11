@@ -14,6 +14,7 @@ import {
   HiUser,
   HiOutlineViewList,
   HiOutlinePlusCircle,
+  HiOutlineCurrencyDollar,
 } from 'react-icons/hi';
 
 const CustomNavbar = () => {
@@ -261,7 +262,7 @@ const CustomNavbar = () => {
           <Navbar.Link href="/about" className="text-lg">
             About
           </Navbar.Link>
-          <Navbar.Link href="/books" className="text-lg">
+          <Navbar.Link href="/book-list" className="text-lg">
             All Books
           </Navbar.Link>
 
@@ -283,6 +284,9 @@ const CustomNavbar = () => {
                   <span className="block truncate text-sm font-medium">
                     {values?.email}
                   </span>
+                  <span className="block truncate text-sm font-medium">
+                    $ {values?.balance}
+                  </span>
                 </Dropdown.Header>
                 <Dropdown.Item onClick={handleProfileClick} icon={HiUser}>
                   Profile
@@ -290,7 +294,9 @@ const CustomNavbar = () => {
                 <Dropdown.Item href="/book-list" icon={HiOutlineViewList}>
                   Book List
                 </Dropdown.Item>
-
+                <Dropdown.Item href="/deposit" icon={HiOutlineCurrencyDollar}>
+                  Deposit
+                </Dropdown.Item>
                 <Dropdown.Item href="/add-author" icon={HiOutlinePlusCircle}>
                   Add Author
                 </Dropdown.Item>

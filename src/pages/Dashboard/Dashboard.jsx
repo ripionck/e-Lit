@@ -4,6 +4,7 @@ import { Sidebar } from 'flowbite-react';
 import { HiInbox, HiUser, HiBookOpen } from 'react-icons/hi';
 import { BiSolidCategory } from 'react-icons/bi';
 import { FaUser, FaUserEdit } from 'react-icons/fa';
+import { TbReportMoney } from 'react-icons/tb';
 import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -26,6 +27,9 @@ const Dashboard = () => {
             </Sidebar.Item>
             <Sidebar.Item href="/dashboard/categories" icon={BiSolidCategory}>
               All Categories
+            </Sidebar.Item>
+            <Sidebar.Item href="/dashboard/transactions" icon={TbReportMoney}>
+              Transactions
             </Sidebar.Item>
             <Sidebar.Item href="#" icon={HiInbox} label="3">
               Inbox
