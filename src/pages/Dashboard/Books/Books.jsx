@@ -15,7 +15,6 @@ const Books = () => {
       })
       .then((data) => {
         setBooks(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -55,9 +54,15 @@ const Books = () => {
               <Table.Cell>
                 <a
                   href="#"
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                  className="font-medium mx-4 text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                   Edit
+                </a>
+                <a
+                  href="#"
+                  className="font-medium text-red-600 hover:underline dark:text-red-500"
+                >
+                  Delete
                 </a>
               </Table.Cell>
             </Table.Row>
