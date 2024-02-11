@@ -6,12 +6,16 @@ import Login from '../pages/Auth/Login';
 import Profile from '../pages/Profile/Profile';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import BookList from '../pages/BookList/BookList';
-import Services from '../pages/Services/Services';
 import About from '../pages/About/About';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import ChangePassword from '../pages/Auth/ChangePassword';
 import AddBook from '../pages/AddBook/AddBook';
 import AddAuthor from '../pages/AddAuthor/AddAuthor';
+import Authors from '../pages/Dashboard/Authors/Authors';
+import Publishers from '../pages/Dashboard/Publishers/Publishers';
+import Users from '../pages/Dashboard/Users/Users';
+import Books from '../pages/Dashboard/Books/Books';
+import Categories from '../pages/Dashboard/Categories/Categories';
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +49,28 @@ export const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <Dashboard />,
+        children: [
+          {
+            path: 'authors',
+            element: <Authors />,
+          },
+          {
+            path: 'publishers',
+            element: <Publishers />,
+          },
+          {
+            path: 'users',
+            element: <Users />,
+          },
+          {
+            path: 'books',
+            element: <Books />,
+          },
+          {
+            path: 'categories',
+            element: <Categories />,
+          },
+        ],
       },
       {
         path: 'book-list',
@@ -57,10 +83,6 @@ export const router = createBrowserRouter([
       {
         path: 'add-author',
         element: <AddAuthor />,
-      },
-      {
-        path: 'services',
-        element: <Services />,
       },
       {
         path: 'about',

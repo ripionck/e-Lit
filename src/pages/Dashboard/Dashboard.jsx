@@ -1,50 +1,42 @@
 'use client';
 
 import { Sidebar } from 'flowbite-react';
-import {
-  HiArrowSmRight,
-  HiChartPie,
-  HiInbox,
-  HiShoppingBag,
-  HiTable,
-  HiUser,
-  HiViewBoards,
-} from 'react-icons/hi';
+import { HiInbox, HiUser, HiBookOpen } from 'react-icons/hi';
+import { BiSolidCategory } from 'react-icons/bi';
+import { FaUser, FaUserEdit } from 'react-icons/fa';
+import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <Sidebar aria-label="Default sidebar example">
-      <Sidebar.Items>
-        <Sidebar.ItemGroup>
-          <Sidebar.Item href="#" icon={HiChartPie}>
-            Dashboard
-          </Sidebar.Item>
-          <Sidebar.Item
-            href="#"
-            icon={HiViewBoards}
-            label="Pro"
-            labelColor="dark"
-          >
-            Kanban
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiInbox} label="3">
-            Inbox
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiUser}>
-            Profile
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiShoppingBag}>
-            Products
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiArrowSmRight}>
-            Logout
-          </Sidebar.Item>
-          <Sidebar.Item href="#" icon={HiTable}>
-            Sign Up
-          </Sidebar.Item>
-        </Sidebar.ItemGroup>
-      </Sidebar.Items>
-    </Sidebar>
+    <div className="flex">
+      <Sidebar aria-label="Default sidebar example">
+        <Sidebar.Items>
+          <Sidebar.ItemGroup>
+            <Sidebar.Item href="/dashboard/authors" icon={HiUser}>
+              All Authors
+            </Sidebar.Item>
+            <Sidebar.Item href="/dashboard/publishers" icon={FaUserEdit}>
+              All Publishers
+            </Sidebar.Item>
+            <Sidebar.Item href="/dashboard/users" icon={FaUser}>
+              All Users
+            </Sidebar.Item>
+            <Sidebar.Item href="/dashboard/books" icon={HiBookOpen}>
+              All Books
+            </Sidebar.Item>
+            <Sidebar.Item href="/dashboard/categories" icon={BiSolidCategory}>
+              All Categories
+            </Sidebar.Item>
+            <Sidebar.Item href="#" icon={HiInbox} label="3">
+              Inbox
+            </Sidebar.Item>
+          </Sidebar.ItemGroup>
+        </Sidebar.Items>
+      </Sidebar>
+      <div className="flex-1 p-5">
+        <Outlet />
+      </div>
+    </div>
   );
 };
 export default Dashboard;

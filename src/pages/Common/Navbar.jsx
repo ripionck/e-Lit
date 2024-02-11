@@ -7,12 +7,10 @@ import {
   Label,
   TextInput,
   Button,
-  Spinner,
 } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import {
   HiArrowSmRight,
-  HiChartPie,
   HiUser,
   HiOutlineViewList,
   HiOutlinePlusCircle,
@@ -20,7 +18,6 @@ import {
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const [openProfileModal, setOpenProfileModal] = useState(false);
   const [values, setValues] = useState({
     username: '',
@@ -63,7 +60,6 @@ const CustomNavbar = () => {
         return response.json();
       })
       .then((data) => {
-        setLoading(false);
         setValues({
           ...values,
           username: data.username,
@@ -74,7 +70,6 @@ const CustomNavbar = () => {
         });
       })
       .catch((error) => {
-        setLoading(true);
         console.error('Error:', error);
       });
   }, []);
@@ -99,14 +94,6 @@ const CustomNavbar = () => {
         console.log(error);
       });
   };
-
-  if (loading) {
-    return (
-      <div className="flex justify-center">
-        <Spinner aria-label="Default status example" />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -274,14 +261,8 @@ const CustomNavbar = () => {
           <Navbar.Link href="about" className="text-lg">
             About
           </Navbar.Link>
-          <Navbar.Link href="about" className="text-lg">
-            Category
-          </Navbar.Link>
           <Navbar.Link href="services" className="text-lg">
-            Books
-          </Navbar.Link>
-          <Navbar.Link href="contact" className="text-lg">
-            Contact
+            All Books
           </Navbar.Link>
 
           {isAuthenticated() ? (
@@ -303,21 +284,23 @@ const CustomNavbar = () => {
                     {values?.email}
                   </span>
                 </Dropdown.Header>
-                <Dropdown.Item href="dashboard" icon={HiChartPie}>
-                  Dashboard
-                </Dropdown.Item>
                 <Dropdown.Item onClick={handleProfileClick} icon={HiUser}>
                   Profile
                 </Dropdown.Item>
                 <Dropdown.Item href="book-list" icon={HiOutlineViewList}>
                   Book List
                 </Dropdown.Item>
+
                 <Dropdown.Item href="add-author" icon={HiOutlinePlusCircle}>
                   Add Author
                 </Dropdown.Item>
                 <Dropdown.Item href="add-book" icon={HiOutlinePlusCircle}>
                   Add Book
                 </Dropdown.Item>
+                <Dropdown.Item href="/dashboard" icon={HiOutlinePlusCircle}>
+                  Dashboard
+                </Dropdown.Item>
+
                 <Dropdown.Item onClick={logout} icon={HiArrowSmRight}>
                   Logout
                 </Dropdown.Item>
