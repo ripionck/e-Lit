@@ -110,31 +110,35 @@ const AddBook = () => {
                   />
                 </label>
               </div>
-              <div className="w-full">
-                <label>
-                  Author:
-                  <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                    type="text"
-                    name="author"
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+              <div className="w-full mt-6">
+                <select
+                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                  // value={selectedCategory}
+                  // onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <option value="">Select Author</option>
+                  <option value="subsistence">Subsistence</option>
+                  <option value="unexpected reality">Unexpected Reality</option>
+                  <option value="wind of love">Wind of Love</option>
+                  <option value="tourism">Tourism</option>
+                  <option value="narcissism">Narcissism</option>
+                </select>
               </div>
             </div>
             <div className="flex gap-2">
-              <div className="w-full">
-                <label>
-                  Category:
-                  <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                    type="text"
-                    name="category"
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+              <div className="w-full mt-6">
+                <select
+                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                  // value={selectedCategory}
+                  // onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <option value="">Select Category</option>
+                  <option value="subsistence">Subsistence</option>
+                  <option value="unexpected reality">Unexpected Reality</option>
+                  <option value="wind of love">Wind of Love</option>
+                  <option value="tourism">Tourism</option>
+                  <option value="narcissism">Narcissism</option>
+                </select>
               </div>
               <div className="w-full">
                 <label>
@@ -150,17 +154,16 @@ const AddBook = () => {
               </div>
             </div>
             <div className="flex gap-2">
-              <div className="w-full">
-                <label>
-                  Language:
-                  <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                    type="text"
-                    name="language"
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+              <div className="w-full mt-6">
+                <select
+                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                  // value={selectedCategory}
+                  // onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                  <option value="">Select Language</option>
+                  <option value="subsistence">Bangla</option>
+                  <option value="unexpected reality">English</option>
+                </select>
               </div>
               <div className="w-full">
                 <label>
