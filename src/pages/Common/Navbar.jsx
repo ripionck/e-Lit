@@ -1,4 +1,5 @@
-import { Avatar, Dropdown, Navbar } from 'flowbite-react';
+import { Dropdown, Navbar } from 'flowbite-react';
+import { useEffect, useState } from 'react';
 import {
   HiArrowSmRight,
   HiUser,
@@ -10,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
   const isAuthenticated = () => {
     return !!localStorage.getItem('access_token');
   };
@@ -18,6 +20,29 @@ const CustomNavbar = () => {
     localStorage.clear();
     navigate('/login');
   };
+
+  const token = localStorage.getItem('access_token');
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
 
   return (
     <>
@@ -49,24 +74,24 @@ const CustomNavbar = () => {
           {isAuthenticated() ? (
             <div className="flex md:order-2">
               <Dropdown
-              // arrowIcon={false}
-              // inline
-              // label={
-              //   values && values?.avater ? (
-              //     <img src={values?.avater} alt="User Avatar" />
-              //   ) : (
-              //     <Avatar rounded />
-              //   )
-              // }
+                arrowIcon={false}
+                inline
+                label={
+                  <img
+                    src={user ? user?.avater : 'placeholder.jpg'}
+                    alt="Profile Image"
+                    className="w-12 h-12 bg-gray-200 rounded-full object-cover"
+                  />
+                }
               >
                 <Dropdown.Header>
-                  {/* <span className="block text-sm">{values?.username}</span>
+                  <span className="block text-sm">{user?.username}</span>
                   <span className="block truncate text-sm font-medium">
-                    {values?.email}
+                    {user?.email}
                   </span>
                   <span className="block truncate text-sm font-medium">
-                    $ {values?.balance}
-                  </span> */}
+                    $ {user?.balance}
+                  </span>
                 </Dropdown.Header>
                 <Dropdown.Item href="/profile" icon={HiUser}>
                   Profile
