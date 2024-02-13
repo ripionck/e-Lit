@@ -1,50 +1,303 @@
-    
 'use client';
 
-import { Card } from 'flowbite-react';
+import { Card, Modal, Label, TextInput, Button } from 'flowbite-react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const [openProfileModal, setOpenProfileModal] = useState(false);
+  const [values, setValues] = useState({
+    username: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    balance: 0,
+  });
+  const [profileImage, setProfileImage] = useState(null);
+
+  const handleProfileClick = () => {
+    setOpenProfileModal(true);
+  };
+
+  const onCloseProfileModal = () => {
+    setOpenProfileModal(false);
+  };
+  const token = localStorage.getItem('access_token');
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setValues({
+          ...values,
+          username: data.username,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          email: data.email,
+          phone: data.phone,
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('image', profileImage);
+    formData.append('username', values.username);
+    formData.append('first_name', values.first_name);
+    formData.append('last_name', values.last_name);
+    formData.append('email', values.email);
+    formData.append('phone', values.phone);
+    formData.append('balance', values.balance);
+
+    await fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    })
+      .then((res) => {
+        console.log(res);
+        onCloseProfileModal();
+        navigate('/profile');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleImageChange = (e) => {
+    setProfileImage(e.target.files[0]);
+  };
+
   return (
-    <div className="h-screen w-1/2 mx-auto mt-12">
-      <Card className="max-w-sm">
-        <div className="flex justify-end px-4 pt-4"></div>
-        <div className="flex flex-col items-center pb-10">
-          <img
-            alt="Bonnie image"
-            height="96"
-            src="/images/people/profile-picture-3.jpg"
-            width="96"
-            className="mb-3 rounded-full shadow-lg"
-          />
-          <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            Username: username
-          </h5>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            Full Name: Full Name
-          </span>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            Email: email@gmail.com
-          </span>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            Balance: 500$
-          </span>
-          <div className="mt-4 flex space-x-3 lg:mt-6">
-            <a
-              href="#"
-              className="inline-flex items-center rounded-lg bg-cyan-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
-            >
-              Add friend
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-            >
-              Message
-            </a>
+    <>
+      <Modal
+        show={openProfileModal}
+        size="xl"
+        onClose={onCloseProfileModal}
+        popup
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="space-y-6">
+            <form onSubmit={handleUpdate}>
+              <div className="flex flex-col">
+                <label
+                  htmlFor="profile-image-upload"
+                  className="flex justify-center"
+                >
+                  <input
+                    type="file"
+                    id="profile-image-upload"
+                    className="sr-only"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
+                  <img
+                    src={
+                      profileImage
+                        ? URL.createObjectURL(profileImage)
+                        : 'placeholder.jpg'
+                    }
+                    alt="Profile Image"
+                    className="w-32 h-32 bg-gray-200  rounded-full object-cover mb-2"
+                  />
+                </label>
+                <button
+                  type="submit"
+                  className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
+                >
+                  Upload Image
+                </button>
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="username" value="Username" />
+                </div>
+                <TextInput
+                  id="username"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={values?.username}
+                  onChange={(e) =>
+                    setValues({ ...values, username: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <div className="flex gap-4">
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="first_name" value="First Name" />
+                  </div>
+                  <TextInput
+                    id="first_name"
+                    name="first_name"
+                    type="text"
+                    placeholder="First name"
+                    value={values?.first_name}
+                    onChange={(e) =>
+                      setValues({ ...values, first_name: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="last_name" value="Last Name" />
+                  </div>
+                  <TextInput
+                    id="last_name"
+                    type="text"
+                    name="last_name"
+                    placeholder="Last name"
+                    value={values?.last_name}
+                    onChange={(e) =>
+                      setValues({ ...values, last_name: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="email" value="Email Address" />
+                </div>
+                <TextInput
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="example@gmail.com"
+                  value={values?.email}
+                  onChange={(e) =>
+                    setValues({ ...values, email: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              <div className="flex gap-4">
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="phone" value="Phone Number" />
+                  </div>
+                  <TextInput
+                    id="phone"
+                    type="number"
+                    name="phone"
+                    value={values?.phone}
+                    onChange={(e) =>
+                      setValues({ ...values, phone: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="w-full">
+                  <div className="mb-2 block">
+                    <Label htmlFor="balance" value="Account Balance" />
+                  </div>
+                  <TextInput
+                    id="balance"
+                    type="number"
+                    name="balance"
+                    value={values?.balance}
+                    onChange={(e) =>
+                      setValues({ ...values, balance: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="w-full mt-4">
+                <Button type="submit">Update Now</Button>
+              </div>
+            </form>
           </div>
-        </div>
-      </Card>
-    </div>
+        </Modal.Body>
+      </Modal>
+
+      <div className="w-full mx-auto p-4">
+        <Card className="max-w-sm">
+          <div className="flex flex-col">
+            <div className="flex flex-col">
+              <label
+                htmlFor="profile-image-upload"
+                className="flex justify-center"
+              >
+                <input
+                  type="file"
+                  id="profile-image-upload"
+                  className="sr-only"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+                <img
+                  src={values.avater}
+                  alt="Profile Image"
+                  className="w-32 h-32 bg-gray-200  rounded-full object-cover mb-2"
+                />
+              </label>
+              <button
+                type="submit"
+                className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
+              >
+                Upload Image
+              </button>
+            </div>
+            <div>
+              <h4 className="mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                Username: {values.username}
+              </h4>
+              <h4 className="text-sm text-gray-500 dark:text-gray-400">
+                Name: {values.first_name} {values.last_name}
+              </h4>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Email: {values.email}
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Phone: {values.phone}
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Balance: {values.balance}$
+              </p>
+              <button
+                onClick={handleProfileClick}
+                className="bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-2 rounded"
+              >
+                Edit Profile
+              </button>
+              <div>
+                <a
+                  href="change-password"
+                  className="hover:underline cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"
+                >
+                  Change password?
+                </a>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </>
   );
 };
 export default Profile;
