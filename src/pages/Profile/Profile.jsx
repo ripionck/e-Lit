@@ -3,6 +3,7 @@
 import { Card, Modal, Label, TextInput, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Report from './Report';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -89,6 +90,7 @@ const Profile = () => {
 
   return (
     <>
+      {/* Modal */}
       <Modal
         show={openProfileModal}
         size="xl"
@@ -234,9 +236,9 @@ const Profile = () => {
           </div>
         </Modal.Body>
       </Modal>
-
-      <div className="w-full mx-auto p-4">
-        <Card className="max-w-sm">
+      {/* Update card */}
+      <div className="flex flex-col lg:flex-row sm:flex-col p-4">
+        <Card className="max-w-sm lg:w-1/2 lg:h-1/2 w-full">
           <div className="flex flex-col">
             <div className="flex flex-col">
               <label
@@ -296,6 +298,7 @@ const Profile = () => {
             </div>
           </div>
         </Card>
+        <Report />
       </div>
     </>
   );
