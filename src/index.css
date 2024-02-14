@@ -2,7 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  /* font-family: 'Arial', sans-serif; */
-  font-family: 'serif';
+@layer base {
+  body {
+    font-family: 'serif';
+    background-color: rgb(241, 233, 233);
+  }
+}
+
+.slick-slide > div {
+  margin: 0 6px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: orange !important;
 }

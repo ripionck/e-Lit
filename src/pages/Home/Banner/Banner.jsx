@@ -7,7 +7,7 @@ import { MdPercent } from 'react-icons/md';
 const HomeBanner = () => {
   return (
     <Banner>
-      <div className="flex w-full justify-between border-t border-gray-200 bg-gray-50 p-8 dark:border-gray-600 dark:bg-gray-700">
+      <div className="flex w-full justify-between border-t border-gray-200 bg-gray-50 p-8 my-4 dark:border-gray-600 dark:bg-gray-700">
         <div className="mx-auto flex items-center">
           <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">
             <span className="mr-3 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-200 p-1 dark:bg-gray-600">
