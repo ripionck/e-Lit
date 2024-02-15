@@ -8,13 +8,10 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <a href="#" className="flex items-center">
               <img
-                src="/src/assets/logo.png"
+                src="/src/assets/E-Lit_Emporium.png"
                 className="h-20 me-3"
                 alt="FlowBite Logo"
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                E-Lit Emporium
-              </span>
             </a>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

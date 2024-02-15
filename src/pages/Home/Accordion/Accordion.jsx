@@ -17,7 +17,7 @@ const HomeAccordion = () => {
             <p className="text-gray-500 dark:text-gray-400">
               Check out this guide to learn how to&nbsp;
               <a
-                href="https://flowbite.com/docs/getting-started/introduction/"
+                href="#"
                 className="text-cyan-600 hover:underline dark:text-cyan-500"
               >
                 get started&nbsp;
@@ -38,7 +38,7 @@ const HomeAccordion = () => {
             <p className="text-gray-500 dark:text-gray-400">
               Check out the
               <a
-                href="https://flowbite.com/figma/"
+                href="#"
                 className="text-cyan-600 hover:underline dark:text-cyan-500"
               >
                 Figma design system
@@ -59,7 +59,7 @@ const HomeAccordion = () => {
             <p className="text-gray-500 dark:text-gray-400">
               Check out the
               <a
-                href="https://flowbite.com/figma/"
+                href="#"
                 className="text-cyan-600 hover:underline dark:text-cyan-500"
               >
                 Figma design system
@@ -92,7 +92,7 @@ const HomeAccordion = () => {
             <ul className="list-disc pl-5 text-gray-500 dark:text-gray-400">
               <li>
                 <a
-                  href="https://flowbite.com/pro/"
+                  href="#"
                   className="text-cyan-600 hover:underline dark:text-cyan-500"
                 >
                   E-Lit Emporium Pro
@@ -100,7 +100,7 @@ const HomeAccordion = () => {
               </li>
               <li>
                 <a
-                  href="https://tailwindui.com/"
+                  href="#"
                   rel="nofollow"
                   className="text-cyan-600 hover:underline dark:text-cyan-500"
                 >

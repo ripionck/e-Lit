@@ -71,11 +71,10 @@ const CustomNavbar = () => {
         <Navbar.Brand>
           <img
             src="/src/assets/E-Lit_Emporium.png"
-            className="lg:w-2/3 md:1/2 w-1/3"
+            className="lg:w-2/3 md:1/2 w-full"
             alt="Logo"
           />
         </Navbar.Brand>
-
         <form
           onSubmit={(e) => e.preventDefault()}
           className="max-w-md px-4 mx-auto flex-grow"
@@ -102,9 +101,7 @@ const CustomNavbar = () => {
             />
           </div>
         </form>
-
         <Navbar.Toggle />
-
         <Navbar.Collapse className="px-8">
           {isAuthenticated() ? (
             <div className="flex md:order-2">
@@ -123,9 +120,6 @@ const CustomNavbar = () => {
                   <span className="block text-sm">{user?.username}</span>
                   <span className="block truncate text-sm font-medium">
                     {user?.email}
-                  </span>
-                  <span className="block truncate text-sm font-medium">
-                    $ {user?.balance}
                   </span>
                 </Dropdown.Header>
                 <Dropdown.Item href="/profile" icon={HiUser}>
@@ -167,17 +161,14 @@ const CustomNavbar = () => {
           )}
         </Navbar.Collapse>
       </Navbar>
-      <Navbar>
-        <Navbar.Collapse className="px-8">
-          <Navbar.Link href="/" className="text-lg">
-            Home
-          </Navbar.Link>
+      <Navbar collapseOnSelect expand="md">
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Brand href="/">Home</Navbar.Brand>
           <DropdownMenu items={books} menuName="Books" />
           <DropdownMenu items={authors} menuName="Authors" />
           <DropdownMenu items={publications} menuName="Publications" />
-          <Navbar.Link href="/about" className="text-lg">
-            About
-          </Navbar.Link>
+          <Navbar.Brand href="/about">About</Navbar.Brand>
         </Navbar.Collapse>
       </Navbar>
     </>

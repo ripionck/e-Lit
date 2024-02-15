@@ -39,7 +39,7 @@ const CardSlider = () => {
   };
 
   return (
-    <div className="w-[92%] m-auto px-8 pb-8 bg-slate-300 rounded-xl mb-4">
+    <div className="w-[92%] m-auto px-8 pb-8 bg-gray-200 rounded-xl mb-4">
       <h2 className="text-2xl text-center py-4">Fiction</h2>
       <Slider {...settings}>
         {data.map((d) => (
