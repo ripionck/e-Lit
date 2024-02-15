@@ -10,36 +10,29 @@ const CustomCarousel = () => {
       >
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/src/assets/books/book1.jpg"
+            src="/src/assets/books/1.png"
             alt="slide 1"
             className="w-full h-full"
           />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/src/assets/books/book2.jpg"
+            src="/src/assets/books/2.jpg"
             alt="slide 2"
             className="w-full h-full"
           />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/src/assets/books/book3.jpg"
+            src="/src/assets/books/1.png"
             alt="slide 3"
             className="w-full h-full"
           />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/src/assets/books/book4.jpg"
+            src="/src/assets/books/2.jpg"
             alt="slide 4"
-            className="w-full h-full"
-          />
-        </div>
-        <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
-          <img
-            src="/src/assets/books/book5.jpg"
-            alt="slide 5"
             className="w-full h-full"
           />
         </div>

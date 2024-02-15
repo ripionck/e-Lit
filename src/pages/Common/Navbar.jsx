@@ -8,6 +8,7 @@ import {
   HiOutlineCurrencyDollar,
 } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
+import DropdownMenu from '../../components/DropMenu';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
@@ -44,60 +45,67 @@ const CustomNavbar = () => {
       });
   }, []);
 
+  const books = [
+    { id: 1, name: 'Book 1' },
+    { id: 2, name: 'Book 2' },
+    { id: 3, name: 'Book 3' },
+    { id: 1, name: 'Book 1' },
+    { id: 2, name: 'Book 2' },
+    { id: 3, name: 'Book 3' },
+  ];
+
+  const authors = [
+    { id: 1, name: 'Author 1' },
+    { id: 2, name: 'Author 2' },
+    { id: 3, name: 'Author 3' },
+  ];
+  const publications = [
+    { id: 1, name: 'Publication 1' },
+    { id: 2, name: 'Publication 2' },
+    { id: 3, name: 'Publication 3' },
+  ];
+
   return (
     <>
       <Navbar fluid rounded className="bg-gray-100">
         <Navbar.Brand>
           <img
-            src="/src/assets/logo.png"
-            className="mr-3 lg:h-20 h-12"
+            src="/src/assets/E-Lit_Emporium.png"
+            className="lg:w-2/3 md:1/2 w-1/3"
             alt="Logo"
           />
-          <p className="self-center whitespace-nowrap text-2xl  font-semibold dark:text-white">
-            E-Lit Emporium
-          </p>
         </Navbar.Brand>
-        <div className="">
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="max-w-md px-4 mx-auto"
-          >
-            <div className="relative">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute top-0 bottom-0 w-4 h-4 my-auto text-gray-400 left-3"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full py-2 pl-8 pr-4 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
+
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="max-w-md px-4 mx-auto flex-grow"
+        >
+          <div className="relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="absolute top-0 bottom-0 w-4 h-4 my-auto text-gray-400 left-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
-            </div>
-          </form>
-        </div>
+            </svg>
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-full py-2 pl-8 pr-4 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
+            />
+          </div>
+        </form>
+
         <Navbar.Toggle />
 
         <Navbar.Collapse className="px-8">
-          <Navbar.Link href="/" className="text-lg">
-            Home
-          </Navbar.Link>
-          <Navbar.Link href="/about" className="text-lg">
-            About
-          </Navbar.Link>
-          <Navbar.Link href="/book-list" className="text-lg">
-            All Books
-          </Navbar.Link>
-
           {isAuthenticated() ? (
             <div className="flex md:order-2">
               <Dropdown
@@ -157,6 +165,19 @@ const CustomNavbar = () => {
               </Navbar.Link>
             </div>
           )}
+        </Navbar.Collapse>
+      </Navbar>
+      <Navbar>
+        <Navbar.Collapse className="px-8">
+          <Navbar.Link href="/" className="text-lg">
+            Home
+          </Navbar.Link>
+          <DropdownMenu items={books} menuName="Books" />
+          <DropdownMenu items={authors} menuName="Authors" />
+          <DropdownMenu items={publications} menuName="Publications" />
+          <Navbar.Link href="/about" className="text-lg">
+            About
+          </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
     </>
