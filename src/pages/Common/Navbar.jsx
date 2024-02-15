@@ -164,11 +164,21 @@ const CustomNavbar = () => {
       <Navbar collapseOnSelect expand="md">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Navbar.Link href="/" className="text-lg">
+            Home
+          </Navbar.Link>
           <DropdownMenu items={books} menuName="Books" />
           <DropdownMenu items={authors} menuName="Authors" />
           <DropdownMenu items={publications} menuName="Publications" />
-          <Navbar.Brand href="/about">About</Navbar.Brand>
+          <Navbar.Link href="/about" className="text-lg">
+            Offer Books
+          </Navbar.Link>
+          <Navbar.Link href="/about" className="text-lg">
+            New Books
+          </Navbar.Link>
+          <Navbar.Link href="/about" className="text-lg">
+            About
+          </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
     </>

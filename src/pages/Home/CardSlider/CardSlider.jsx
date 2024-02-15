@@ -40,7 +40,14 @@ const CardSlider = () => {
 
   return (
     <div className="w-[92%] m-auto px-8 pb-8 bg-gray-200 rounded-xl mb-4">
-      <h2 className="text-2xl text-center py-4">Fiction</h2>
+      <div className="flex justify-between">
+        <div></div>
+        <h2 className="text-2xl py-4">Fiction</h2>
+        <a href="#" className="text-xl pt-2 underline hover:text-blue-500">
+          View all
+        </a>
+      </div>
+
       <Slider {...settings}>
         {data.map((d) => (
           <div
