@@ -39,23 +39,22 @@ const CardSlider = () => {
   };
 
   return (
-    <div className="w-[92%] m-auto p-8 bg-slate-300 rounded-xl">
+    <div className="w-[92%] m-auto px-8 pb-8 bg-slate-300 rounded-xl mb-4">
+      <h2 className="text-2xl text-center py-4">Fiction</h2>
       <Slider {...settings}>
         {data.map((d) => (
           <div
             key={d.name}
-            className="bg-red-200 h-[450px] text-black rounded-xl"
+            className="h-[320px] bg-gray-100 text-black rounded-xl"
           >
-            <div className="h-52 bg-indigo-500 flex justify-center items-center rounded-t-xl">
-              <img src={d.img} alt="" className="h-44 w-44 rounded-full" />
+            <div className="h-56 flex justify-center items-center rounded-t-xl">
+              <img src={d.img} alt="" className="h-44 w-44" />
             </div>
 
-            <div className="flex flex-col items-center justify-center gap-4 p-4">
-              <p className="text-xl font-semibold">{d.name}</p>
-              <p className="text-center">{d.review}</p>
-              <button className="bg-indigo-500 text-white text-lg px-6 py-1 rounded-xl">
-                Read More
-              </button>
+            <div className="flex flex-col items-center justify-center px-4">
+              <p className="text-xl font-semibold">{d.title}</p>
+              <p className="text-center">{d.author}</p>
+              <p className="text-center">{d.price}</p>
             </div>
           </div>
         ))}
@@ -66,29 +65,34 @@ const CardSlider = () => {
 
 const data = [
   {
-    name: `John Morgan`,
-    img: `/students/John_Morgan.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    title: `The Great Gatsby`,
+    img: `/src/assets/books/42766.png`,
+    author: `F. Scott Fitzgerald`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
-    name: `Ellie Anderson`,
-    img: `/students/Ellie_Anderson.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    title: `To Kill a Mockingbird`,
+    img: `/src/assets/books/75154.png`,
+    author: `Harper Lee`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
-    name: `Nia Adebayo`,
-    img: `/students/Nia_Adebayo.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    title: `1984`,
+    img: `/src/assets/books/42766.png`,
+    author: `George Orwell`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
-    name: `Rigo Louie`,
-    img: `/students/Rigo_Louie.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    title: `The Catcher in the Rye`,
+    img: `/src/assets/books/75154.png`,
+    author: `J.D. Salinger`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
-    name: `Mia Williams`,
-    img: `/students/Mia_Williams.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
+    title: `Pride and Prejudice`,
+    img: `/src/assets/books/42766.png`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`, // Random price between $10 and $30
   },
 ];
 

@@ -9,6 +9,9 @@ const Home = () => {
       <CustomCarousel />
       <HomeBanner />
       <CardSlider />
+      <CardSlider />
+      <CardSlider />
+      <CardSlider />
       <HomeAccordion />
     </>
   );
