@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import DetailCard from '../../components/DetailCard';
 import Details from './Details/Details';
+import RatingAndReviews from './RatingAndReviews/RatingAndReviews';
 
 const BookDetail = () => {
   const { id } = useParams(); // Extracting the ID parameter from the URL
@@ -17,6 +18,7 @@ const BookDetail = () => {
     <>
       {book ? <DetailCard book={book} /> : <p>Loading...</p>}
       <Details />
+      <RatingAndReviews />
     </>
   );
 };

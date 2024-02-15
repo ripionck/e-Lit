@@ -78,13 +78,18 @@ const Details = () => {
           aria-labelledby="description-tab"
         >
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content the{' '}
-            <strong className="font-medium text-gray-800 dark:text-white">
-              Description tab&apos;s associated content
-            </strong>
-            . Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat
+            excepturi, dignissimos at adipisci neque ex aliquam consequuntur cum
+            praesentium soluta eligendi magnam eum quod delectus maxime fuga.
+            Eius sapiente debitis perspiciatis molestiae dicta fugiat odio
+            voluptates aspernatur doloremque laborum animi aperiam, dolorum
+            dolore id! Aspernatur eligendi doloremque, vel harum ut neque
+            nesciunt quia tempore, numquam molestias beatae quaerat, eos dolor
+            facilis rem explicabo dolorem! Incidunt totam, similique voluptate
+            veniam sunt debitis quia in reiciendis ducimus ea quam, tenetur
+            architecto repellat voluptas libero nam animi ratione possimus. Nisi
+            quaerat, atque voluptatibus reprehenderit ratione, distinctio nihil
+            quos repellendus doloremque facere nulla consequatur!
           </p>
         </div>
         <div
