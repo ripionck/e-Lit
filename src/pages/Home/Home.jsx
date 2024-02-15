@@ -1,6 +1,6 @@
 import HomeAccordion from './Accordion/Accordion';
 import HomeBanner from './Banner/Banner';
-import CardSlider from './CardSlider/CardSlider';
+import Books from './Books/Books';
 import CustomCarousel from './Carousel/Carousel';
 
 const Home = () => {
@@ -8,10 +8,9 @@ const Home = () => {
     <>
       <CustomCarousel />
       <HomeBanner />
-      <CardSlider />
-      <CardSlider />
-      <CardSlider />
-      <CardSlider />
+      <Books />
+      <Books />
+      <Books />
       <HomeAccordion />
     </>
   );

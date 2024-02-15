@@ -20,6 +20,7 @@ import EditBook from '../pages/Dashboard/Books/EditBook/EditBook';
 import EditAuthor from '../pages/Dashboard/Authors/EditAuthor/EditAuthor';
 import Transactions from '../pages/Dashboard/Transactions/Transactions';
 import Deposit from '../pages/Deposit/Deposit';
+import BookDetail from '../pages/BookDetail/BookDetail';
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
             element: <Transactions />,
           },
         ],
+      },
+      {
+        path: '/book/:id',
+        element: <BookDetail />,
       },
       {
         path: 'book-list',
