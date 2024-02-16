@@ -6,10 +6,11 @@ import { useState } from 'react';
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
-    password1: '',
+    password: '',
     password2: '',
     email: '',
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -25,19 +26,19 @@ const Register = () => {
     if (
       !formData.username ||
       !formData.email ||
-      !formData.password1 ||
+      !formData.password ||
       !formData.password2
     ) {
-      console.error('Please fill out all fields');
+      setError('Please fill out all fields');
       return;
     }
 
-    if (formData.password1 !== formData.password2) {
-      console.error('Passwords do not match');
+    if (formData.password !== formData.password2) {
+      setError('Passwords do not match');
       return;
     }
 
-    const apiUrl = 'https://e-library-z7s7.onrender.com/accounts/registration/';
+    const apiUrl = 'https://e-library-z7s7.onrender.com/accounts/register/';
 
     try {
       const response = await fetch(apiUrl, {
@@ -50,10 +51,9 @@ const Register = () => {
 
       if (response.ok) {
         console.log('Registration successful');
-        // Redirect or perform any other action upon successful registration
       } else {
         // Handle error response
-        const errorData = await response.json(); // Assuming server returns error details in JSON format
+        const errorData = await response.json();
         console.error('Registration failed:', errorData);
       }
     } catch (error) {
@@ -62,7 +62,7 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen mx-auto max-w-md mt-8">
+    <div className="mx-auto max-w-md mt-8">
       <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
         <div className="p-4 sm:p-7">
           <h3 className="text-xl font-black text-slate-700">Register</h3>
@@ -104,13 +104,13 @@ const Register = () => {
             </div>
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="password1" value="Password" />
+                <Label htmlFor="password" value="Password" />
               </div>
               <TextInput
                 type="password"
-                id="password1"
-                name="password1"
-                value={formData.password1}
+                id="password"
+                name="password"
+                value={formData.password}
                 onChange={handleChange}
                 required
                 shadow
@@ -144,6 +144,7 @@ const Register = () => {
             </div>
             <Button type="submit">Register new account</Button>
           </form>
+          {error && <div className="text-red-500 my-2">{error}</div>}
           <p className="my-4">
             Already have an account?
             <a

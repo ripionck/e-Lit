@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { Button, Label, TextInput, Alert } from 'flowbite-react';
+import { Button, Label, TextInput } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     old_password: '',
-    new_password1: '',
-    new_password2: '',
+    password: '',
+    password2: '',
   });
-  const [changeStatus, setChangeStatus] = useState(null);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,16 +19,6 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate form data
-    if (!formData.new_password1 || !formData.new_password2) {
-      console.error('Please fill out all fields');
-      return;
-    }
-    if (formData.new_password1 != formData.new_password2) {
-      console.error("Password didn't match");
-      return;
-    }
 
     const apiUrl =
       'https://e-library-z7s7.onrender.com/accounts/password/change/';
@@ -45,21 +35,14 @@ const ChangePassword = () => {
       });
 
       if (response.ok) {
-        setChangeStatus('success');
-        navigate('/');
+        navigate('/profile');
       } else {
         // Handle error response
         const errorData = await response.json();
         console.error('Password change failed:', errorData);
-
-        // Set login status to 'failure'
-        setChangeStatus('failure');
       }
     } catch (error) {
       console.error('Error during change password:', error);
-
-      // Set login status to 'failure'
-      setChangeStatus('failure');
     }
   };
 
@@ -78,13 +61,13 @@ const ChangePassword = () => {
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="password" value="Current Password" />
+                  <Label htmlFor="old_password" value="Current Password" />
                 </div>
                 <TextInput
-                  id="password"
+                  id="old_password"
                   type="password"
                   name="old_password"
-                  value={formData.password}
+                  value={formData.old_password}
                   onChange={handleChange}
                   required
                   shadow
@@ -92,13 +75,13 @@ const ChangePassword = () => {
               </div>
               <div>
                 <div className="mb-2 block">
-                  <Label htmlFor="password1" value="New Password" />
+                  <Label htmlFor="password" value="New Password" />
                 </div>
                 <TextInput
-                  id="password1"
+                  id="password"
                   type="password"
-                  name="new_password1"
-                  value={formData.new_password1}
+                  name="password"
+                  value={formData.password}
                   onChange={handleChange}
                   required
                   shadow
@@ -111,8 +94,8 @@ const ChangePassword = () => {
                 <TextInput
                   id="password2"
                   type="password"
-                  name="new_password2"
-                  value={formData.new_password2}
+                  name="password2"
+                  value={formData.password2}
                   onChange={handleChange}
                   required
                   shadow
@@ -121,20 +104,6 @@ const ChangePassword = () => {
 
               <Button type="submit">Change Password</Button>
             </form>
-            {changeStatus === 'success' && (
-              <Alert color="success">
-                <span className="text-green-700 font-medium">
-                  Password Changed successful!
-                </span>
-              </Alert>
-            )}
-            {changeStatus === 'failure' && (
-              <Alert color="error">
-                <span className="text-red-700 font-medium">
-                  Failed! Please try again.
-                </span>
-              </Alert>
-            )}
           </div>
         </div>
       </div>

@@ -161,7 +161,7 @@ const CustomNavbar = () => {
           )}
         </Navbar.Collapse>
       </Navbar>
-      <Navbar collapseOnSelect expand="md">
+      <Navbar collapseonselect="true" expand="md">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Navbar.Link href="/" className="text-lg">

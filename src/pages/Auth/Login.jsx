@@ -38,11 +38,11 @@ const Login = () => {
       });
 
       if (response.ok) {
-        const { access, refresh } = await response.json();
+        const { token } = await response.json();
 
         //save the token to localStorage
-        localStorage.setItem('access_token', access);
-        localStorage.setItem('refresh_token', refresh);
+        localStorage.setItem('access_token', token.access);
+        localStorage.setItem('refresh_token', token.refresh);
 
         // Set login status to 'success'
         setLoginStatus('success');
@@ -66,7 +66,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="h-screen mx-auto max-w-md mt-8">
+      <div className="mx-auto max-w-md mt-8">
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
           <div className="p-4 sm:p-7">
             <h4 className="mb-2 font-medium text-gray-700 xl:text-xl">

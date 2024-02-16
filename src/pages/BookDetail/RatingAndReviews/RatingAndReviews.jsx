@@ -78,7 +78,7 @@ const RatingAndReviews = () => {
                 <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                   <div className="mt-2">
                     {/* Modal Content */}
-                    <form className="p-4 md:p-5">
+                    <form className="p-2">
                       {/* Rating Input */}
                       <div className="mb-4">
                         <label
