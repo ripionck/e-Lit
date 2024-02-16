@@ -17,9 +17,9 @@ const BookList = () => {
   return (
     <div className="flex flex-row ml-4 mt-2">
       {/* ---------Left side--------------- */}
-      <div className="flex flex-col w-1/5 p-4 overflow-y-auto">
+      <div className="flex flex-col w-1/4 p-4 overflow-y-auto">
         {/*-----------Categories---------------*/}
-        <div className="border border-gray-300 px-4 py-2 rounded-sm">
+        <div className="border bg-gray-50 border-gray-300 px-4 py-2 rounded-lg">
           <h3 className="text-xl mb-2 border-b border-gray-300">
             Filter By Categories
           </h3>
@@ -31,7 +31,7 @@ const BookList = () => {
               >
                 <input
                   type="checkbox"
-                  className="mr-2 cursor-pointer h-3 w-3"
+                  className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                   style={{ boxShadow: 'none' }}
                 />
                 {category}
@@ -40,7 +40,7 @@ const BookList = () => {
           </div>
         </div>
         {/*-------author---------- */}
-        <div className="border border-gray-300 px-4 py-2 mt-4 rounded-sm">
+        <div className="border bg-gray-50 border-gray-300 px-4 py-2 mt-4 rounded-lg">
           <div className="flex justify-between border-b border-gray-300 mb-2">
             <h4 className="">Filter</h4>
             <p className="">Reset Filter</p>
@@ -50,13 +50,12 @@ const BookList = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full px-2 py-1 pr-8 mt-3 mb-2 border rounded-full focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full px-2 py-1 pr-8 mt-3 mb-2 border rounded-full bg-gray-200 focus:outline-none focus:ring focus:border-blue-300"
             />
             <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
               <CiSearch />
             </span>
           </div>
-
           <div className="flex flex-col space-y-1 max-h-56 overflow-y-auto">
             {categories.map((category, index) => (
               <label
@@ -65,7 +64,7 @@ const BookList = () => {
               >
                 <input
                   type="checkbox"
-                  className="mr-2 cursor-pointer h-3 w-3"
+                  className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                   style={{ boxShadow: 'none' }}
                 />
                 {category}
@@ -74,13 +73,13 @@ const BookList = () => {
           </div>
         </div>
         {/* -------------publishers-------------- */}
-        <div className="border border-gray-300 px-4 py-2 mt-4 rounded-sm">
+        <div className="border bg-gray-50 border-gray-300 px-4 py-2 mt-4 rounded-lg">
           <h4 className="">Publishers</h4>
           <div className="relative">
             <input
               type="text"
               placeholder="Search..."
-              className="w-full px-2 py-1 pr-8 mt-3 mb-2 border rounded-full focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full px-2 py-1 pr-8 mt-3 mb-2 border rounded-full bg-gray-200 focus:outline-none focus:ring focus:border-blue-300"
             />
             <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
               <CiSearch />
@@ -94,7 +93,7 @@ const BookList = () => {
               >
                 <input
                   type="checkbox"
-                  className="mr-2 cursor-pointer h-3 w-3"
+                  className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                   style={{ boxShadow: 'none' }}
                 />
                 {category}
@@ -105,7 +104,7 @@ const BookList = () => {
       </div>
 
       {/* ---------------Right Side -------------*/}
-      <div className="flex flex-col w-4/5 p-4 overflow-y-auto">
+      <div className="flex flex-col w-3/4 p-4 overflow-y-auto">
         {/* Display All Items */}
         <div className="grid grid-cols-3 gap-4">
           {/* Sample Item */}
