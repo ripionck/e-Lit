@@ -9,6 +9,7 @@ import {
 } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import DropdownMenu from '../../components/DropMenu';
+import { CiSearch } from 'react-icons/ci';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ const CustomNavbar = () => {
   return (
     <>
       <Navbar fluid rounded className="bg-gray-100">
+        {/* --------------Logo---------------- */}
         <Navbar.Brand>
           <img
             src="/src/assets/E-Lit_Emporium.png"
@@ -87,33 +89,24 @@ const CustomNavbar = () => {
             alt="Logo"
           />
         </Navbar.Brand>
+        {/* ----------Navbar search input--------------*/}
         <form
           onSubmit={(e) => e.preventDefault()}
           className="max-w-md px-4 mx-auto flex-grow"
         >
           <div className="relative">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute top-0 bottom-0 w-4 h-4 my-auto text-gray-400 left-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
             <input
               type="text"
               placeholder="Search"
-              className="w-full py-2 pl-8 pr-4 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
+              className="w-full py-2 pl-8 pr-2 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-gray-600"
             />
+            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+              <CiSearch />
+            </span>
           </div>
         </form>
         <Navbar.Toggle />
+        {/* --------------Navbar Collapse----------------- */}
         <Navbar.Collapse className="px-8">
           {isAuthenticated() ? (
             <div className="flex md:order-2">
@@ -176,6 +169,7 @@ const CustomNavbar = () => {
           )}
         </Navbar.Collapse>
       </Navbar>
+      {/* ----------------Navbar items------------------ */}
       <Navbar collapseonselect="true" expand="md">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
