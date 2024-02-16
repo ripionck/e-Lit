@@ -21,6 +21,7 @@ import EditAuthor from '../pages/Dashboard/Authors/EditAuthor/EditAuthor';
 import Transactions from '../pages/Dashboard/Transactions/Transactions';
 import Deposit from '../pages/Deposit/Deposit';
 import BookDetail from '../pages/BookDetail/BookDetail';
+import AddPublisher from '../pages/Dashboard/Publishers/AddPublisher/AddPublisher';
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
       {
         path: 'add-author',
         element: <AddAuthor />,
+      },
+      {
+        path: 'add-publisher',
+        element: <AddPublisher />,
       },
       {
         path: '/edit-author/:id',

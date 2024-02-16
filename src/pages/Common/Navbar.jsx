@@ -133,6 +133,9 @@ const CustomNavbar = () => {
                 <Dropdown.Item href="/deposit" icon={HiOutlineCurrencyDollar}>
                   Deposit
                 </Dropdown.Item>
+                <Dropdown.Item href="/add-publisher" icon={HiOutlinePlusCircle}>
+                  Add Publisher
+                </Dropdown.Item>
                 <Dropdown.Item href="/add-author" icon={HiOutlinePlusCircle}>
                   Add Author
                 </Dropdown.Item>
