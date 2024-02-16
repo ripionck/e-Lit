@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import {
   HiArrowSmRight,
   HiUser,
-  HiOutlineViewList,
   HiOutlinePlusCircle,
   HiOutlineCurrencyDollar,
 } from 'react-icons/hi';
@@ -130,9 +129,6 @@ const CustomNavbar = () => {
                 <Dropdown.Item href="/profile" icon={HiUser}>
                   Profile
                 </Dropdown.Item>
-                <Dropdown.Item href="/book-list" icon={HiOutlineViewList}>
-                  Book List
-                </Dropdown.Item>
                 <Dropdown.Item href="/deposit" icon={HiOutlineCurrencyDollar}>
                   Deposit
                 </Dropdown.Item>
@@ -179,6 +175,9 @@ const CustomNavbar = () => {
           <DropdownMenu items={categories} menuName="Categories" />
           <DropdownMenu items={authors} menuName="Authors" />
           <DropdownMenu items={publishers} menuName="Publishers" />
+          <Navbar.Link href="/book-list" className="text-lg">
+            All Books
+          </Navbar.Link>
           <Navbar.Link href="/about" className="text-lg">
             e-Books
           </Navbar.Link>
