@@ -42,11 +42,11 @@ const DropdownMenu = ({ items, menuName }) => {
 
       {/* <!-- Dropdown menu --> */}
       {isOpen && (
-        <div className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-max dark:bg-gray-700">
+        <div className="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow lg:w-[600px] md:w-[400px] w-[400px] dark:bg-gray-700">
           <div className="py-2 text-sm text-gray-700 dark:text-gray-200 flex flex-wrap">
             {items.map((item) => (
               <div key={item.id} className="flex">
-                <button className="p-4">{item.name}</button>
+                <button className="p-3 hover:text-blue-700">{item.name}</button>
               </div>
             ))}
           </div>

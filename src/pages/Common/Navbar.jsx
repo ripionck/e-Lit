@@ -51,20 +51,40 @@ const CustomNavbar = () => {
     { id: 1, name: 'Book 1' },
     { id: 2, name: 'Book 2' },
     { id: 3, name: 'Book 3' },
+    { id: 4, name: 'Book 4' },
+    { id: 5, name: 'Book 5' },
+    { id: 6, name: 'Book 6' },
+    { id: 7, name: 'Book 7' },
+    { id: 8, name: 'Book 8' },
+    { id: 9, name: 'Book 9' },
+    { id: 10, name: 'Book 10' },
     { id: 1, name: 'Book 1' },
     { id: 2, name: 'Book 2' },
     { id: 3, name: 'Book 3' },
+    { id: 4, name: 'Book 4' },
+    { id: 5, name: 'Book 5' },
+    { id: 6, name: 'Book 6' },
+    { id: 7, name: 'Book 7' },
+    { id: 8, name: 'Book 8' },
+    { id: 9, name: 'Book 9' },
+    { id: 10, name: 'Book 10' },
   ];
 
   const authors = [
     { id: 1, name: 'Author 1' },
     { id: 2, name: 'Author 2' },
     { id: 3, name: 'Author 3' },
+    { id: 1, name: 'Author 1' },
+    { id: 2, name: 'Author 2' },
+    { id: 3, name: 'Author 3' },
+    { id: 1, name: 'Author 1' },
+    { id: 2, name: 'Author 2' },
+    { id: 3, name: 'Author 3' },
   ];
-  const publications = [
-    { id: 1, name: 'Publication 1' },
-    { id: 2, name: 'Publication 2' },
-    { id: 3, name: 'Publication 3' },
+  const publishers = [
+    { id: 1, name: 'Publisher 1' },
+    { id: 2, name: 'Publisher 2' },
+    { id: 3, name: 'Publisher 3' },
   ];
 
   return (
@@ -174,7 +194,7 @@ const CustomNavbar = () => {
           </Navbar.Link>
           <DropdownMenu items={books} menuName="Books" />
           <DropdownMenu items={authors} menuName="Authors" />
-          <DropdownMenu items={publications} menuName="Publications" />
+          <DropdownMenu items={publishers} menuName="Publishers" />
           <Navbar.Link href="/about" className="text-lg">
             Offer Books
           </Navbar.Link>
