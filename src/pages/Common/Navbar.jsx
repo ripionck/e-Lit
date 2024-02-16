@@ -13,6 +13,7 @@ import DropdownMenu from '../../components/DropMenu';
 const CustomNavbar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  console.log(user);
   const isAuthenticated = () => {
     return !!localStorage.getItem('access_token');
   };
@@ -25,7 +26,7 @@ const CustomNavbar = () => {
   const token = localStorage.getItem('access_token');
 
   useEffect(() => {
-    fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
+    fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -38,6 +39,7 @@ const CustomNavbar = () => {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         setUser(data);
       })
       .catch((error) => {
@@ -110,7 +112,7 @@ const CustomNavbar = () => {
                 inline
                 label={
                   <img
-                    src={user ? user?.avater : 'placeholder.jpg'}
+                    src={user ? user.avater : 'placeholder.jpg'}
                     alt="Profile Image"
                     className="w-12 h-12 bg-gray-200 rounded-full object-cover"
                   />

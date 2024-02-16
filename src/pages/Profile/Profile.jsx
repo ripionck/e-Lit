@@ -9,6 +9,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [openProfileModal, setOpenProfileModal] = useState(false);
   const [values, setValues] = useState({
+    avater: null,
     username: '',
     first_name: '',
     last_name: '',
@@ -16,7 +17,7 @@ const Profile = () => {
     phone: '',
     balance: 0,
   });
-  const [profileImage, setProfileImage] = useState(null);
+  const [profileImage, setProfileImage] = useState('');
 
   const handleProfileClick = () => {
     setOpenProfileModal(true);
@@ -28,7 +29,7 @@ const Profile = () => {
   const token = localStorage.getItem('access_token');
 
   useEffect(() => {
-    fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
+    fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -43,11 +44,13 @@ const Profile = () => {
       .then((data) => {
         setValues({
           ...values,
+          avater: data.avater,
           username: data.username,
           first_name: data.first_name,
           last_name: data.last_name,
           email: data.email,
           phone: data.phone,
+          balance: data.balance,
         });
       })
       .catch((error) => {
@@ -55,11 +58,17 @@ const Profile = () => {
       });
   }, []);
 
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setProfileImage(imageFile);
+    setValues((prevValues) => ({ ...prevValues }));
+  };
+
   const handleUpdate = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('image', profileImage);
+    formData.append('avater', profileImage);
     formData.append('username', values.username);
     formData.append('first_name', values.first_name);
     formData.append('last_name', values.last_name);
@@ -67,25 +76,30 @@ const Profile = () => {
     formData.append('phone', values.phone);
     formData.append('balance', values.balance);
 
-    await fetch('https://e-library-z7s7.onrender.com/accounts/user/', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    })
-      .then((res) => {
-        console.log(res);
+    try {
+      const response = await fetch(
+        'https://e-library-z7s7.onrender.com/accounts/profile/',
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        console.log('Profile updated successfully');
         onCloseProfileModal();
         navigate('/profile');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const handleImageChange = (e) => {
-    setProfileImage(e.target.files[0]);
+      } else {
+        console.error('Failed to update profile');
+        // Handle error response here
+      }
+    } catch (error) {
+      console.error('Error during profile update:', error);
+      // Handle error here
+    }
   };
 
   return (
@@ -106,30 +120,35 @@ const Profile = () => {
                   htmlFor="profile-image-upload"
                   className="flex justify-center"
                 >
+                  <img
+                    src={
+                      profileImage
+                        ? URL.createObjectURL(profileImage)
+                        : values.avater
+                    }
+                    alt="Profile Image"
+                    className="w-32 h-32 bg-gray-200 rounded-full object-cover mb-2 cursor-pointer"
+                  />
                   <input
                     type="file"
                     id="profile-image-upload"
                     className="sr-only"
                     accept="image/*"
+                    name="avatar"
                     onChange={handleImageChange}
-                  />
-                  <img
-                    src={
-                      profileImage
-                        ? URL.createObjectURL(profileImage)
-                        : 'placeholder.jpg'
-                    }
-                    alt="Profile Image"
-                    className="w-32 h-32 bg-gray-200  rounded-full object-cover mb-2"
                   />
                 </label>
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={() =>
+                    document.getElementById('profile-image-upload').click()
+                  }
                   className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
                 >
                   Upload Image
                 </button>
               </div>
+
               <div>
                 <div className="mb-2 block">
                   <Label htmlFor="username" value="Username" />
@@ -240,31 +259,11 @@ const Profile = () => {
       <div className="flex flex-col lg:flex-row sm:flex-col p-4">
         <Card className="max-w-sm lg:w-1/2 lg:h-1/2 w-full">
           <div className="flex flex-col">
-            <div className="flex flex-col">
-              <label
-                htmlFor="profile-image-upload"
-                className="flex justify-center"
-              >
-                <input
-                  type="file"
-                  id="profile-image-upload"
-                  className="sr-only"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-                <img
-                  src={values.avater}
-                  alt="Profile Image"
-                  className="w-32 h-32 bg-gray-200  rounded-full object-cover mb-2"
-                />
-              </label>
-              <button
-                type="submit"
-                className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
-              >
-                Upload Image
-              </button>
-            </div>
+            <img
+              src={values.avater}
+              alt="Profile Image"
+              className="w-32 h-32 bg-gray-200  rounded-full object-cover mb-2"
+            />
             <div>
               <h4 className="mb-1 text-sm font-medium text-gray-900 dark:text-white">
                 Username: {values.username}
