@@ -13,7 +13,7 @@ const DropdownMenu = ({ items, menuName }) => {
 
   return (
     <div
-      className="relative inline-block"
+      className="relative inline-block py-2 pl-3 lg:pl-0 md:pl-0 lg:py-0 md:py-0"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

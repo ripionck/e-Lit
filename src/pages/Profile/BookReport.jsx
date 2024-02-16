@@ -2,7 +2,7 @@
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 
-const Report = () => {
+const BookReport = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Report = () => {
   }, []);
 
   return (
-    <div className="h-screen overflow-x-auto px-8 py-4">
+    <div className="overflow-x-auto px-8">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Cover</Table.HeadCell>
@@ -58,4 +58,4 @@ const Report = () => {
     </div>
   );
 };
-export default Report;
+export default BookReport;

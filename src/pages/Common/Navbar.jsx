@@ -47,17 +47,7 @@ const CustomNavbar = () => {
       });
   }, []);
 
-  const books = [
-    { id: 1, name: 'Book 1' },
-    { id: 2, name: 'Book 2' },
-    { id: 3, name: 'Book 3' },
-    { id: 4, name: 'Book 4' },
-    { id: 5, name: 'Book 5' },
-    { id: 6, name: 'Book 6' },
-    { id: 7, name: 'Book 7' },
-    { id: 8, name: 'Book 8' },
-    { id: 9, name: 'Book 9' },
-    { id: 10, name: 'Book 10' },
+  const categories = [
     { id: 1, name: 'Book 1' },
     { id: 2, name: 'Book 2' },
     { id: 3, name: 'Book 3' },
@@ -192,17 +182,17 @@ const CustomNavbar = () => {
           <Navbar.Link href="/" className="text-lg">
             Home
           </Navbar.Link>
-          <DropdownMenu items={books} menuName="Books" />
+          <DropdownMenu items={categories} menuName="Categories" />
           <DropdownMenu items={authors} menuName="Authors" />
           <DropdownMenu items={publishers} menuName="Publishers" />
           <Navbar.Link href="/about" className="text-lg">
-            Offer Books
+            e-Books
           </Navbar.Link>
           <Navbar.Link href="/about" className="text-lg">
-            New Books
+            Foreign Books
           </Navbar.Link>
           <Navbar.Link href="/about" className="text-lg">
-            About
+            About Us
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>

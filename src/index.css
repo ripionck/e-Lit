@@ -9,10 +9,25 @@
   }
 }
 
+/* ------Book Card slide------- */
 .slick-slide > div {
   margin: 0 6px;
 }
 
 .slick-dots li.slick-active button:before {
   color: orange !important;
+}
+
+/* -------Scrollbar ----------- */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1);
 }

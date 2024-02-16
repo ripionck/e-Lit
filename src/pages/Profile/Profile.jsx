@@ -3,7 +3,8 @@
 import { Card, Modal, Label, TextInput, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Report from './Report';
+import BookReport from './BookReport';
+import TransactionReport from './TransactionReport';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -297,7 +298,10 @@ const Profile = () => {
             </div>
           </div>
         </Card>
-        <Report />
+        <div>
+          <BookReport />
+          <TransactionReport />
+        </div>
       </div>
     </>
   );
