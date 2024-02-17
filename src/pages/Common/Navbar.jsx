@@ -13,7 +13,7 @@ import { CiSearch } from 'react-icons/ci';
 const CustomNavbar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState('');
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   // -----------getting user------------------//
   useEffect(() => {
@@ -63,13 +63,26 @@ const CustomNavbar = () => {
           return response.json();
         })
         .then((data) => {
-          setCategories(data);
+          // setCategories(data);
         })
         .catch((error) => {
           console.error('Error:', error);
         });
     }
   }, []);
+
+  const categories = [
+    { id: 1, name: 'Mystery' },
+    { id: 2, name: 'Thriller' },
+    { id: 3, name: 'Horror' },
+    { id: 4, name: 'Adventure' },
+    { id: 5, name: 'Fantasy' },
+    { id: 6, name: 'Science Fiction' },
+    { id: 7, name: 'Historical Fiction' },
+    { id: 8, name: 'Romance' },
+    { id: 9, name: 'Young Adult' },
+    { id: 10, name: 'Biography' },
+  ];
 
   const authors = [
     { id: 1, firstName: 'John', lastName: 'Doe' },
