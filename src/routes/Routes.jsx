@@ -22,6 +22,7 @@ import Transactions from '../pages/Dashboard/Transactions/Transactions';
 import Deposit from '../pages/Deposit/Deposit';
 import BookDetail from '../pages/BookDetail/BookDetail';
 import AddPublisher from '../pages/Dashboard/Publishers/AddPublisher/AddPublisher';
+import AddCategory from '../pages/Dashboard/Categories/AddCategory/AddCategory';
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
       {
         path: 'add-book',
         element: <AddBook />,
+      },
+      {
+        path: 'add-category',
+        element: <AddCategory />,
       },
       {
         path: '/edit-book/:id',

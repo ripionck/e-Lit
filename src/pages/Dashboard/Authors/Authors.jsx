@@ -63,7 +63,7 @@ const Authors = () => {
               <Table.Cell>
                 <img
                   className="h-8 w-8"
-                  src={author.avatar}
+                  src={author.avater}
                   alt={author.first_name}
                 />
               </Table.Cell>

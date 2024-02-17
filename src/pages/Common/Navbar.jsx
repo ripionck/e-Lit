@@ -138,6 +138,9 @@ const CustomNavbar = () => {
                 <Dropdown.Item href="/add-author" icon={HiOutlinePlusCircle}>
                   Add Author
                 </Dropdown.Item>
+                <Dropdown.Item href="/add-category" icon={HiOutlinePlusCircle}>
+                  Add Category
+                </Dropdown.Item>
                 <Dropdown.Item href="/add-book" icon={HiOutlinePlusCircle}>
                   Add Book
                 </Dropdown.Item>
