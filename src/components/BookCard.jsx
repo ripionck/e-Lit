@@ -13,8 +13,8 @@ const BookCard = ({ book }) => {
         key={book.name}
         className="h-[320px] bg-gray-100 text-black rounded-xl relative"
       >
-        <div className="h-56 flex justify-center items-center rounded-t-xl">
-          <img src={book.img} alt="" className="h-44 w-44" />
+        <div className="h-56 flex justify-center items-center rounded-t-xl pt-6">
+          <img src={book.img} alt="" className="h-52 w-56" />
           <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300">
             <button
               onClick={() => handleBookDetail(book.id)}
