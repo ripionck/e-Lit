@@ -1,5 +1,3 @@
-'use client';
-
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 
@@ -7,7 +5,7 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(' https://e-library-z7s7.onrender.com/category/')
+    fetch('https://e-library-z7s7.onrender.com/category/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -21,36 +19,51 @@ const Categories = () => {
         console.error('Error:', error);
       });
   }, []);
+
+  const handleDelete = async (categoryId) => {
+    try {
+      const response = await fetch(
+        `https://e-library-z7s7.onrender.com/category/${categoryId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (response.ok) {
+        // Filter out the deleted category from the categories array
+        setCategories(
+          categories.filter((category) => category.id !== categoryId)
+        );
+        console.log('Category deleted successfully');
+      } else {
+        console.error('Failed to delete category');
+      }
+    } catch (error) {
+      console.error('Error deleting category:', error);
+    }
+  };
+
   return (
     <div className="h-screen overflow-x-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Category Name</Table.HeadCell>
-          <Table.HeadCell>
-            <span className="sr-only">Edit</span>
-          </Table.HeadCell>
+          <Table.HeadCell>Action</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {categories.map((category, id) => (
+          {categories.map((category) => (
             <Table.Row
-              key={id}
+              key={category.id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <Table.Cell>{category.title}</Table.Cell>
-
               <Table.Cell>
-                <a
-                  href="#"
-                  className="font-medium mx-4 text-cyan-600 hover:underline dark:text-cyan-500"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleDelete(category.id)}
                   className="font-medium text-red-600 hover:underline dark:text-red-500"
                 >
                   Delete
-                </a>
+                </button>
               </Table.Cell>
             </Table.Row>
           ))}
@@ -59,4 +72,5 @@ const Categories = () => {
     </div>
   );
 };
+
 export default Categories;

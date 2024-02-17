@@ -1,5 +1,3 @@
-'use client';
-
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 
@@ -7,7 +5,7 @@ const Users = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(' https://e-library-z7s7.onrender.com/accounts/all-user/')
+    fetch('https://e-library-z7s7.onrender.com/accounts/all-user/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -21,22 +19,43 @@ const Users = () => {
         console.error('Error:', error);
       });
   }, []);
+
+  const handleDelete = async (userId) => {
+    try {
+      const response = await fetch(
+        `https://e-library-z7s7.onrender.com/accounts/delete/${userId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (response.ok) {
+        // Filter out the deleted user from the users array
+        setUsers(users.filter((user) => user.id !== userId));
+        console.log('User deleted successfully');
+      } else {
+        console.error('Failed to delete user');
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
   return (
     <div className="h-screen overflow-x-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Avatar</Table.HeadCell>
-          <Table.HeadCell>User Name</Table.HeadCell>
+          <Table.HeadCell>Name</Table.HeadCell>
           <Table.HeadCell>Email</Table.HeadCell>
           <Table.HeadCell>Phone</Table.HeadCell>
-          <Table.HeadCell>
-            <span className="sr-only">Edit</span>
-          </Table.HeadCell>
+          <Table.HeadCell>Delete</Table.HeadCell>{' '}
+          {/* Added Delete header cell */}
         </Table.Head>
         <Table.Body className="divide-y">
-          {users.map((user, id) => (
+          {users.map((user) => (
             <Table.Row
-              key={id}
+              key={user.id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
               <Table.Cell>
@@ -52,18 +71,12 @@ const Users = () => {
               <Table.Cell>{user.email}</Table.Cell>
               <Table.Cell>{user.phone}</Table.Cell>
               <Table.Cell>
-                <a
-                  href="#"
-                  className="font-medium mx-4 text-cyan-600 hover:underline dark:text-cyan-500"
-                >
-                  Edit
-                </a>
-                <a
-                  href="#"
+                <button
+                  onClick={() => handleDelete(user.id)}
                   className="font-medium text-red-600 hover:underline dark:text-red-500"
                 >
                   Delete
-                </a>
+                </button>
               </Table.Cell>
             </Table.Row>
           ))}
@@ -72,4 +85,5 @@ const Users = () => {
     </div>
   );
 };
+
 export default Users;

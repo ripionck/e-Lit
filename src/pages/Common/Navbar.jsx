@@ -12,8 +12,34 @@ import { CiSearch } from 'react-icons/ci';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  console.log(user);
+  const [user, setUser] = useState('');
+  const [categories, setCategories] = useState([]);
+
+  // -----------getting user------------------//
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setUser(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  }, []);
+
   const isAuthenticated = () => {
     return !!localStorage.getItem('access_token');
   };
@@ -23,64 +49,58 @@ const CustomNavbar = () => {
     navigate('/login');
   };
 
-  const token = localStorage.getItem('access_token');
-
+  //-----------------getting categories----------------//
   useEffect(() => {
-    fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      fetch('https://e-library-z7s7.onrender.com/category/', {
+        method: 'GET',
       })
-      .then((data) => {
-        console.log(data);
-        setUser(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setCategories(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
   }, []);
 
-  const categories = [
-    { id: 1, name: 'Book 1' },
-    { id: 2, name: 'Book 2' },
-    { id: 3, name: 'Book 3' },
-    { id: 4, name: 'Book 4' },
-    { id: 5, name: 'Book 5' },
-    { id: 6, name: 'Book 6' },
-    { id: 7, name: 'Book 7' },
-    { id: 8, name: 'Book 8' },
-    { id: 9, name: 'Book 9' },
-    { id: 10, name: 'Book 10' },
+  const authors = [
+    { id: 1, firstName: 'John', lastName: 'Doe' },
+    { id: 2, firstName: 'Alice', lastName: 'Smith' },
+    { id: 3, firstName: 'Michael', lastName: 'Johnson' },
+    { id: 4, firstName: 'Emily', lastName: 'Brown' },
+    { id: 5, firstName: 'David', lastName: 'Williams' },
+    { id: 6, firstName: 'Sophia', lastName: 'Jones' },
+    { id: 7, firstName: 'James', lastName: 'Garcia' },
+    { id: 8, firstName: 'Olivia', lastName: 'Martinez' },
+    { id: 9, firstName: 'Benjamin', lastName: 'Hernandez' },
+    { id: 10, firstName: 'Emma', lastName: 'Lopez' },
   ];
 
-  const authors = [
-    { id: 1, name: 'Author 1' },
-    { id: 2, name: 'Author 2' },
-    { id: 3, name: 'Author 3' },
-    { id: 1, name: 'Author 1' },
-    { id: 2, name: 'Author 2' },
-    { id: 3, name: 'Author 3' },
-    { id: 1, name: 'Author 1' },
-    { id: 2, name: 'Author 2' },
-    { id: 3, name: 'Author 3' },
-  ];
   const publishers = [
-    { id: 1, name: 'Publisher 1' },
-    { id: 2, name: 'Publisher 2' },
-    { id: 3, name: 'Publisher 3' },
+    { id: 1, name: 'Penguin Random House' },
+    { id: 2, name: 'HarperCollins Publishers' },
+    { id: 3, name: 'Simon & Schuster' },
+    { id: 4, name: 'Macmillan Publishers' },
+    { id: 5, name: 'Hachette Livre' },
+    { id: 6, name: 'Pearson Education' },
+    { id: 7, name: 'Scholastic Corporation' },
+    { id: 8, name: 'Wiley (John Wiley & Sons)' },
+    { id: 9, name: 'Bloomsbury Publishing' },
+    { id: 10, name: 'Oxford University Press' },
   ];
 
   return (
     <>
       <Navbar fluid rounded className="bg-gray-100">
-        {/* --------------Logo---------------- */}
+        {/* -------------Logo----------------- */}
         <Navbar.Brand>
           <img
             src="/src/assets/E-Lit_Emporium.png"
@@ -88,7 +108,7 @@ const CustomNavbar = () => {
             alt="Logo"
           />
         </Navbar.Brand>
-        {/* ----------Navbar search input--------------*/}
+        {/* ---------------Navbar search input---------------- */}
         <form
           onSubmit={(e) => e.preventDefault()}
           className="max-w-md px-4 mx-auto flex-grow"
@@ -105,9 +125,9 @@ const CustomNavbar = () => {
           </div>
         </form>
         <Navbar.Toggle />
-        {/* --------------Navbar Collapse----------------- */}
+        {/* ---------------Navbar Collapse----------------- */}
         <Navbar.Collapse className="px-8">
-          {isAuthenticated() ? (
+          {isAuthenticated() && user?.is_active ? (
             <div className="flex md:order-2">
               <Dropdown
                 arrowIcon={false}
@@ -132,25 +152,39 @@ const CustomNavbar = () => {
                 <Dropdown.Item href="/deposit" icon={HiOutlineCurrencyDollar}>
                   Deposit
                 </Dropdown.Item>
-                <Dropdown.Item href="/add-publisher" icon={HiOutlinePlusCircle}>
-                  Add Publisher
-                </Dropdown.Item>
-                <Dropdown.Item href="/add-author" icon={HiOutlinePlusCircle}>
-                  Add Author
-                </Dropdown.Item>
-                <Dropdown.Item href="/add-category" icon={HiOutlinePlusCircle}>
-                  Add Category
-                </Dropdown.Item>
-                <Dropdown.Item href="/add-book" icon={HiOutlinePlusCircle}>
-                  Add Book
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="/dashboard/authors"
-                  icon={HiOutlinePlusCircle}
-                >
-                  Dashboard
-                </Dropdown.Item>
-
+                {user.is_publisher && (
+                  <>
+                    <Dropdown.Item
+                      href="/add-publisher"
+                      icon={HiOutlinePlusCircle}
+                    >
+                      Add Publisher
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="/add-author"
+                      icon={HiOutlinePlusCircle}
+                    >
+                      Add Author
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      href="/add-category"
+                      icon={HiOutlinePlusCircle}
+                    >
+                      Add Category
+                    </Dropdown.Item>
+                    <Dropdown.Item href="/add-book" icon={HiOutlinePlusCircle}>
+                      Add Book
+                    </Dropdown.Item>
+                  </>
+                )}
+                {user.is_staff && (
+                  <Dropdown.Item
+                    href="/dashboard/authors"
+                    icon={HiOutlinePlusCircle}
+                  >
+                    Dashboard
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Item onClick={logout} icon={HiArrowSmRight}>
                   Logout
                 </Dropdown.Item>
@@ -168,7 +202,7 @@ const CustomNavbar = () => {
           )}
         </Navbar.Collapse>
       </Navbar>
-      {/* ----------------Navbar items------------------ */}
+      {/* -------------------Navbar items----------------- */}
       <Navbar collapseonselect="true" expand="md">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
