@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { HiArrowNarrowRight } from 'react-icons/hi';
 
 const BookCard = ({ book }) => {
   const navigate = useNavigate();
@@ -19,7 +20,10 @@ const BookCard = ({ book }) => {
               onClick={() => handleBookDetail(book.id)}
               className="bg-blue-500 text-white px-4 py-2 rounded-lg"
             >
-              Details
+              <span className="flex items-center gap-1">
+                Details
+                <HiArrowNarrowRight />
+              </span>
             </button>
           </div>
         </div>
