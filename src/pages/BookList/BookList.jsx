@@ -18,15 +18,11 @@ const BookList = () => {
     fetch('https://e-library-z7s7.onrender.com/category/')
       .then((res) => res.json())
       .then((data) => setCategories(data));
-  }, []);
 
-  useEffect(() => {
     fetch('https://e-library-z7s7.onrender.com/author/')
       .then((res) => res.json())
       .then((data) => setAuthors(data));
-  }, []);
 
-  useEffect(() => {
     fetch('https://e-library-z7s7.onrender.com/publisher/all/')
       .then((res) => res.json())
       .then((data) => setPublishers(data));
@@ -34,7 +30,7 @@ const BookList = () => {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, selectedCategory, selectedAuthor, selectedPublisher]);
 
   const fetchData = async () => {
     try {
@@ -50,33 +46,33 @@ const BookList = () => {
   };
 
   // Function to handle category selection
-  const handleCategorySelect = (category) => {
-    if (selectedCategory === category) {
+  const handleCategorySelect = (categoryId) => {
+    if (selectedCategory === categoryId) {
       setSelectedCategory(null);
     } else {
-      setSelectedCategory(category);
+      setSelectedCategory(categoryId);
       setSelectedAuthor(null);
       setSelectedPublisher(null);
     }
   };
 
   // Function to handle author selection
-  const handleAuthorSelect = (author) => {
-    if (selectedAuthor === author) {
+  const handleAuthorSelect = (authorId) => {
+    if (selectedAuthor === authorId) {
       setSelectedAuthor(null);
     } else {
-      setSelectedAuthor(author);
+      setSelectedAuthor(authorId);
       setSelectedCategory(null);
       setSelectedPublisher(null);
     }
   };
 
   // Function to handle publisher selection
-  const handlePublisherSelect = (publisher) => {
-    if (selectedPublisher === publisher) {
+  const handlePublisherSelect = (name) => {
+    if (selectedPublisher === name) {
       setSelectedPublisher(null);
     } else {
-      setSelectedPublisher(publisher);
+      setSelectedPublisher(name);
       setSelectedCategory(null);
       setSelectedAuthor(null);
     }
@@ -118,8 +114,8 @@ const BookList = () => {
                   <input
                     type="radio"
                     name="category"
-                    checked={selectedCategory === category}
-                    onChange={() => handleCategorySelect(category)}
+                    checked={selectedCategory === category.id}
+                    onChange={() => handleCategorySelect(category.id)}
                     className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                     style={{ boxShadow: 'none' }}
                   />
@@ -157,8 +153,8 @@ const BookList = () => {
                   <input
                     type="radio"
                     name="author"
-                    checked={selectedAuthor === author}
-                    onChange={() => handleAuthorSelect(author)}
+                    checked={selectedAuthor === author.id}
+                    onChange={() => handleAuthorSelect(author.id)}
                     className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                     style={{ boxShadow: 'none' }}
                   />
@@ -190,8 +186,8 @@ const BookList = () => {
                   <input
                     type="radio"
                     name="publisher"
-                    checked={selectedPublisher === publisher}
-                    onChange={() => handlePublisherSelect(publisher)}
+                    checked={selectedPublisher === publisher.name}
+                    onChange={() => handlePublisherSelect(publisher.name)}
                     className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                     style={{ boxShadow: 'none' }}
                   />

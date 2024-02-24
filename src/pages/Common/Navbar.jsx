@@ -51,30 +51,18 @@ const CustomNavbar = () => {
     navigate('/login');
   };
 
-  //-----------------loading categories----------------//
   useEffect(() => {
     fetch('https://e-library-z7s7.onrender.com/category/')
       .then((res) => res.json())
-      .then((data) => {
-        setCategories(data);
-      });
-  }, []);
+      .then((data) => setCategories(data));
 
-  //-----------------loading authors----------------//
-  useEffect(() => {
     fetch('https://e-library-z7s7.onrender.com/author/')
       .then((res) => res.json())
-      .then((data) => {
-        setAuthors(data);
-      });
-  }, []);
-  //-----------------loading publishers----------------//
-  useEffect(() => {
+      .then((data) => setAuthors(data));
+
     fetch('https://e-library-z7s7.onrender.com/publisher/all/')
       .then((res) => res.json())
-      .then((data) => {
-        setPublishers(data);
-      });
+      .then((data) => setPublishers(data));
   }, []);
 
   return (
