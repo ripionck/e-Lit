@@ -34,8 +34,8 @@ const DropdownMenu = ({ items, menuName }) => {
             {items.map((item) => (
               <div key={item.id} className="flex">
                 <button className="p-3 hover:text-blue-700">
-                  {item.firstName && item.lastName
-                    ? `${item.firstName} ${item.lastName}`
+                  {item.first_name && item.last_name
+                    ? `${item.first_name} ${item.last_name}`
                     : null}
                   {item.name && !item.title ? item.name : null}
                   {item.title ? item.title : null}

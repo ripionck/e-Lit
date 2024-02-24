@@ -1,170 +1,201 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import PaginationX from '../../components/Pagination';
 
-const categories = [
-  'Mystery',
-  'Thriller',
-  'Horror',
-  'Adventure',
-  'Fantasy',
-  'Science Fiction',
-  'Historical Fiction',
-];
+// const categories = [
+//   'Mystery',
+//   'Thriller',
+//   'Horror',
+//   'Adventure',
+//   'Fantasy',
+//   'Science Fiction',
+//   'Historical Fiction',
+// ];
 
-const authors = [
-  'Jane Smith',
-  'John Doe',
-  'Emily Johnson',
-  'Michael Brown',
-  'Sarah Lee',
-  'David Wilson',
-  'Jennifer Taylor',
-  'Robert Anderson',
-  'Amanda Martinez',
-  'Christopher Davis',
-];
+// const authors = [
+//   'Jane Smith',
+//   'John Doe',
+//   'Emily Johnson',
+//   'Michael Brown',
+//   'Sarah Lee',
+//   'David Wilson',
+//   'Jennifer Taylor',
+//   'Robert Anderson',
+//   'Amanda Martinez',
+//   'Christopher Davis',
+// ];
 
-const publishers = [
-  'HarperCollins',
-  'Penguin Random House',
-  'Simon & Schuster',
-  'Hachette Book Group',
-  'Macmillan Publishers',
-  'HarperCollins Publishers',
-  'Scholastic Corporation',
-  'Pearson Education',
-  'Wiley',
-  'Oxford University Press',
-];
-const items = [
-  {
-    title: 'The Mystery of the Lost Key',
-    author: 'Jane Smith',
-    publisher: 'HarperCollins',
-    category: 'Mystery',
-  },
-  {
-    title: 'Echoes of the Past',
-    author: 'John Doe',
-    publisher: 'Penguin Random House',
-    category: 'Thriller',
-  },
-  {
-    title: 'Whispers in the Dark',
-    author: 'Emily Johnson',
-    publisher: 'Simon & Schuster',
-    category: 'Horror',
-  },
-  {
-    title: 'The Secret of the Hidden Chamber',
-    author: 'Michael Brown',
-    publisher: 'Hachette Book Group',
-    category: 'Adventure',
-  },
-  {
-    title: 'Shadows of the Unknown',
-    author: 'Sarah Lee',
-    publisher: 'Macmillan Publishers',
-    category: 'Fantasy',
-  },
-  {
-    title: 'Beyond the Horizon',
-    author: 'David Wilson',
-    publisher: 'HarperCollins Publishers',
-    category: 'Science Fiction',
-  },
-  {
-    title: 'The Enigma of the Forbidden Scroll',
-    author: 'Jennifer Taylor',
-    publisher: 'Scholastic Corporation',
-    category: 'Mystery',
-  },
-  {
-    title: 'Lost in Time',
-    author: 'Robert Anderson',
-    publisher: 'Pearson Education',
-    category: 'Historical Fiction',
-  },
-  {
-    title: 'Echoes of Eternity',
-    author: 'Amanda Martinez',
-    publisher: 'Wiley',
-    category: 'Fantasy',
-  },
-  {
-    title: 'The Chronicles of Destiny',
-    author: 'Christopher Davis',
-    publisher: 'Oxford University Press',
-    category: 'Adventure',
-  },
-  {
-    title: 'The Hidden Path',
-    author: 'Jane Smith',
-    publisher: 'HarperCollins',
-    category: 'Science Fiction',
-  },
-  {
-    title: 'Shadow of Doubt',
-    author: 'John Doe',
-    publisher: 'Penguin Random House',
-    category: 'Thriller',
-  },
-  {
-    title: 'Forgotten Dreams',
-    author: 'Emily Johnson',
-    publisher: 'Simon & Schuster',
-    category: 'Mystery',
-  },
-  {
-    title: 'The Forbidden Forest',
-    author: 'Michael Brown',
-    publisher: 'Hachette Book Group',
-    category: 'Fantasy',
-  },
-  {
-    title: 'Echoes of Silence',
-    author: 'Sarah Lee',
-    publisher: 'Macmillan Publishers',
-    category: 'Horror',
-  },
-  {
-    title: 'The Lost Chronicles',
-    author: 'David Wilson',
-    publisher: 'HarperCollins Publishers',
-    category: 'Adventure',
-  },
-  {
-    title: 'Whispers of Fate',
-    author: 'Jennifer Taylor',
-    publisher: 'Scholastic Corporation',
-    category: 'Fantasy',
-  },
-  {
-    title: 'The Enchanted Mirror',
-    author: 'Robert Anderson',
-    publisher: 'Pearson Education',
-    category: 'Mystery',
-  },
-  {
-    title: 'The Last Voyage',
-    author: 'Amanda Martinez',
-    publisher: 'Wiley',
-    category: 'Adventure',
-  },
-  {
-    title: 'The Endless Odyssey',
-    author: 'Christopher Davis',
-    publisher: 'Oxford University Press',
-    category: 'Science Fiction',
-  },
-];
+// const publishers = [
+//   'HarperCollins',
+//   'Penguin Random House',
+//   'Simon & Schuster',
+//   'Hachette Book Group',
+//   'Macmillan Publishers',
+//   'HarperCollins Publishers',
+//   'Scholastic Corporation',
+//   'Pearson Education',
+//   'Wiley',
+//   'Oxford University Press',
+// ];
+// const items = [
+//   {
+//     title: 'The Mystery of the Lost Key',
+//     author: 'Jane Smith',
+//     publisher: 'HarperCollins',
+//     category: 'Mystery',
+//   },
+//   {
+//     title: 'Echoes of the Past',
+//     author: 'John Doe',
+//     publisher: 'Penguin Random House',
+//     category: 'Thriller',
+//   },
+//   {
+//     title: 'Whispers in the Dark',
+//     author: 'Emily Johnson',
+//     publisher: 'Simon & Schuster',
+//     category: 'Horror',
+//   },
+//   {
+//     title: 'The Secret of the Hidden Chamber',
+//     author: 'Michael Brown',
+//     publisher: 'Hachette Book Group',
+//     category: 'Adventure',
+//   },
+//   {
+//     title: 'Shadows of the Unknown',
+//     author: 'Sarah Lee',
+//     publisher: 'Macmillan Publishers',
+//     category: 'Fantasy',
+//   },
+//   {
+//     title: 'Beyond the Horizon',
+//     author: 'David Wilson',
+//     publisher: 'HarperCollins Publishers',
+//     category: 'Science Fiction',
+//   },
+//   {
+//     title: 'The Enigma of the Forbidden Scroll',
+//     author: 'Jennifer Taylor',
+//     publisher: 'Scholastic Corporation',
+//     category: 'Mystery',
+//   },
+//   {
+//     title: 'Lost in Time',
+//     author: 'Robert Anderson',
+//     publisher: 'Pearson Education',
+//     category: 'Historical Fiction',
+//   },
+//   {
+//     title: 'Echoes of Eternity',
+//     author: 'Amanda Martinez',
+//     publisher: 'Wiley',
+//     category: 'Fantasy',
+//   },
+//   {
+//     title: 'The Chronicles of Destiny',
+//     author: 'Christopher Davis',
+//     publisher: 'Oxford University Press',
+//     category: 'Adventure',
+//   },
+//   {
+//     title: 'The Hidden Path',
+//     author: 'Jane Smith',
+//     publisher: 'HarperCollins',
+//     category: 'Science Fiction',
+//   },
+//   {
+//     title: 'Shadow of Doubt',
+//     author: 'John Doe',
+//     publisher: 'Penguin Random House',
+//     category: 'Thriller',
+//   },
+//   {
+//     title: 'Forgotten Dreams',
+//     author: 'Emily Johnson',
+//     publisher: 'Simon & Schuster',
+//     category: 'Mystery',
+//   },
+//   {
+//     title: 'The Forbidden Forest',
+//     author: 'Michael Brown',
+//     publisher: 'Hachette Book Group',
+//     category: 'Fantasy',
+//   },
+//   {
+//     title: 'Echoes of Silence',
+//     author: 'Sarah Lee',
+//     publisher: 'Macmillan Publishers',
+//     category: 'Horror',
+//   },
+//   {
+//     title: 'The Lost Chronicles',
+//     author: 'David Wilson',
+//     publisher: 'HarperCollins Publishers',
+//     category: 'Adventure',
+//   },
+//   {
+//     title: 'Whispers of Fate',
+//     author: 'Jennifer Taylor',
+//     publisher: 'Scholastic Corporation',
+//     category: 'Fantasy',
+//   },
+//   {
+//     title: 'The Enchanted Mirror',
+//     author: 'Robert Anderson',
+//     publisher: 'Pearson Education',
+//     category: 'Mystery',
+//   },
+//   {
+//     title: 'The Last Voyage',
+//     author: 'Amanda Martinez',
+//     publisher: 'Wiley',
+//     category: 'Adventure',
+//   },
+//   {
+//     title: 'The Endless Odyssey',
+//     author: 'Christopher Davis',
+//     publisher: 'Oxford University Press',
+//     category: 'Science Fiction',
+//   },
+// ];
 
 const BookList = () => {
+  const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [publishers, setPublishers] = useState([]);
+  const [books, setBooks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [selectedPublisher, setSelectedPublisher] = useState(null);
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/category/')
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/author/')
+      .then((res) => res.json())
+      .then((data) => setAuthors(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/publisher/all/')
+      .then((res) => res.json())
+      .then((data) => setPublishers(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/book/')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setBooks(data);
+      });
+  }, []);
 
   // Function to handle category selection
   const handleCategorySelect = (category) => {
@@ -207,11 +238,11 @@ const BookList = () => {
   };
 
   // Filter items based on selected categories, authors, and publishers
-  const filteredItems = items.filter(
-    (item) =>
-      (selectedCategory === null || selectedCategory === item.category) &&
-      (selectedAuthor === null || selectedAuthor === item.author) &&
-      (selectedPublisher === null || selectedPublisher === item.publisher)
+  const filteredBooks = books.filter(
+    (book) =>
+      (selectedCategory === null || selectedCategory === book.category) &&
+      (selectedAuthor === null || selectedAuthor === book.author) &&
+      (selectedPublisher === null || selectedPublisher === book.publisher)
   );
 
   return (
@@ -225,9 +256,9 @@ const BookList = () => {
               Show By Categories
             </h3>
             <div className="flex flex-col space-y-1 max-h-52 overflow-y-auto ">
-              {categories.map((category, index) => (
+              {categories.map((category) => (
                 <label
-                  key={index}
+                  key={category.id}
                   className="block border rounded px-2 py-0.5 hover:bg-gray-100 cursor-pointer"
                 >
                   <input
@@ -238,7 +269,7 @@ const BookList = () => {
                     className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                     style={{ boxShadow: 'none' }}
                   />
-                  {category}
+                  {category.title}
                 </label>
               ))}
             </div>
@@ -264,9 +295,9 @@ const BookList = () => {
               </span>
             </div>
             <div className="flex flex-col space-y-1 max-h-56 overflow-y-auto">
-              {authors.map((author, index) => (
+              {authors.map((author) => (
                 <label
-                  key={index}
+                  key={author.id}
                   className="block border rounded px-2 py-0.5 hover:bg-gray-100 cursor-pointer"
                 >
                   <input
@@ -277,7 +308,7 @@ const BookList = () => {
                     className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                     style={{ boxShadow: 'none' }}
                   />
-                  {author}
+                  {author.first_name} {author.last_name}
                 </label>
               ))}
             </div>
@@ -297,9 +328,9 @@ const BookList = () => {
               </span>
             </div>
             <div className="flex flex-col space-y-1 max-h-52 overflow-y-auto">
-              {publishers.map((publisher, index) => (
+              {publishers.map((publisher) => (
                 <label
-                  key={index}
+                  key={publisher.id}
                   className="block border rounded px-2 py-0.5 hover:bg-gray-100 cursor-pointer"
                 >
                   <input
@@ -310,7 +341,7 @@ const BookList = () => {
                     className="mr-2 cursor-pointer hover:bg-blue-500 h-3 w-3"
                     style={{ boxShadow: 'none' }}
                   />
-                  {publisher}
+                  {publisher.name}
                 </label>
               ))}
             </div>
@@ -320,7 +351,7 @@ const BookList = () => {
         {/* ---------------Right Side -------------*/}
         <div className="flex flex-col w-3/4 p-4 overflow-y-auto">
           <div className="grid grid-cols-4 gap-4">
-            {filteredItems.map((item) => (
+            {filteredBooks.map((item) => (
               <div
                 key={item.id}
                 className="flex flex-col justify-center items-center bg-gray-200 rounded shadow relative"

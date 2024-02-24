@@ -13,7 +13,9 @@ import { CiSearch } from 'react-icons/ci';
 const CustomNavbar = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState('');
-  // const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [publishers, setPublishers] = useState([]);
 
   // -----------getting user------------------//
   useEffect(() => {
@@ -49,65 +51,31 @@ const CustomNavbar = () => {
     navigate('/login');
   };
 
-  //-----------------getting categories----------------//
+  //-----------------loading categories----------------//
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      fetch('https://e-library-z7s7.onrender.com/category/', {
-        method: 'GET',
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // setCategories(data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
+    fetch('https://e-library-z7s7.onrender.com/category/')
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data);
+      });
   }, []);
 
-  const categories = [
-    { id: 1, name: 'Mystery' },
-    { id: 2, name: 'Thriller' },
-    { id: 3, name: 'Horror' },
-    { id: 4, name: 'Adventure' },
-    { id: 5, name: 'Fantasy' },
-    { id: 6, name: 'Science Fiction' },
-    { id: 7, name: 'Historical Fiction' },
-    { id: 8, name: 'Romance' },
-    { id: 9, name: 'Young Adult' },
-    { id: 10, name: 'Biography' },
-  ];
-  const authors = [
-    { id: 1, firstName: 'John', lastName: 'Doe' },
-    { id: 2, firstName: 'Alice', lastName: 'Smith' },
-    { id: 3, firstName: 'Michael', lastName: 'Johnson' },
-    { id: 4, firstName: 'Emily', lastName: 'Brown' },
-    { id: 5, firstName: 'David', lastName: 'Williams' },
-    { id: 6, firstName: 'Sophia', lastName: 'Jones' },
-    { id: 7, firstName: 'James', lastName: 'Garcia' },
-    { id: 8, firstName: 'Olivia', lastName: 'Martinez' },
-    { id: 9, firstName: 'Benjamin', lastName: 'Hernandez' },
-    { id: 10, firstName: 'Emma', lastName: 'Lopez' },
-  ];
-
-  const publishers = [
-    { id: 1, name: 'Penguin Random House' },
-    { id: 2, name: 'HarperCollins Publishers' },
-    { id: 3, name: 'Simon & Schuster' },
-    { id: 4, name: 'Macmillan Publishers' },
-    { id: 5, name: 'Hachette Livre' },
-    { id: 6, name: 'Pearson Education' },
-    { id: 7, name: 'Scholastic Corporation' },
-    { id: 8, name: 'Wiley (John Wiley & Sons)' },
-    { id: 9, name: 'Bloomsbury Publishing' },
-    { id: 10, name: 'Oxford University Press' },
-  ];
+  //-----------------loading authors----------------//
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/author/')
+      .then((res) => res.json())
+      .then((data) => {
+        setAuthors(data);
+      });
+  }, []);
+  //-----------------loading publishers----------------//
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/publisher/all/')
+      .then((res) => res.json())
+      .then((data) => {
+        setPublishers(data);
+      });
+  }, []);
 
   return (
     <>
