@@ -2,53 +2,13 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import BookCard from '../../../components/BookCard';
+import { settings } from '../../../components/SlideSettings';
 
-const Books = () => {
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
+const NewReleases = () => {
   return (
     <>
-      <div className="w-[92%] m-auto px-8 pb-8 bg-gray-200 rounded-xl mb-4">
-        <div className="flex justify-between">
-          <div></div>
-          <h2 className="text-2xl py-4">Fiction</h2>
-          <a href="#" className="text-xl pt-2 underline hover:text-blue-500">
-            View all
-          </a>
-        </div>
+      <div className="w-full m-auto px-8 pb-8 bg-gray-200 rounded-xl mb-4">
+        <h2 className="text-2xl py-4">New Releases</h2>
 
         <Slider {...settings}>
           {books.map((book) => (
@@ -98,4 +58,4 @@ const books = [
   },
 ];
 
-export default Books;
+export default NewReleases;
