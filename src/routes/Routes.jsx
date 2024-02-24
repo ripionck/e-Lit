@@ -23,12 +23,17 @@ import Deposit from '../pages/Deposit/Deposit';
 import BookDetail from '../pages/BookDetail/BookDetail';
 import AddPublisher from '../pages/Dashboard/Publishers/AddPublisher/AddPublisher';
 import AddCategory from '../pages/Dashboard/Categories/AddCategory/AddCategory';
+import NotFound from '../pages/NotFound/NotFound';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
     children: [
+      {
+        path: '*',
+        element: <NotFound />,
+      },
       {
         path: '/',
         element: <Home />,

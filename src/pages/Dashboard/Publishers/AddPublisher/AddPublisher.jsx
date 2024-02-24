@@ -28,13 +28,16 @@ const AddPublisher = () => {
       formDataToSend.append('logo', formData.logo);
       formDataToSend.append('address', formData.address);
 
-      const response = await fetch('http://127.0.0.1:8000/publisher/create/', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      });
+      const response = await fetch(
+        'https://e-library-z7s7.onrender.com/publisher/create/',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formDataToSend,
+        }
+      );
 
       if (response.ok) {
         setformData({

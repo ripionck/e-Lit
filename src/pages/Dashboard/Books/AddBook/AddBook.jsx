@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const AddBook = () => {
+  const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [publishers, setPublishers] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     language: '',
     isbn: '',
     pages: 0,
+    price: 0,
     edition: '',
     cover: null,
     publication_date: '',
@@ -14,62 +18,61 @@ const AddBook = () => {
     category: '',
     publisher: '',
   });
-
   console.log(formData);
-
   const handleChange = (e) => {
-    if (e.target.name === 'cover') {
-      setFormData({ ...formData, cover: e.target.files[0] });
+    const { name, value, files } = e.target;
+    if (name === 'cover') {
+      setFormData({ ...formData, cover: files[0] });
+    } else if (
+      name === 'author' ||
+      name === 'category' ||
+      name === 'publisher'
+    ) {
+      const selectedOption = e.target.options[e.target.selectedIndex];
+      const id = selectedOption.value;
+      setFormData({ ...formData, [name]: id });
     } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData({ ...formData, [name]: value });
     }
   };
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/category/')
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/author/')
+      .then((res) => res.json())
+      .then((data) => setAuthors(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('https://e-library-z7s7.onrender.com/publisher/all/')
+      .then((res) => res.json())
+      .then((data) => setPublishers(data));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate form data
-    if (
-      !formData.title ||
-      !formData.language ||
-      !formData.isbn ||
-      !formData.pages ||
-      !formData.edition ||
-      !formData.cover ||
-      !formData.publication_date ||
-      !formData.quantity ||
-      !formData.author ||
-      !formData.category ||
-      !formData.publisher
-    ) {
-      console.error('Please fill out all fields');
-      return;
+    const form = new FormData();
+    for (const key in formData) {
+      form.append(key, formData[key]);
     }
 
     const token = localStorage.getItem('access_token');
     const apiUrl = 'https://e-library-z7s7.onrender.com/book/';
 
     try {
-      const formData = new FormData();
-      formData.append('title', formData.title);
-      formData.append('language', formData.language);
-      formData.append('isbn', formData.isbn);
-      formData.append('pages', formData.pages);
-      formData.append('edition', formData.edition);
-      formData.append('cover', formData.cover);
-      formData.append('publiction_date', formData.publiction_date);
-      formData.append('quantity', formData.quantity);
-      formData.append('author', formData.author);
-      formData.append('category', formData.category);
-      formData.append('publisher', formData.publisher);
-
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(formData),
+        body: form,
       });
 
       if (response.ok) {
@@ -102,7 +105,7 @@ const AddBook = () => {
                 <label>
                   Title:
                   <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
                     type="text"
                     name="title"
                     onChange={handleChange}
@@ -110,66 +113,84 @@ const AddBook = () => {
                   />
                 </label>
               </div>
-              <div className="w-full mt-6">
-                <select
-                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
-                  // value={selectedCategory}
-                  // onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  <option value="">Select Author</option>
-                  <option value="subsistence">Subsistence</option>
-                  <option value="unexpected reality">Unexpected Reality</option>
-                  <option value="wind of love">Wind of Love</option>
-                  <option value="tourism">Tourism</option>
-                  <option value="narcissism">Narcissism</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <div className="w-full mt-6">
-                <select
-                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
-                  // value={selectedCategory}
-                  // onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  <option value="">Select Category</option>
-                  <option value="subsistence">Subsistence</option>
-                  <option value="unexpected reality">Unexpected Reality</option>
-                  <option value="wind of love">Wind of Love</option>
-                  <option value="tourism">Tourism</option>
-                  <option value="narcissism">Narcissism</option>
-                </select>
-              </div>
               <div className="w-full">
                 <label>
-                  Publisher:
-                  <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                    type="text"
-                    name="publisher"
+                  Author:
+                  <select
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                    name="author"
                     onChange={handleChange}
                     required
-                  />
+                  >
+                    <option value="">Select Author</option>
+                    {authors.map((author) => (
+                      <option key={author.id} value={author.id}>
+                        {author.first_name} {author.last_name}
+                      </option>
+                    ))}
+                  </select>
                 </label>
               </div>
             </div>
             <div className="flex gap-2">
-              <div className="w-full mt-6">
-                <select
-                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
-                  // value={selectedCategory}
-                  // onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                  <option value="">Select Language</option>
-                  <option value="subsistence">Bangla</option>
-                  <option value="unexpected reality">English</option>
-                </select>
+              <div className="w-full">
+                <label>
+                  Category:
+                  <select
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                    name="category"
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((category) => (
+                      <option key={category.id} value={category.id}>
+                        {category.title}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <div className="w-full">
+                <label>
+                  Publisher:
+                  <select
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                    name="publisher"
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Publisher</option>
+                    {publishers.map((publisher) => (
+                      <option key={publisher.id} value={publisher.name}>
+                        {publisher.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <div className="w-full">
+                <label>
+                  Language:
+                  <select
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                    name="language"
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Language</option>
+                    <option value="Bangla">Bangla</option>
+                    <option value="English">English</option>
+                  </select>
+                </label>
               </div>
               <div className="w-full">
                 <label>
                   ISBN:
                   <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
                     type="number"
                     name="isbn"
                     onChange={handleChange}
@@ -181,9 +202,9 @@ const AddBook = () => {
             <div className="flex gap-2">
               <div className="w-full">
                 <label>
-                  Page Number:
+                  Page Count:
                   <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
                     type="number"
                     name="pages"
                     onChange={handleChange}
@@ -195,7 +216,7 @@ const AddBook = () => {
                 <label>
                   Edition:
                   <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
                     type="text"
                     name="edition"
                     onChange={handleChange}
@@ -209,7 +230,7 @@ const AddBook = () => {
                 <label>
                   Quantity:
                   <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
                     type="number"
                     name="quantity"
                     onChange={handleChange}
@@ -221,7 +242,7 @@ const AddBook = () => {
                 <label>
                   Publication Date:
                   <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
                     type="date"
                     name="publication_date"
                     onChange={handleChange}
@@ -230,19 +251,32 @@ const AddBook = () => {
                 </label>
               </div>
             </div>
-            <div className="w-full">
-              <label>
-                Avater:
-                <input
-                  className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                  type="file"
-                  name="cover"
-                  onChange={handleChange}
-                  required
-                />
-              </label>
+            <div className="flex gap-2">
+              <div className="w-full">
+                <label>
+                  Price:
+                  <input
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                    type="number"
+                    name="price"
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+              </div>
+              <div className="w-full">
+                <label>
+                  Avatar:
+                  <input
+                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                    type="file"
+                    name="cover"
+                    onChange={handleChange}
+                    required
+                  />
+                </label>
+              </div>
             </div>
-
             <button
               className="uppercase text-sm font-bold border-0 rounded px-4 py-2 bg-sky-500 hover:bg-sky-900"
               type="submit"
@@ -255,4 +289,5 @@ const AddBook = () => {
     </div>
   );
 };
+
 export default AddBook;

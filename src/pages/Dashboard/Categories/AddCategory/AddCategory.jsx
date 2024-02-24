@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 const AddCategory = () => {
   const navigate = useNavigate();
-  const [category, setCategory] = useState('');
+  const [title, setTitle] = useState('');
   const token = localStorage.getItem('access_token');
 
   const handleChange = (e) => {
-    setCategory(e.target.value);
+    setTitle(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -15,14 +15,14 @@ const AddCategory = () => {
 
     try {
       const response = await fetch(
-        'https://e-library-z7s7.onrender.com/deposit/',
+        'https://e-library-z7s7.onrender.com/category/',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ category }),
+          body: JSON.stringify({ title }),
         }
       );
 
@@ -53,7 +53,7 @@ const AddCategory = () => {
               <input
                 className="w-full py-2 rounded px-4  bg-gray-100"
                 type="text"
-                value={category}
+                name="category"
                 onChange={handleChange}
                 required
               />

@@ -83,7 +83,6 @@ const CustomNavbar = () => {
     { id: 9, name: 'Young Adult' },
     { id: 10, name: 'Biography' },
   ];
-
   const authors = [
     { id: 1, firstName: 'John', lastName: 'Doe' },
     { id: 2, firstName: 'Alice', lastName: 'Smith' },
@@ -228,10 +227,10 @@ const CustomNavbar = () => {
           <Navbar.Link href="/book-list" className="text-lg">
             All Books
           </Navbar.Link>
-          <Navbar.Link href="/about" className="text-lg">
+          <Navbar.Link href="*" className="text-lg">
             e-Books
           </Navbar.Link>
-          <Navbar.Link href="/about" className="text-lg">
+          <Navbar.Link href="*" className="text-lg">
             Foreign Books
           </Navbar.Link>
           <Navbar.Link href="/about" className="text-lg">

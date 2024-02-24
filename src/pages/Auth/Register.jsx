@@ -2,8 +2,10 @@
 
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -51,6 +53,7 @@ const Register = () => {
 
       if (response.ok) {
         console.log('Registration successful');
+        navigate('/login');
       } else {
         // Handle error response
         const errorData = await response.json();

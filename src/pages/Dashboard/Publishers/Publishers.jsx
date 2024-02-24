@@ -51,7 +51,6 @@ const Publishers = () => {
           <Table.HeadCell>Logo</Table.HeadCell>
           <Table.HeadCell>Name</Table.HeadCell>
           <Table.HeadCell>Address</Table.HeadCell>
-          <Table.HeadCell>Total Books</Table.HeadCell>
           <Table.HeadCell>
             <span className="sr-only">Edit</span>
           </Table.HeadCell>
@@ -71,7 +70,6 @@ const Publishers = () => {
               </Table.Cell>
               <Table.Cell>{publisher.name}</Table.Cell>
               <Table.Cell>{publisher.address}</Table.Cell>
-              <Table.Cell>{publisher.book.length}</Table.Cell>
               <Table.Cell>
                 <button
                   //onClick={() => handleEdit(publisher.id)}
