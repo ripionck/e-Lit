@@ -1,27 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const EditBook = () => {
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     title: '',
     language: '',
     isbn: '',
-    pages: 0,
+    pages: '',
     edition: '',
-    cover: null,
-    publication_date: '',
-    quantity: 0,
+    cover: '',
+    quantity: '',
     author: '',
     category: '',
-    publisher: '',
+    price: 0,
   });
 
+  console.log(formData.isbn);
+
   const handleChange = (e) => {
-    if (e.target.name === 'cover') {
-      setFormData({ ...formData, cover: e.target.files[0] });
+    const { name, value, files } = e.target;
+    if (name === 'cover') {
+      setFormData({ ...formData, [name]: files[0] });
     } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setFormData({ ...formData, [name]: value });
     }
   };
+
+  useEffect(() => {
+    fetch(`https://e-library-z7s7.onrender.com/book/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setFormData(data);
+      });
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,18 +47,16 @@ const EditBook = () => {
       !formData.pages ||
       !formData.edition ||
       !formData.cover ||
-      !formData.publication_date ||
       !formData.quantity ||
       !formData.author ||
-      !formData.category ||
-      !formData.publisher
+      !formData.category
     ) {
       console.error('Please fill out all fields');
       return;
     }
 
     const token = localStorage.getItem('access_token');
-    const apiUrl = 'https://e-library-z7s7.onrender.com/book/';
+    const apiUrl = `https://e-library-z7s7.onrender.com/book/${id}`;
 
     try {
       const formData = new FormData();
@@ -55,11 +66,9 @@ const EditBook = () => {
       formData.append('pages', formData.pages);
       formData.append('edition', formData.edition);
       formData.append('cover', formData.cover);
-      formData.append('publiction_date', formData.publiction_date);
       formData.append('quantity', formData.quantity);
       formData.append('author', formData.author);
       formData.append('category', formData.category);
-      formData.append('publisher', formData.publisher);
 
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -103,9 +112,8 @@ const EditBook = () => {
                     className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
                     type="text"
                     name="title"
-                    value={formData.author}
+                    value={formData.title}
                     onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
@@ -118,7 +126,6 @@ const EditBook = () => {
                     name="author"
                     value={formData.author}
                     onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
@@ -131,22 +138,20 @@ const EditBook = () => {
                     className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
                     type="text"
                     name="category"
-                    value={formData.author}
+                    value={formData.category}
                     onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
               <div className="w-full">
                 <label>
-                  Publisher:
+                  Edition:
                   <input
                     className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
                     type="text"
-                    name="publisher"
-                    value={formData.author}
+                    name="edition"
+                    value={formData.edition}
                     onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
@@ -159,9 +164,8 @@ const EditBook = () => {
                     className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
                     type="text"
                     name="language"
-                    value={formData.author}
+                    value={formData.language}
                     onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
@@ -172,9 +176,8 @@ const EditBook = () => {
                     className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
                     type="number"
                     name="isbn"
-                    value={formData.author}
+                    value={formData.isbn}
                     onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
@@ -187,27 +190,11 @@ const EditBook = () => {
                     className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
                     type="number"
                     name="pages"
-                    value={formData.author}
+                    value={formData.pages}
                     onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
-              <div className="w-full">
-                <label>
-                  Edition:
-                  <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                    type="text"
-                    name="edition"
-                    value={formData.author}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-              </div>
-            </div>
-            <div className="flex gap-2">
               <div className="w-full">
                 <label>
                   Quantity:
@@ -215,45 +202,17 @@ const EditBook = () => {
                     className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
                     type="number"
                     name="quantity"
-                    value={formData.author}
+                    value={formData.quantity}
                     onChange={handleChange}
-                    required
-                  />
-                </label>
-              </div>
-              <div className="w-full">
-                <label>
-                  Publication Date:
-                  <input
-                    className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                    type="date"
-                    name="publication_date"
-                    value={formData.author}
-                    onChange={handleChange}
-                    required
                   />
                 </label>
               </div>
             </div>
-            <div className="w-full">
-              <label>
-                Avater:
-                <input
-                  className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                  type="file"
-                  name="cover"
-                  value={formData.author}
-                  onChange={handleChange}
-                  required
-                />
-              </label>
-            </div>
-
             <button
               className="uppercase text-sm font-bold border-0 rounded px-4 py-2 bg-sky-500 hover:bg-sky-900"
               type="submit"
             >
-              Add Book
+              Update Book
             </button>
           </form>
         </div>

@@ -3,20 +3,18 @@ import { useEffect, useState } from 'react';
 const AddBook = () => {
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
-  const [publishers, setPublishers] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
     language: '',
     isbn: '',
-    pages: 0,
-    price: 0,
+    pages: '',
     edition: '',
     cover: null,
-    publication_date: '',
-    quantity: 0,
-    author: '',
-    category: '',
-    publisher: '',
+    publication_date: null,
+    quantity: null,
+    author: null,
+    category: null,
+    price: 0,
   });
   console.log(formData);
   const handleChange = (e) => {
@@ -48,12 +46,6 @@ const AddBook = () => {
       .then((data) => setAuthors(data));
   }, []);
 
-  useEffect(() => {
-    fetch('https://e-library-z7s7.onrender.com/publisher/all/')
-      .then((res) => res.json())
-      .then((data) => setPublishers(data));
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -64,16 +56,18 @@ const AddBook = () => {
     }
 
     const token = localStorage.getItem('access_token');
-    const apiUrl = 'https://e-library-z7s7.onrender.com/book/';
 
     try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: form,
-      });
+      const response = await fetch(
+        'https://e-library-z7s7.onrender.com/book/',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: form,
+        }
+      );
 
       if (response.ok) {
         console.log('Book added successfully!');
@@ -153,26 +147,6 @@ const AddBook = () => {
               </div>
               <div className="w-full">
                 <label>
-                  Publisher:
-                  <select
-                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
-                    name="publisher"
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Publisher</option>
-                    {publishers.map((publisher) => (
-                      <option key={publisher.id} value={publisher.name}>
-                        {publisher.name}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-            </div>
-            <div className="flex gap-2">
-              <div className="w-full">
-                <label>
                   Language:
                   <select
                     className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
@@ -184,18 +158,6 @@ const AddBook = () => {
                     <option value="Bangla">Bangla</option>
                     <option value="English">English</option>
                   </select>
-                </label>
-              </div>
-              <div className="w-full">
-                <label>
-                  ISBN:
-                  <input
-                    className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
-                    type="number"
-                    name="isbn"
-                    onChange={handleChange}
-                    required
-                  />
                 </label>
               </div>
             </div>
@@ -228,11 +190,11 @@ const AddBook = () => {
             <div className="flex gap-2">
               <div className="w-full">
                 <label>
-                  Quantity:
+                  ISBN:
                   <input
                     className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
                     type="number"
-                    name="quantity"
+                    name="isbn"
                     onChange={handleChange}
                     required
                   />
@@ -266,16 +228,28 @@ const AddBook = () => {
               </div>
               <div className="w-full">
                 <label>
-                  Avatar:
+                  Quantity:
                   <input
                     className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
-                    type="file"
-                    name="cover"
+                    type="number"
+                    name="quantity"
                     onChange={handleChange}
                     required
                   />
                 </label>
               </div>
+            </div>
+            <div className="w-full">
+              <label>
+                Cover:
+                <input
+                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                  type="file"
+                  name="cover"
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <button
               className="uppercase text-sm font-bold border-0 rounded px-4 py-2 bg-sky-500 hover:bg-sky-900"
