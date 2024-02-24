@@ -84,7 +84,7 @@ const CustomNavbar = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search book, author, ISBN"
               className="w-full py-2 pl-8 pr-2 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-gray-600"
             />
             <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
@@ -181,16 +181,16 @@ const CustomNavbar = () => {
           <DropdownMenu items={authors} menuName="Authors" />
           <DropdownMenu items={publishers} menuName="Publishers" />
           <Navbar.Link href="/book-list" className="text-lg">
-            All Books
+            Books
           </Navbar.Link>
           <Navbar.Link href="*" className="text-lg">
-            e-Books
+            Events
           </Navbar.Link>
           <Navbar.Link href="*" className="text-lg">
-            Foreign Books
+            Articles
           </Navbar.Link>
-          <Navbar.Link href="/about" className="text-lg">
-            About Us
+          <Navbar.Link href="*" className="text-lg">
+            Audio
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>

@@ -6,7 +6,6 @@ import Login from '../pages/Auth/Login';
 import Profile from '../pages/Profile/Profile';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import BookList from '../pages/BookList/BookList';
-import About from '../pages/About/About';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import ChangePassword from '../pages/Auth/ChangePassword';
 import Authors from '../pages/Dashboard/Authors/Authors';
@@ -123,10 +122,6 @@ export const router = createBrowserRouter([
       {
         path: '/deposit',
         element: <Deposit />,
-      },
-      {
-        path: 'about',
-        element: <About />,
       },
     ],
   },

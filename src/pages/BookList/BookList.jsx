@@ -2,8 +2,10 @@ import { Pagination } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { HiArrowNarrowRight } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 const BookList = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
@@ -92,6 +94,10 @@ const BookList = () => {
       (selectedAuthor === null || selectedAuthor === book.author) &&
       (selectedPublisher === null || selectedPublisher === book.publisher)
   );
+
+  const handleBookDetail = (id) => {
+    navigate(`/book/${id}`);
+  };
 
   const onPageChange = (page) => setCurrentPage(page);
 
@@ -209,7 +215,7 @@ const BookList = () => {
                 <img src={book.cover} alt={book.title} className="h-52 w-48" />
                 <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <button
-                    // onClick={() => handleBookDetail(item.id)}
+                    onClick={() => handleBookDetail(book.id)}
                     className="bg-blue-500 text-white px-4 py-2 rounded-lg"
                   >
                     <span className="flex items-center gap-1">
