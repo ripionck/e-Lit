@@ -1,7 +1,7 @@
+import { Pagination } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { HiArrowNarrowRight } from 'react-icons/hi';
-import PaginationX from '../../components/Pagination';
 
 const BookList = () => {
   const [categories, setCategories] = useState([]);
@@ -11,6 +11,8 @@ const BookList = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedAuthor, setSelectedAuthor] = useState(null);
   const [selectedPublisher, setSelectedPublisher] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     fetch('https://e-library-z7s7.onrender.com/category/')
@@ -31,13 +33,21 @@ const BookList = () => {
   }, []);
 
   useEffect(() => {
-    fetch('https://e-library-z7s7.onrender.com/book/')
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setBooks(data);
-      });
-  }, []);
+    fetchData();
+  }, [currentPage]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        `https://e-library-z7s7.onrender.com/book/?p=${currentPage}`
+      );
+      const data = await response.json();
+      setBooks(data.results);
+      setTotalPages(data.total_pages);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   // Function to handle category selection
   const handleCategorySelect = (category) => {
@@ -86,6 +96,8 @@ const BookList = () => {
       (selectedAuthor === null || selectedAuthor === book.author) &&
       (selectedPublisher === null || selectedPublisher === book.publisher)
   );
+
+  const onPageChange = (page) => setCurrentPage(page);
 
   return (
     <>
@@ -193,12 +205,12 @@ const BookList = () => {
         {/* ---------------Right Side -------------*/}
         <div className="flex flex-col w-3/4 p-4 overflow-y-auto">
           <div className="grid grid-cols-4 gap-4">
-            {filteredBooks.map((item) => (
+            {filteredBooks.map((book) => (
               <div
-                key={item.id}
+                key={book.id}
                 className="flex flex-col justify-center items-center bg-gray-200 rounded shadow relative"
               >
-                <img src={item.cover} alt={item.title} className="h-52 w-48" />
+                <img src={book.cover} alt={book.title} className="h-52 w-48" />
                 <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <button
                     // onClick={() => handleBookDetail(item.id)}
@@ -210,14 +222,22 @@ const BookList = () => {
                     </span>
                   </button>
                 </div>
-                <p>{item.title}</p>
-                <p>{item.author}</p>
+                <p>{book.title}</p>
+                <p>{book.author}</p>
+                <p>{book.price}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
-      <PaginationX />
+      <div className="flex justify-center my-4">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+          showIcons
+        />
+      </div>
     </>
   );
 };

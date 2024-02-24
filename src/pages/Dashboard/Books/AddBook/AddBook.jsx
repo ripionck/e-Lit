@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddBook = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [formData, setFormData] = useState({
@@ -71,7 +73,7 @@ const AddBook = () => {
 
       if (response.ok) {
         console.log('Book added successfully!');
-        // Redirect or perform any other action upon successful registration
+        navigate('/dashboard/books');
       } else {
         // Handle error response
         const errorData = await response.json();
