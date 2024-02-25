@@ -16,8 +16,6 @@ const EditBook = () => {
     price: 0,
   });
 
-  console.log(formData.isbn);
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'cover') {

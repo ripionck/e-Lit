@@ -22,36 +22,69 @@ const Footer = () => {
             </a>
           </div>
           <div className="flex justify-between flex-wrap w-full md:w-auto">
-            <div className="mb-8 md:mb-0 md:mr-4">
+            <div className="mb-8 md:mb-0 md:mr-8">
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                 Resources
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
+                <li className="mb-2">
                   <a href="#" className="hover:underline">
-                    Library
+                    For Educators and Librarians
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="#" className="hover:underline">
+                    Book Festival Resources
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:underline">
-                    Management
+                    For Booksellers & Distributors
                   </a>
                 </li>
               </ul>
             </div>
-            <div className="mb-8 md:mb-0 md:mr-4">
+            <div className="mb-8 md:mb-0 md:mr-8">
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                 System
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
+                <li className="mb-2">
                   <a href="#" className="hover:underline ">
-                    Github
+                    Publishing Fraud Alert
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="#" className="hover:underline ">
+                    Services, Sales & Rights
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:underline">
-                    Discord
+                    Recruitment Fraud Alert
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mb-8 md:mb-0 md:mr-8">
+              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+                About Us
+              </h2>
+              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+                <li className="mb-2">
+                  <a href="#" className="hover:underline">
+                    Corporate Information
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="#" className="hover:underline">
+                    Our Mission Statement
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:underline">
+                    Divisions & Imprints
                   </a>
                 </li>
               </ul>
@@ -61,41 +94,19 @@ const Footer = () => {
                 Legal
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
+                <li className="mb-2">
                   <a href="#" className="hover:underline">
                     Privacy Policy
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="#" className="hover:underline">
+                    Cookie Preferences
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:underline">
                     Terms &amp; Conditions
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                About Us
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Our Story
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Our People
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Our Contributors
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Management
                   </a>
                 </li>
               </ul>
@@ -111,13 +122,48 @@ const Footer = () => {
             </a>
             . All Rights Reserved.
           </span>
-          <div className="flex gap-4 text-2xl mt-4 sm:justify-center sm:mt-0">
-            <FaFacebookF />
-            <FaInstagram />
-            <FaTwitter />
-            <FaLinkedin />
-            <FaWhatsapp />
-            <FaTelegram />
+          <div className="flex flex-col mt-4 sm:justify-center sm:mt-0">
+            <h4 className="text-2xl border-b-2 border-gray-500 mb-2 text-center">
+              Follow Us
+            </h4>
+            <div className="flex text-xl space-x-2">
+              <a
+                href="#"
+                className="px-2 py-2 border rounded-full border-black hover:bg-gray-300"
+              >
+                <FaFacebookF />
+              </a>
+              <a
+                href="#"
+                className="px-2 py-2 border rounded-full border-black hover:bg-gray-300"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href="#"
+                className="px-2 py-2 border rounded-full border-black hover:bg-gray-300"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="#"
+                className="px-2 py-2 border rounded-full border-black hover:bg-gray-300"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="#"
+                className="px-2 py-2 border rounded-full border-black hover:bg-gray-300"
+              >
+                <FaWhatsapp />
+              </a>
+              <a
+                href="#"
+                className="px-2 py-2 border rounded-full border-black hover:bg-gray-300"
+              >
+                <FaTelegram />
+              </a>
+            </div>
           </div>
         </div>
       </div>

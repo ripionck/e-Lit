@@ -6,7 +6,7 @@ const BookReport = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch('https://e-library-z7s7.onrender.com/book/')
+    fetch('https://e-library-z7s7.onrender.com/book/?p=1')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -37,7 +37,7 @@ const BookReport = () => {
           </Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
-          {books.map((book, id) => (
+          {/* {books.map((book, id) => (
             <Table.Row
               key={id}
               className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -52,7 +52,7 @@ const BookReport = () => {
               <Table.Cell>{book.publisher}</Table.Cell>
               <Table.Cell>{book.quantity}</Table.Cell>
             </Table.Row>
-          ))}
+          ))} */}
         </Table.Body>
       </Table>
     </div>
