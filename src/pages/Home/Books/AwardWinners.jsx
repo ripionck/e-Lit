@@ -7,8 +7,8 @@ import { settings } from '../../../components/SlideSettings';
 const AwardWinners = () => {
   return (
     <>
-      <div className="w-full m-auto px-8 pb-8 bg-gray-200 rounded-xl mb-4">
-        <h2 className="text-2xl py-4">Award Winners</h2>
+      <div className="w-full m-auto px-8 pb-8 rounded-xl mb-4">
+        <h2 className="text-3xl py-4">Award Winners</h2>
 
         <Slider {...settings}>
           {books.map((book) => (
