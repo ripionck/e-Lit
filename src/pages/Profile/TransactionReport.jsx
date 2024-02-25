@@ -22,7 +22,7 @@ const TransactionReport = () => {
       });
   }, []);
   return (
-    <div className="overflow-x-auto px-8 mt-2">
+    <div className="overflow-x-auto mt-2">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Transaction ID</Table.HeadCell>

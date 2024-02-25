@@ -22,7 +22,7 @@ const BookReport = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto px-8">
+    <div className="overflow-x-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Cover</Table.HeadCell>

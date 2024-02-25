@@ -257,8 +257,8 @@ const Profile = () => {
         </Modal.Body>
       </Modal>
       {/* Update card */}
-      <div className="flex flex-col lg:flex-row sm:flex-col p-4">
-        <Card className="max-w-sm lg:w-1/2 lg:h-1/2 w-full">
+      <div className="flex flex-col lg:flex-row sm:flex-col p-2">
+        <Card className="max-w-sm lg:w-80 lg:h-1/2 w-full">
           <div className="flex flex-col">
             <img
               src={values.avater}
@@ -298,7 +298,7 @@ const Profile = () => {
             </div>
           </div>
         </Card>
-        <div>
+        <div className="ml-0 lg:ml-4 md:ml-4">
           <BookReport />
           <TransactionReport />
         </div>

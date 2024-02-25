@@ -9,7 +9,7 @@ import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
-    <div className="flex">
+    <div className="flex pt-2">
       <Sidebar aria-label="Default sidebar example">
         <Sidebar.Items>
           <Sidebar.ItemGroup>
@@ -37,7 +37,7 @@ const Dashboard = () => {
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
-      <div className="flex-1 p-2">
+      <div className="flex-1 pl-2">
         <Outlet />
       </div>
     </div>

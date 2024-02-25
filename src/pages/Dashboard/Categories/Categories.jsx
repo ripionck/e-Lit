@@ -1,10 +1,13 @@
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
+import Loading from '../../../components/Spinner';
 
 const Categories = () => {
+  const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://e-library-z7s7.onrender.com/category/')
       .then((response) => {
         if (!response.ok) {
@@ -17,10 +20,12 @@ const Categories = () => {
       })
       .catch((error) => {
         console.error('Error:', error);
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const handleDelete = async (categoryId) => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://e-library-z7s7.onrender.com/category/${categoryId}`,
@@ -40,36 +45,44 @@ const Categories = () => {
       }
     } catch (error) {
       console.error('Error deleting category:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="h-screen overflow-y-auto">
-      <Table striped>
-        <Table.Head>
-          <Table.HeadCell>Category Name</Table.HeadCell>
-          <Table.HeadCell>Action</Table.HeadCell>
-        </Table.Head>
-        <Table.Body className="divide-y">
-          {categories.map((category) => (
-            <Table.Row
-              key={category.id}
-              className="bg-white dark:border-gray-700 dark:bg-gray-800"
-            >
-              <Table.Cell>{category.title}</Table.Cell>
-              <Table.Cell>
-                <button
-                  onClick={() => handleDelete(category.id)}
-                  className="font-medium text-red-600 hover:underline dark:text-red-500"
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="h-screen overflow-y-auto">
+          <Table striped>
+            <Table.Head>
+              <Table.HeadCell>Category Name</Table.HeadCell>
+              <Table.HeadCell>Action</Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y">
+              {categories.map((category) => (
+                <Table.Row
+                  key={category.id}
+                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
-                  Delete
-                </button>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </div>
+                  <Table.Cell>{category.title}</Table.Cell>
+                  <Table.Cell>
+                    <button
+                      onClick={() => handleDelete(category.id)}
+                      className="font-medium text-red-600 hover:underline dark:text-red-500"
+                    >
+                      Delete
+                    </button>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+      )}
+    </>
   );
 };
 

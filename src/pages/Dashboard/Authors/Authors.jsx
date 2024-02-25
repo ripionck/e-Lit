@@ -2,11 +2,14 @@
 
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
+import Loading from '../../../components/Spinner';
 
 const Authors = () => {
+  const [loading, setLoading] = useState(true);
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://e-library-z7s7.onrender.com/author/')
       .then((response) => {
         if (!response.ok) {
@@ -19,11 +22,13 @@ const Authors = () => {
       })
       .catch((error) => {
         console.error('Error:', error);
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   const token = localStorage.getItem('access_token');
   const handleDelete = (id) => {
+    setLoading(true);
     fetch(`https://e-library-z7s7.onrender.com/author/${id}`, {
       method: 'DELETE',
       headers: {
@@ -39,58 +44,67 @@ const Authors = () => {
       })
       .catch((error) => {
         console.error('Error deleting author:', error);
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
-    <div className="h-screen overflow-y-auto">
-      <Table striped>
-        <Table.Head>
-          <Table.HeadCell>Avatar</Table.HeadCell>
-          <Table.HeadCell>Author Name</Table.HeadCell>
-          <Table.HeadCell>Description</Table.HeadCell>
-          <Table.HeadCell>
-            <span className="sr-only">Edit</span>
-          </Table.HeadCell>
-        </Table.Head>
-        <Table.Body className="divide-y">
-          {authors.map((author) => (
-            <Table.Row
-              key={author.id}
-              className="bg-white dark:border-gray-700 dark:bg-gray-800"
-            >
-              <Table.Cell>
-                <img
-                  className="h-8 w-8"
-                  src={author.avater}
-                  alt={author.first_name}
-                />
-              </Table.Cell>
-              <Table.Cell>
-                {author.first_name} {author.last_name}
-              </Table.Cell>
-              <Table.Cell>{author.description}</Table.Cell>
-              <Table.Cell>
-                <div className="flex gap-4">
-                  <a
-                    href={`/edit-author/${author.id}`}
-                    className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <div className="h-screen overflow-y-auto">
+            <Table striped>
+              <Table.Head>
+                <Table.HeadCell>Avatar</Table.HeadCell>
+                <Table.HeadCell>Author Name</Table.HeadCell>
+                <Table.HeadCell>Description</Table.HeadCell>
+                <Table.HeadCell>
+                  <span className="sr-only">Edit</span>
+                </Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                {authors.map((author) => (
+                  <Table.Row
+                    key={author.id}
+                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
                   >
-                    Edit
-                  </a>
-                  <button
-                    className="font-medium text-red-600 hover:underline dark:text-red-500"
-                    onClick={() => handleDelete(author.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </div>
+                    <Table.Cell>
+                      <img
+                        className="h-8 w-8"
+                        src={author.avater}
+                        alt={author.first_name}
+                      />
+                    </Table.Cell>
+                    <Table.Cell>
+                      {author.first_name} {author.last_name}
+                    </Table.Cell>
+                    <Table.Cell>{author.description}</Table.Cell>
+                    <Table.Cell>
+                      <div className="flex gap-4">
+                        <a
+                          href={`/edit-author/${author.id}`}
+                          className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                        >
+                          Edit
+                        </a>
+                        <button
+                          className="font-medium text-red-600 hover:underline dark:text-red-500"
+                          onClick={() => handleDelete(author.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
