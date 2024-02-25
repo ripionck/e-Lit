@@ -25,10 +25,8 @@ const BookSlide = ({ book }) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center px-4">
-          <p className="text-xl font-semibold">{book.title}</p>
-          <p className="text-center">{book.author}</p>
-          <p className="text-center">{book.price}</p>
+        <div className="flex flex-col items-center justify-center px-4 mt-2">
+          <p className="text-xl">{book.title}</p>
         </div>
       </div>
     </>
