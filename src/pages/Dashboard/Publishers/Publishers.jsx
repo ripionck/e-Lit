@@ -22,12 +22,17 @@ const Publishers = () => {
       });
   }, []);
 
+  const token = localStorage.getItem('access_token');
+
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
         `https://e-library-z7s7.onrender.com/publisher/${id}`,
         {
           method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 

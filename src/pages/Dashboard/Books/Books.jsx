@@ -53,8 +53,8 @@ const Books = () => {
             <Table.HeadCell>Cover</Table.HeadCell>
             <Table.HeadCell>Title</Table.HeadCell>
             <Table.HeadCell>Author</Table.HeadCell>
-            <Table.HeadCell>Edition</Table.HeadCell>
             <Table.HeadCell>Category</Table.HeadCell>
+            <Table.HeadCell>Edition</Table.HeadCell>
             <Table.HeadCell>Publisher</Table.HeadCell>
             <Table.HeadCell>Quantity</Table.HeadCell>
             <Table.HeadCell>

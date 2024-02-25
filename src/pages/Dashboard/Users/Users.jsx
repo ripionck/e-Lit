@@ -42,7 +42,7 @@ const Users = () => {
   };
 
   return (
-    <div className="h-screen overflow-x-auto">
+    <div className="h-screen overflow-y-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Avatar</Table.HeadCell>

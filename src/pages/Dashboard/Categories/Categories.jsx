@@ -44,7 +44,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="h-screen overflow-x-auto">
+    <div className="h-screen overflow-y-auto">
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Category Name</Table.HeadCell>
