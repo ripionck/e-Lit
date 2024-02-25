@@ -8,7 +8,9 @@ const AwardWinners = () => {
   return (
     <>
       <div className="w-full m-auto px-8 rounded-xl mb-4">
-        <h2 className="text-3xl py-4">Award Winners</h2>
+        <h2 className="text-3xl py-4 border-b-2 border-gray-400">
+          Award Winners
+        </h2>
 
         <Slider {...settings}>
           {books.map((book) => (

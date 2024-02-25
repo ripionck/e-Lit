@@ -8,7 +8,9 @@ const CommingSoon = () => {
   return (
     <>
       <div className="w-full m-auto px-8 pb-8 mb-4">
-        <h2 className="text-3xl py-4">Comming Soon</h2>
+        <h2 className="text-3xl py-4 border-b-2 border-gray-400">
+          Comming Soon
+        </h2>
 
         <Slider {...settings}>
           {books.map((book) => (
@@ -23,38 +25,122 @@ const CommingSoon = () => {
 const books = [
   {
     id: 1,
-    title: `The Great Gatsby`,
-    img: `/src/assets/books/42766.png`,
+    title: `The Truth About The Devlins`,
+    img: `/src/assets/books/comming_soon/9780525539704.jfif`,
     author: `F. Scott Fitzgerald`,
     price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
     id: 2,
-    title: `To Kill a Mockingbird`,
-    img: `/src/assets/books/75154.png`,
+    title: `After Annie`,
+    img: `/src/assets/books/comming_soon/9780593229804.jfif`,
     author: `Harper Lee`,
     price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
     id: 3,
-    title: `1984`,
-    img: `/src/assets/books/42766.png`,
+    title: `Poverty By America`,
+    img: `/src/assets/books/comming_soon/9780593239933.jfif`,
     author: `George Orwell`,
     price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
     id: 4,
-    title: `The Catcher in the Rye`,
-    img: `/src/assets/books/75154.png`,
+    title: `Table For Two`,
+    img: `/src/assets/books/comming_soon/9780593296370.jfif`,
     author: `J.D. Salinger`,
     price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
   {
     id: 5,
-    title: `Pride and Prejudice`,
-    img: `/src/assets/books/42766.png`,
+    title: `Wandering Stars`,
+    img: `/src/assets/books/comming_soon/9780593318256.jfif`,
     author: `Jane Austen`,
-    price: `$${Math.floor(Math.random() * 20) + 10}`, // Random price between $10 and $30
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 6,
+    title: `C.J. Box`,
+    img: `/src/assets/books/comming_soon/9780593331347.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 7,
+    title: `The Golden Doves`,
+    img: `/src/assets/books/comming_soon/9780593354902.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 8,
+    title: `DEfiant Joy`,
+    img: `/src/assets/books/comming_soon/9780593445426.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 9,
+    title: `Never To Late`,
+    img: `/src/assets/books/comming_soon/9780593498408.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 10,
+    title: `Dead Weight`,
+    img: `/src/assets/books/comming_soon/9780593536902.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 11,
+    title: `True Story Of Tanner`,
+    img: `/src/assets/books/comming_soon/9780593549094.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 12,
+    title: `Wishing Game`,
+    img: `/src/assets/books/comming_soon/9780593598856.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 13,
+    title: `Alice`,
+    img: `/src/assets/books/comming_soon/9780593641668.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 14,
+    title: `John Sandford`,
+    img: `/src/assets/books/comming_soon/9780593714812.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 15,
+    title: `The Blue Book`,
+    img: `/src/assets/books/comming_soon/9780593723678.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 16,
+    title: `Outspoken`,
+    img: `/src/assets/books/comming_soon/9781039007079.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
+  },
+  {
+    id: 17,
+    title: `Burn It Down!`,
+    img: `/src/assets/books/comming_soon/9781788735391.jfif`,
+    author: `Jane Austen`,
+    price: `$${Math.floor(Math.random() * 20) + 10}`,
   },
 ];
 
