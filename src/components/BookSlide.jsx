@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 
-const BookCard = ({ book }) => {
+const BookSlide = ({ book }) => {
   const navigate = useNavigate();
 
   const handleBookDetail = (id) => {
@@ -35,4 +35,4 @@ const BookCard = ({ book }) => {
   );
 };
 
-export default BookCard;
+export default BookSlide;

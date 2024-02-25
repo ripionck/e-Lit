@@ -1,8 +1,8 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import BookCard from '../../../components/BookCard';
 import { settings } from '../../../components/SlideSettings';
+import BookSlide from '../../../components/BookSlide';
 
 const BestSellers = () => {
   return (
@@ -12,7 +12,7 @@ const BestSellers = () => {
 
         <Slider {...settings}>
           {books.map((book) => (
-            <BookCard book={book} key={book.id} />
+            <BookSlide book={book} key={book.id} />
           ))}
         </Slider>
       </div>

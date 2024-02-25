@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Details = () => {
+const BookInformation = () => {
   const [activeTab, setActiveTab] = useState('description');
 
   const handleTabClick = (tabId) => {
@@ -63,7 +63,7 @@ const Details = () => {
               aria-controls="more"
               aria-selected={activeTab === 'more'}
             >
-              More
+              More Info
             </button>
           </li>
         </ul>
@@ -133,4 +133,4 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default BookInformation;
