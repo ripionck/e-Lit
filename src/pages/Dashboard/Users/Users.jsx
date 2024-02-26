@@ -60,8 +60,7 @@ const Users = () => {
               <Table.HeadCell>Name</Table.HeadCell>
               <Table.HeadCell>Email</Table.HeadCell>
               <Table.HeadCell>Phone</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>{' '}
-              {/* Added Delete header cell */}
+              <Table.HeadCell></Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
               {users.map((user) => (
@@ -82,12 +81,14 @@ const Users = () => {
                   <Table.Cell>{user.email}</Table.Cell>
                   <Table.Cell>{user.phone}</Table.Cell>
                   <Table.Cell>
-                    <button
-                      onClick={() => handleDelete(user.id)}
-                      className="font-medium text-red-600 hover:underline dark:text-red-500"
-                    >
-                      Delete
-                    </button>
+                    {user.is_superuser && (
+                      <button
+                        onClick={() => handleDelete(user.id)}
+                        className="font-medium text-red-600 hover:underline dark:text-red-500"
+                      >
+                        Delete
+                      </button>
+                    )}
                   </Table.Cell>
                 </Table.Row>
               ))}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const BookInformation = () => {
+const BookInfo = ({ book }) => {
   const [activeTab, setActiveTab] = useState('description');
 
   const handleTabClick = (tabId) => {
@@ -9,7 +9,7 @@ const BookInformation = () => {
 
   return (
     <>
-      <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="mb-2 border-b border-gray-200 dark:border-gray-700">
         <ul
           className="flex flex-wrap -mb-px text-md font-medium text-center"
           id="default-styled-tab"
@@ -78,18 +78,7 @@ const BookInformation = () => {
           aria-labelledby="description-tab"
         >
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat
-            excepturi, dignissimos at adipisci neque ex aliquam consequuntur cum
-            praesentium soluta eligendi magnam eum quod delectus maxime fuga.
-            Eius sapiente debitis perspiciatis molestiae dicta fugiat odio
-            voluptates aspernatur doloremque laborum animi aperiam, dolorum
-            dolore id! Aspernatur eligendi doloremque, vel harum ut neque
-            nesciunt quia tempore, numquam molestias beatae quaerat, eos dolor
-            facilis rem explicabo dolorem! Incidunt totam, similique voluptate
-            veniam sunt debitis quia in reiciendis ducimus ea quam, tenetur
-            architecto repellat voluptas libero nam animi ratione possimus. Nisi
-            quaerat, atque voluptatibus reprehenderit ratione, distinctio nihil
-            quos repellendus doloremque facere nulla consequatur!
+            {book?.description}
           </p>
         </div>
         <div
@@ -100,15 +89,22 @@ const BookInformation = () => {
           role="tabpanel"
           aria-labelledby="author-tab"
         >
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content the
-            <strong className="font-medium text-gray-800 dark:text-white">
-              Author tab&apos;s associated content
-            </strong>
-            . Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
-          </p>
+          <div className="flex flex-col md:flex-row items-center md:gap-4">
+            <div className="w-32 h-32 max-w-md mb-4 md:mb-0">
+              {book?.author?.avater && (
+                <img
+                  src={book?.author?.avater}
+                  alt={`${book?.author?.first_name} ${book?.author?.last_name}`}
+                  className="w-full h-auto rounded-lg shadow-md"
+                />
+              )}
+            </div>
+
+            <div className="w-full p-4">
+              <p className="text-xl font-semibold py-2">{`${book?.author?.first_name} ${book?.author?.last_name}`}</p>
+              <p className="">{book?.author?.description}</p>
+            </div>
+          </div>
         </div>
         <div
           className={`p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ${
@@ -118,14 +114,15 @@ const BookInformation = () => {
           role="tabpanel"
           aria-labelledby="more-tab"
         >
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content the
-            <strong className="font-medium text-gray-800 dark:text-white">
-              More tab&apos;s associated content
-            </strong>
-            . Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
+          <p className="mb-1">{book?.publisher}</p>
+          <p className="mb-1">
+            <span className="px-1">{book?.publication_date}</span>
+          </p>
+          <p className="mb-1">
+            <span className="px-1">{book?.publication_date}</span>
+          </p>
+          <p className="mb-1">
+            <span className="px-1">{book?.pages}</span>
           </p>
         </div>
       </div>
@@ -133,4 +130,4 @@ const BookInformation = () => {
   );
 };
 
-export default BookInformation;
+export default BookInfo;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { HiOutlinePlusSm, HiOutlineX } from 'react-icons/hi';
 import { useParams } from 'react-router-dom';
 
-const RatingAndReviews = () => {
+const Review = () => {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const RatingAndReviews = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('access_token');
-    const apiUrl = `https://e-library-z7s7.onrender.com/book/${id}`;
+    const apiUrl = `https://e-library-z7s7.onrender.com/book-reviews/?book=${id}`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -49,9 +49,9 @@ const RatingAndReviews = () => {
 
   return (
     <>
-      <h5>Ratings and Reviews</h5>
+      <h5 className="text-xl font-semibold mt-4">Ratings and Reviews</h5>
       <div className="flex justify-between items-center mt-4 border-t-2">
-        <h3>Reviews</h3>
+        <h3>Total Reviews</h3>
         {/* ---------Write Review Button---------------- */}
         <button
           onClick={toggleModal}
@@ -117,6 +117,7 @@ const RatingAndReviews = () => {
                             Write Comment
                           </label>
                           <textarea
+                            type="text"
                             id="comment"
                             rows="4"
                             value={formData.comment}
@@ -150,4 +151,4 @@ const RatingAndReviews = () => {
   );
 };
 
-export default RatingAndReviews;
+export default Review;

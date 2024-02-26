@@ -97,8 +97,8 @@ const BookList = () => {
   // Filter items based on selected categories, authors, and publishers
   const filteredBooks = books.filter(
     (book) =>
-      (selectedCategory === null || selectedCategory === book.category) &&
-      (selectedAuthor === null || selectedAuthor === book.author) &&
+      (selectedCategory === null || selectedCategory === book.category.id) &&
+      (selectedAuthor === null || selectedAuthor === book.author.id) &&
       (selectedPublisher === null || selectedPublisher === book.publisher)
   );
 

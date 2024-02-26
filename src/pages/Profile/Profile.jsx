@@ -127,7 +127,7 @@ const Profile = () => {
                         ? URL.createObjectURL(profileImage)
                         : values.avater
                     }
-                    alt="Profile Image"
+                    alt={`${values.first_name} ${values.last_name}`}
                     className="w-32 h-32 bg-gray-200 rounded-full object-cover mb-2 cursor-pointer"
                   />
                   <input

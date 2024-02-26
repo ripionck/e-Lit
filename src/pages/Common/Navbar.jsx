@@ -12,10 +12,17 @@ import { CiSearch } from 'react-icons/ci';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    // Redirect to the search results page with the search query as a parameter
+    navigate(`/book-list?search=${encodeURIComponent(searchQuery)}`);
+  };
 
   // -----------getting user------------------//
   useEffect(() => {
@@ -78,18 +85,23 @@ const CustomNavbar = () => {
         </Navbar.Brand>
         {/* ---------------Navbar search input---------------- */}
         <form
-          onSubmit={(e) => e.preventDefault()}
           className="max-w-md px-4 mx-auto flex-grow"
+          onSubmit={handleSearch}
         >
           <div className="relative">
             <input
               type="text"
-              placeholder="Search book, author, ISBN"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by book, author, or language"
               className="w-full py-2 pl-8 pr-2 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-gray-600"
             />
-            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <button
+              type="submit"
+              className="absolute right-5 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-400"
+            >
               <CiSearch />
-            </span>
+            </button>
           </div>
         </form>
         <Navbar.Toggle />

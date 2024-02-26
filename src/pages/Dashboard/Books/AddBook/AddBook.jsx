@@ -17,6 +17,7 @@ const AddBook = () => {
     author: null,
     category: null,
     price: 0,
+    description: '',
   });
   console.log(formData);
   const handleChange = (e) => {
@@ -240,6 +241,19 @@ const AddBook = () => {
                   />
                 </label>
               </div>
+            </div>
+            <div className="w-full">
+              <label>
+                Description:
+                <textarea
+                  className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
+                  rows={5}
+                  type="text"
+                  name="description"
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <div className="w-full">
               <label>

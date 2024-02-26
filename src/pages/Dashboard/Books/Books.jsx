@@ -70,9 +70,7 @@ const Books = () => {
                 <Table.HeadCell>Edition</Table.HeadCell>
                 <Table.HeadCell>Publisher</Table.HeadCell>
                 <Table.HeadCell>Quantity</Table.HeadCell>
-                <Table.HeadCell>
-                  <span className="sr-only">Edit</span>
-                </Table.HeadCell>
+                <Table.HeadCell></Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
                 {books.map((book, id) => (
@@ -88,8 +86,8 @@ const Books = () => {
                       />
                     </Table.Cell>
                     <Table.Cell>{book.title}</Table.Cell>
-                    <Table.Cell>{book.author}</Table.Cell>
-                    <Table.Cell>{book.category}</Table.Cell>
+                    <Table.Cell>{`${book?.author?.first_name} ${book?.author?.last_name}`}</Table.Cell>
+                    <Table.Cell>{book.category.title}</Table.Cell>
                     <Table.Cell>{book.edition}</Table.Cell>
                     <Table.Cell>{book.publisher}</Table.Cell>
                     <Table.Cell>{book.quantity}</Table.Cell>
