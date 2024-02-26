@@ -102,8 +102,8 @@ const CustomNavbar = () => {
                 inline
                 label={
                   <img
-                    src={user ? user.avater : 'placeholder.jpg'}
-                    alt="Profile Image"
+                    src={user?.avater}
+                    alt={user?.username}
                     className="w-12 h-12 bg-gray-200 rounded-full object-cover"
                   />
                 }
