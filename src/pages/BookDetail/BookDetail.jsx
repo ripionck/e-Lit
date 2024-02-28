@@ -1,25 +1,54 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../components/Spinner';
 import Review from './Review/Review';
 import BookInfo from './BookInfo/BookInfo';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { HiShoppingCart } from 'react-icons/hi';
 
 const BookDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [book, setBook] = useState([]);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     setLoading(true);
     fetch(`https://e-library-z7s7.onrender.com/book/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('Book', data);
+        // console.log('Book', data);
         setBook(data);
         setLoading(false);
       });
   }, [id]);
+
+  const addToCart = async () => {
+    const token = localStorage.getItem('access_token');
+    const apiUrl = 'https://e-library-z7s7.onrender.com/cart/';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ book: book.id, quantity: quantity }),
+      });
+
+      if (response.ok) {
+        console.log('Book added to cart successfully!');
+        navigate('/profile');
+      } else {
+        // Handle error response
+        const errorData = await response.json();
+        console.error('Failed to add book to cart:', errorData);
+      }
+    } catch (error) {
+      console.error('Error during adding book to cart:', error);
+    }
+  };
 
   return (
     <>
@@ -50,15 +79,28 @@ const BookDetail = () => {
               <p className="mb-1">
                 ISBN: <span className="px-1">{book?.isbn}</span>
               </p>
-              <p className="text-gray-700 mb-2">Price: {book.price}</p>
-              <button className="flex items-center gap-1 text-orange-500 text-xl hover:border-b hover:border-black">
-                Add to Cart
-                <HiOutlineArrowNarrowRight className="pt-1 text-3xl" />
-              </button>
+              <p className="text-gray-700 mb-2">Price: {book.price}$</p>
+              <div className="flex flex-col gap-4">
+                <input
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  min="1"
+                  className="px-2 py-1 border border-gray-300 rounded-lg w-20 text-center"
+                />
+                <button
+                  onClick={addToCart}
+                  className="w-1/2 md:w-1/3 pl-2 flex items-center gap-1 text-orange-500 text-xl border border-black hover:cursor-pointer hover:bg-white"
+                >
+                  Add to Cart
+                  <HiShoppingCart className="pt-1 text-3xl" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
+
       <BookInfo book={book} />
       <Review />
     </>
