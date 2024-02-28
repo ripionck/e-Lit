@@ -13,10 +13,9 @@ const BookDetail = () => {
   useEffect(() => {
     setLoading(true);
     fetch(`https://e-library-z7s7.onrender.com/book/${id}`)
-      // fetch(`https://e-library-z7s7.onrender.com/book/946676257622228994`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log('Book', data);
         setBook(data);
         setLoading(false);
       });

@@ -24,7 +24,7 @@ const Review = () => {
     fetch(`https://e-library-z7s7.onrender.com/book-reviews/?book=${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log('reviews', data.results);
+        // console.log('reviews', data.results);
         setReviews(data.results);
       });
   }, [id]);
@@ -43,10 +43,14 @@ const Review = () => {
         },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
-        console.log('Review added successfully!');
+        // console.log('Review added successfully!');
         setFormData({ rating: 0, comment: '' });
+        const updatedReviews = await fetch(
+          `https://e-library-z7s7.onrender.com/book-reviews/?book=${id}`
+        );
+        const reviews = await updatedReviews.json();
+        setReviews(reviews.results);
         toggleModal();
       } else {
         // Handle error response
