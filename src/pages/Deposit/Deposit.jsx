@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Deposit = () => {
   const navigate = useNavigate();
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const token = localStorage.getItem('access_token');
 
   const handleChange = (e) => {
@@ -28,7 +28,7 @@ const Deposit = () => {
 
       if (response.ok) {
         console.log('Deposit successful');
-        navigate('/');
+        navigate('/profile');
       } else {
         throw new Error('Error depositing amount');
       }
