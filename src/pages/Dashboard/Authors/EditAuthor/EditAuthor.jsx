@@ -4,12 +4,21 @@ import { useParams, useNavigate } from 'react-router-dom';
 const EditAuthor = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [formData, setFormData] = useState({
+  const [authorData, setAuthorData] = useState({
     first_name: '',
     last_name: '',
     description: '',
-    avater: null,
   });
+
+  const [avater, setAvater] = useState('');
+
+  const handleChange = (e) => {
+    if (e.target.name === 'avater') {
+      setAvater(e.target.files[0]);
+    } else {
+      setAuthorData({ ...authorData, [e.target.name]: e.target.value });
+    }
+  };
 
   const token = localStorage.getItem('access_token');
 
@@ -22,50 +31,36 @@ const EditAuthor = () => {
         return response.json();
       })
       .then((data) => {
-        setFormData(data);
+        setAuthorData(data);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, [id]);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    // if (e.target.name === 'avater') {
-    //   setFormData({ ...formData, avatar: e.target.files[0] });
-    // } else {
-    //   setFormData({ ...formData, [e.target.name]: e.target.value });
-    // }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('first_name', formData.first_name);
-      formDataToSend.append('last_name', formData.last_name);
-      formDataToSend.append('description', formData.description);
+      const formData = new FormData();
+      formData.append('first_name', authorData.first_name);
+      formData.append('last_name', authorData.last_name);
+      formData.append('description', authorData.description);
+      formData.append('avater', avater);
 
       const response = await fetch(
-        `https://e-library-z7s7.onrender.com/author/${id}`,
+        `https://e-library-z7s7.onrender.com/author/${id}/`,
         {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify(formDataToSend),
+          body: formData,
         }
       );
 
       if (response.ok) {
-        setFormData({
-          first_name: '',
-          last_name: '',
-          description: '',
-          avatar: null,
-        });
+        console.log('Author updated successfully!');
         navigate('/dashboard/authors');
       } else {
         throw new Error('Error updating author');
@@ -87,13 +82,42 @@ const EditAuthor = () => {
             encType="multipart/form-data"
             className="flex max-w-md flex-col gap-1"
           >
+            <div className="flex flex-col">
+              <label
+                htmlFor="profile-image-upload"
+                className="flex justify-center"
+              >
+                <img
+                  src={avater ? URL.createObjectURL(avater) : authorData.cover}
+                  alt={`${authorData.first_name} ${authorData.last_name}`}
+                  className="w-40 h-48 bg-gray-200 object-cover mb-2 cursor-pointer"
+                />
+                <input
+                  type="file"
+                  id="profile-image-upload"
+                  className="sr-only"
+                  accept="image/*"
+                  name="cover"
+                  onChange={handleChange}
+                />
+              </label>
+              <button
+                type="button"
+                onClick={() =>
+                  document.getElementById('profile-image-upload').click()
+                }
+                className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
+              >
+                Upload Image
+              </button>
+            </div>
             <label>
               First Name:
               <input
                 className="w-full py-2 rounded px-4  bg-gray-100"
                 type="text"
                 name="first_name"
-                value={formData.first_name}
+                value={authorData.first_name}
                 onChange={handleChange}
                 required
               />
@@ -104,7 +128,7 @@ const EditAuthor = () => {
                 className="w-full py-2 rounded px-4  bg-gray-100"
                 type="text"
                 name="last_name"
-                value={formData.last_name}
+                value={authorData.last_name}
                 onChange={handleChange}
                 required
               />
@@ -116,18 +140,9 @@ const EditAuthor = () => {
                 rows="5"
                 type="text"
                 name="description"
-                value={formData.description}
+                value={authorData.description}
                 onChange={handleChange}
                 required
-              />
-            </label>
-            <label>
-              Avater:
-              <input
-                className="w-full py-2 mb-2 rounded px-4  bg-gray-100"
-                type="file"
-                name="avater"
-                onChange={handleChange}
               />
             </label>
             <button
