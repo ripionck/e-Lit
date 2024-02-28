@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookReport from './BookReport';
 import TransactionReport from './TransactionReport';
+import Spinner from '../../components/Spinner';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Profile = () => {
     balance: 0,
   });
   const [profileImage, setProfileImage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const handleProfileClick = () => {
     setOpenProfileModal(true);
@@ -30,6 +32,7 @@ const Profile = () => {
   const token = localStorage.getItem('access_token');
 
   useEffect(() => {
+    setLoading(true);
     fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
       method: 'GET',
       headers: {
@@ -43,16 +46,8 @@ const Profile = () => {
         return response.json();
       })
       .then((data) => {
-        setValues({
-          ...values,
-          avater: data.avater,
-          username: data.username,
-          first_name: data.first_name,
-          last_name: data.last_name,
-          email: data.email,
-          phone: data.phone,
-          balance: data.balance,
-        });
+        setValues(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -88,9 +83,19 @@ const Profile = () => {
           body: formData,
         }
       );
-
       if (response.ok) {
-        console.log('Profile updated successfully');
+        // console.log('Profile updated successfully');
+        const updatedProfile = await fetch(
+          `https://e-library-z7s7.onrender.com/accounts/profile/`,
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const profile = await updatedProfile.json();
+        setValues(profile);
         onCloseProfileModal();
         navigate('/profile');
       } else {
@@ -105,7 +110,7 @@ const Profile = () => {
 
   return (
     <>
-      {/* Modal */}
+      {/* --------------Profile Update Modal------------------ */}
       <Modal
         show={openProfileModal}
         size="xl"
@@ -256,53 +261,57 @@ const Profile = () => {
           </div>
         </Modal.Body>
       </Modal>
-      {/* Update card */}
-      <div className="flex flex-col lg:flex-row sm:flex-col p-2">
-        <Card className="max-w-sm lg:w-80 lg:h-1/2 w-full">
-          <div className="flex flex-col">
-            <img
-              src={values.avater}
-              alt="Profile Image"
-              className="w-32 h-32 bg-gray-200  rounded-full object-cover mb-2"
-            />
-            <div>
-              <h4 className="mb-1 text-sm font-medium text-gray-900 dark:text-white">
-                Username: {values.username}
-              </h4>
-              <h4 className="text-sm text-gray-500 dark:text-gray-400">
-                Name: {values.first_name} {values.last_name}
-              </h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Email: {values.email}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Phone: {values.phone}
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Balance: {values.balance}$
-              </p>
-              <button
-                onClick={handleProfileClick}
-                className="bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-2 rounded"
-              >
-                Edit Profile
-              </button>
+      {/* -------------Update card----------------- */}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex flex-col lg:flex-row sm:flex-col p-2">
+          <Card className="max-w-sm lg:w-80 lg:h-1/2 w-full">
+            <div className="flex flex-col">
+              <img
+                src={values.avater}
+                alt="Profile Image"
+                className="w-32 h-32 bg-gray-200  rounded-full object-cover mb-2"
+              />
               <div>
-                <a
-                  href="change-password"
-                  className="hover:underline cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"
+                <h4 className="mb-1 text-sm font-medium text-gray-900 dark:text-white">
+                  Username: {values.username}
+                </h4>
+                <h4 className="text-sm text-gray-500 dark:text-gray-400">
+                  Name: {values.first_name} {values.last_name}
+                </h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Email: {values.email}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Phone: {values.phone}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Balance: {values.balance}$
+                </p>
+                <button
+                  onClick={handleProfileClick}
+                  className="bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-2 rounded"
                 >
-                  Change password?
-                </a>
+                  Edit Profile
+                </button>
+                <div>
+                  <a
+                    href="change-password"
+                    className="hover:underline cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"
+                  >
+                    Change password?
+                  </a>
+                </div>
               </div>
             </div>
+          </Card>
+          <div className="ml-0 lg:ml-4 md:ml-4">
+            <BookReport />
+            <TransactionReport />
           </div>
-        </Card>
-        <div className="ml-0 lg:ml-4 md:ml-4">
-          <BookReport />
-          <TransactionReport />
         </div>
-      </div>
+      )}
     </>
   );
 };
