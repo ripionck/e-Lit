@@ -16,11 +16,11 @@ const BookDetail = () => {
       // fetch(`https://e-library-z7s7.onrender.com/book/946676257622228994`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setBook(data);
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return (
     <>

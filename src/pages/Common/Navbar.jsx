@@ -192,7 +192,7 @@ const CustomNavbar = () => {
           <DropdownMenu items={categories} menuName="Categories" />
           <DropdownMenu items={authors} menuName="Authors" />
           <DropdownMenu items={publishers} menuName="Publishers" />
-          <Navbar.Link href="/book-list" className="text-lg">
+          <Navbar.Link href="/books" className="text-lg">
             Books
           </Navbar.Link>
           <Navbar.Link href="*" className="text-lg">

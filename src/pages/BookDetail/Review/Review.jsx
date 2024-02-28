@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HiOutlinePlusSm, HiOutlineX } from 'react-icons/hi';
 import { useParams } from 'react-router-dom';
 
 const Review = () => {
   const { id } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reviews, setReviews] = useState([]);
   const [formData, setFormData] = useState({
     rating: 0,
     comment: '',
   });
-  console.log(formData);
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -17,6 +18,16 @@ const Review = () => {
   const handleRatingChange = (value) => {
     setFormData({ ...formData, rating: value });
   };
+
+  //------------------loading reviews with id-----------------//
+  useEffect(() => {
+    fetch(`https://e-library-z7s7.onrender.com/book-reviews/?book=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('reviews', data.results);
+        setReviews(data.results);
+      });
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,19 +58,44 @@ const Review = () => {
     }
   };
 
+  //---------------generating number-wise stars-----------------//
+  const generateStars = (rating) => {
+    const filledStars = '★'.repeat(rating); // Filled stars
+    const emptyStars = '☆'.repeat(5 - rating); // Empty stars
+    return filledStars + emptyStars; // Concatenate filled and empty stars
+  };
+
+  // ----------------formating date and time-----------------//
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleString();
+  };
+
   return (
     <>
-      <h5 className="text-xl font-semibold mt-4">Ratings and Reviews</h5>
-      <div className="flex justify-between items-center mt-4 border-t-2">
-        <h3>Total Reviews</h3>
+      <div className="flex justify-between mt-4 border-t-2">
+        <h5 className="text-xl font-semibold">Ratings and Reviews</h5>
         {/* ---------Write Review Button---------------- */}
         <button
           onClick={toggleModal}
-          className="block text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          className="block text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 mt-2 text-center"
           type="button"
         >
           Write Review
         </button>
+      </div>
+      {/* ------------reviews------------------- */}
+      <div className="flex flex-col">
+        <h3 className="mb-2 border-b-2 border-gray-400">
+          Total Reviews: {reviews.length}
+        </h3>
+        {reviews.map((review) => (
+          <div key={review.id} className="border-b border-gray-300">
+            <p className="text-lg">{review.comment}</p>
+            <p>{generateStars(review.rating)}</p>
+            <p className="text-sm italic">{formatDate(review.created_at)}</p>
+          </div>
+        ))}
       </div>
 
       {/* -----------Main Modal--------------- */}
