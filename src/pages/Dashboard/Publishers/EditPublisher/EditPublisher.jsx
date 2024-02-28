@@ -4,16 +4,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 const EditPublisher = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [formData, setFormData] = useState({
+  const [publisherData, setPublisherData] = useState({
     name: '',
     address: '',
-    logo: null,
   });
-  console.log(formData);
+  const [logo, setLogo] = useState('');
+
   const token = localStorage.getItem('access_token');
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/publisher/${id}`)
+    fetch(`https://e-library-z7s7.onrender.com/publisher/update/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -21,11 +21,7 @@ const EditPublisher = () => {
         return response.json();
       })
       .then((data) => {
-        setFormData({
-          name: data.name,
-          address: data.address,
-          logo: data.logo,
-        });
+        setPublisherData(data);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -34,9 +30,9 @@ const EditPublisher = () => {
 
   const handleChange = (e) => {
     if (e.target.name === 'logo') {
-      setFormData({ ...formData, logo: e.target.files[0] });
+      setLogo(e.target.files[0]);
     } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setPublisherData({ ...publisherData, [e.target.name]: e.target.value });
     }
   };
 
@@ -44,18 +40,21 @@ const EditPublisher = () => {
     e.preventDefault();
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('logo', formData.logo);
-      formDataToSend.append('address', formData.address);
+      const formData = new FormData();
+      formData.append('name', formData.name);
+      formData.append('address', formData.address);
+      formData.append('logo', logo);
 
-      const response = await fetch(`http://127.0.0.1:8000/publisher/${id}`, {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formDataToSend,
-      });
+      const response = await fetch(
+        `https://e-library-z7s7.onrender.com/publisher/update/${id}/`,
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         navigate('/dashboard/publishers');
@@ -79,15 +78,38 @@ const EditPublisher = () => {
             encType="multipart/form-data"
             className="flex max-w-md flex-col gap-1"
           >
+            <div className="flex flex-col">
+              <label htmlFor="logo-upload" className="flex justify-center">
+                <img
+                  src={logo ? URL.createObjectURL(logo) : publisherData.logo}
+                  alt={publisherData.name}
+                  className="w-40 h-48 bg-gray-200 object-cover mb-2 cursor-pointer"
+                />
+                <input
+                  type="file"
+                  id="logo-upload"
+                  className="sr-only"
+                  accept="image/*"
+                  name="logo"
+                  onChange={handleChange}
+                />
+              </label>
+              <button
+                type="button"
+                onClick={() => document.getElementById('logo-upload').click()}
+                className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
+              >
+                Upload Image
+              </button>
+            </div>
             <label>
               Name:
               <input
                 className="w-full py-2 rounded px-4 bg-gray-100"
                 type="text"
                 name="name"
-                value={formData.name}
+                value={publisherData.name}
                 onChange={handleChange}
-                required
               />
             </label>
             <label>
@@ -97,17 +119,7 @@ const EditPublisher = () => {
                 rows="3"
                 type="text"
                 name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-              />
-            </label>
-            <label>
-              Logo:
-              <input
-                className="w-full py-2 mb-2 rounded px-4 bg-gray-100"
-                type="file"
-                name="logo"
+                value={publisherData.address}
                 onChange={handleChange}
               />
             </label>

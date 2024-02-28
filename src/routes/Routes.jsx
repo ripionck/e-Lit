@@ -23,6 +23,7 @@ import BookDetail from '../pages/BookDetail/BookDetail';
 import AddPublisher from '../pages/Dashboard/Publishers/AddPublisher/AddPublisher';
 import AddCategory from '../pages/Dashboard/Categories/AddCategory/AddCategory';
 import NotFound from '../pages/NotFound/NotFound';
+import EditPublisher from '../pages/Dashboard/Publishers/EditPublisher/EditPublisher';
 
 export const router = createBrowserRouter([
   {
@@ -88,20 +89,20 @@ export const router = createBrowserRouter([
         ],
       },
       {
+        path: 'add-category',
+        element: <AddCategory />,
+      },
+      {
         path: '/book/:id',
         element: <BookDetail />,
       },
       {
-        path: 'book-list',
+        path: 'books',
         element: <BookList />,
       },
       {
         path: 'add-book',
         element: <AddBook />,
-      },
-      {
-        path: 'add-category',
-        element: <AddCategory />,
       },
       {
         path: '/edit-book/:id',
@@ -112,12 +113,16 @@ export const router = createBrowserRouter([
         element: <AddAuthor />,
       },
       {
+        path: '/edit-author/:id',
+        element: <EditAuthor />,
+      },
+      {
         path: 'add-publisher',
         element: <AddPublisher />,
       },
       {
-        path: '/edit-author/:id',
-        element: <EditAuthor />,
+        path: '/edit-publisher/:id',
+        element: <EditPublisher />,
       },
       {
         path: '/deposit',

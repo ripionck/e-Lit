@@ -56,6 +56,7 @@ const Publishers = () => {
       setLoading(false);
     }
   };
+
   return (
     <>
       {loading ? (
@@ -87,12 +88,12 @@ const Publishers = () => {
                   <Table.Cell>{publisher.name}</Table.Cell>
                   <Table.Cell>{publisher.address}</Table.Cell>
                   <Table.Cell>
-                    <button
-                      //onClick={() => handleEdit(publisher.id)}
+                    <a
+                      href={`/edit-publisher/${publisher.id}`}
                       className="font-medium mx-4 text-cyan-600 hover:underline dark:text-cyan-500"
                     >
                       Edit
-                    </button>
+                    </a>
                     <button
                       onClick={() => handleDelete(publisher.id)}
                       className="font-medium text-red-600 hover:underline dark:text-red-500"

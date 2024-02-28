@@ -92,7 +92,7 @@ const EditBook = () => {
           >
             <div className="flex flex-col">
               <label
-                htmlFor="profile-image-upload"
+                htmlFor="cover-image-upload"
                 className="flex justify-center"
               >
                 <img
@@ -102,7 +102,7 @@ const EditBook = () => {
                 />
                 <input
                   type="file"
-                  id="profile-image-upload"
+                  id="cover-image-upload"
                   className="sr-only"
                   accept="image/*"
                   name="cover"
@@ -112,7 +112,7 @@ const EditBook = () => {
               <button
                 type="button"
                 onClick={() =>
-                  document.getElementById('profile-image-upload').click()
+                  document.getElementById('cover-image-upload').click()
                 }
                 className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
               >
