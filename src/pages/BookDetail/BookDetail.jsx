@@ -38,7 +38,7 @@ const BookDetail = () => {
       });
 
       if (response.ok) {
-        console.log('Book added to cart successfully!');
+        // console.log('Book added to cart successfully!');
         navigate('/profile');
       } else {
         // Handle error response

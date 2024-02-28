@@ -32,6 +32,25 @@ const Cart = () => {
       });
   }, [token]);
 
+  const handleRemove = (id) => {
+    fetch(`https://e-library-z7s7.onrender.com/cart/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to delete book');
+        }
+        // Remove the deleted book from the state
+        setBooks(books.filter((book) => book.id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting book:', error);
+      });
+  };
+
   return (
     <>
       {loading ? (
@@ -54,6 +73,22 @@ const Cart = () => {
                   <Table.Cell>{book.book}</Table.Cell>
                   <Table.Cell>{book.amount}</Table.Cell>
                   <Table.Cell>{book.quantity}</Table.Cell>
+                  <Table.Cell>
+                    <div className="flex gap-4">
+                      <a
+                        // href={`/edit-book/${book.id}`}
+                        className="font-medium mx-4 text-cyan-600 hover:underline dark:text-cyan-500"
+                      >
+                        Check Out
+                      </a>
+                      <button
+                        className="font-medium text-red-600 hover:underline dark:text-red-500"
+                        onClick={() => handleRemove(book.id)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
