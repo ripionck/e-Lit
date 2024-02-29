@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Label, TextInput } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -48,6 +49,9 @@ const ChangePassword = () => {
 
   return (
     <>
+      <Helmet>
+        <title>E-Lit Emporium | Not Found</title>
+      </Helmet>
       <div className="mx-auto max-w-md mt-8">
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
           <div className="p-4 sm:p-7">
