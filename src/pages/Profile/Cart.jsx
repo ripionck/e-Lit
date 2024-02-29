@@ -93,13 +93,27 @@ const Cart = () => {
       });
   };
 
+  const subtotal = books.reduce(
+    (acc, book) => acc + parseFloat(book.amount),
+    0
+  );
+  const shippingDiscount = 10;
+  const shippingHandling = 8;
+  const tax = 5;
+
+  const total =
+    subtotal - shippingDiscount + shippingHandling + (subtotal * tax) / 100;
+
+  const handlePlaceOrder = () => {
+    navigate('/order', { state: { books: books } });
+  };
+
   return (
     <>
       {loading ? (
         <Spinner />
       ) : (
         <div className="w-full overflow-y-auto">
-          <h4 className="mb-1">Your Selected Book</h4>
           <Table striped>
             <Table.Head>
               <Table.HeadCell>Title</Table.HeadCell>
@@ -134,6 +148,44 @@ const Cart = () => {
                   </Table.Cell>
                 </Table.Row>
               ))}
+              <Table.Row>
+                <Table.Cell colSpan="4">
+                  <div className="border border-gray-200 p-4 rounded-md shadow-md">
+                    <h2 className="flex justify-end text-lg font-semibold mb-4">
+                      Order Summary
+                    </h2>
+                    <div className="flex justify-end space-x-10 mb-2">
+                      <span>Subtotal:</span>
+                      <span>${subtotal}</span>
+                    </div>
+                    <div className="flex justify-end space-x-10 mb-2">
+                      <span>Shipping Discount:</span>
+                      <span>-${shippingDiscount}</span>
+                    </div>
+                    <div className="flex justify-end space-x-12 mb-2">
+                      <span>Shipping & Handling:</span>
+                      <span>${shippingHandling}</span>
+                    </div>
+                    <div className="flex justify-end space-x-8 mb-2">
+                      <span>Tax ({tax}%):</span>
+                      <span>${((subtotal * tax) / 100).toFixed(2)}</span>
+                    </div>
+                    <hr className="my-2" />
+                    <div className="flex justify-end space-x-8">
+                      <span className="font-semibold">Balance:</span>
+                      <span className="font-semibold">${total.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-end">
+                      <button
+                        onClick={handlePlaceOrder}
+                        className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                      >
+                        Place Order
+                      </button>
+                    </div>
+                  </div>
+                </Table.Cell>
+              </Table.Row>
             </Table.Body>
           </Table>
           {/* -----------Main Modal--------------- */}
