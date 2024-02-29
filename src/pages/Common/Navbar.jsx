@@ -17,25 +17,8 @@ const CustomNavbar = () => {
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
 
-  const searchBooks = async () => {
-    try {
-      const response = await fetch(
-        `https://e-library-z7s7.onrender.com/book/?search=${searchQuery}`
-      );
-      if (!response.ok) {
-        throw new Error('Failed to fetch search results');
-      }
-      const data = await response.json();
-      setSearchResults(data.results);
-    } catch (error) {
-      console.error('Error searching books:', error);
-    }
-  };
-
-  // -----------getting user------------------//
-  useEffect(() => {
+  const fetchUserData = () => {
     const token = localStorage.getItem('access_token');
     if (token) {
       fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
@@ -50,13 +33,36 @@ const CustomNavbar = () => {
           }
           return response.json();
         })
-        .then((data) => {
-          setUser(data);
-        })
+        .then((data) => setUser(data))
         .catch((error) => {
           console.error('Error:', error);
         });
     }
+  };
+
+  const fetchCategories = () => {
+    fetch('https://e-library-z7s7.onrender.com/category/')
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  };
+
+  const fetchAuthors = () => {
+    fetch('https://e-library-z7s7.onrender.com/author/')
+      .then((res) => res.json())
+      .then((data) => setAuthors(data));
+  };
+
+  const fetchPublishers = () => {
+    fetch('https://e-library-z7s7.onrender.com/publisher/all/')
+      .then((res) => res.json())
+      .then((data) => setPublishers(data));
+  };
+
+  useEffect(() => {
+    fetchUserData();
+    fetchCategories();
+    fetchAuthors();
+    fetchPublishers();
   }, []);
 
   const isAuthenticated = () => {
@@ -68,24 +74,15 @@ const CustomNavbar = () => {
     navigate('/login');
   };
 
-  useEffect(() => {
-    fetch('https://e-library-z7s7.onrender.com/category/')
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
-
-    fetch('https://e-library-z7s7.onrender.com/author/')
-      .then((res) => res.json())
-      .then((data) => setAuthors(data));
-
-    fetch('https://e-library-z7s7.onrender.com/publisher/all/')
-      .then((res) => res.json())
-      .then((data) => setPublishers(data));
-  }, []);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/books/search/${searchQuery}`);
+  };
 
   return (
     <>
       <Navbar fluid rounded className="bg-gray-100">
-        {/* -------------Logo----------------- */}
+        {/* -------------------Logo----------------- */}
         <Navbar.Brand>
           <img
             src="/src/assets/E-Lit_Emporium.png"
@@ -93,8 +90,11 @@ const CustomNavbar = () => {
             alt="Logo"
           />
         </Navbar.Brand>
-        {/* ---------------Navbar search input---------------- */}
-        <form className="max-w-md px-4 mx-auto flex-grow">
+        {/* -------------Navbar search input---------------- */}
+        <form
+          className="max-w-md px-4 mx-auto flex-grow"
+          onSubmit={handleSearch}
+        >
           <div className="relative">
             <input
               type="text"
@@ -104,7 +104,6 @@ const CustomNavbar = () => {
               className="w-full py-2 pl-4 pr-2 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-gray-600"
             />
             <button
-              onClick={searchBooks}
               type="submit"
               className="absolute right-5 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-400"
             >
@@ -113,7 +112,7 @@ const CustomNavbar = () => {
           </div>
         </form>
         <Navbar.Toggle />
-        {/* ---------------Navbar Collapse----------------- */}
+        {/* ----------------Navbar Collapse------------------- */}
         <Navbar.Collapse className="px-8">
           {isAuthenticated() && user?.is_active ? (
             <div className="flex md:order-2">
@@ -190,7 +189,7 @@ const CustomNavbar = () => {
           )}
         </Navbar.Collapse>
       </Navbar>
-      {/* -------------------Navbar items----------------- */}
+      {/* ----------------Navbar items------------------- */}
       <Navbar collapseonselect="true" expand="md">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
