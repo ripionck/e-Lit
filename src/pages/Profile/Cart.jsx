@@ -8,7 +8,6 @@ const Cart = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
-  console.log(books);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [bookId, setBookId] = useState(null);
@@ -65,6 +64,7 @@ const Cart = () => {
   };
 
   const handleConfirm = () => {
+    setLoading(true);
     fetch(`https://e-library-z7s7.onrender.com/cart/${bookId}/`, {
       method: 'PATCH',
       headers: {
@@ -81,12 +81,24 @@ const Cart = () => {
       })
       .then((data) => {
         // Update the quantity of the book in the local state
-        const updatedBooks = books.map((book) =>
-          book.id === bookId ? { ...book, quantity: data.quantity } : book
-        );
+        const updatedBooks = books.map((book) => {
+          if (book.id === bookId) {
+            // Update the quantity and amount based on the new quantity
+            const newQuantity = data.quantity;
+            const newAmount =
+              (parseFloat(book.amount) / book.quantity) * newQuantity;
+            return {
+              ...book,
+              quantity: newQuantity,
+              amount: newAmount.toFixed(2),
+            };
+          }
+          return book;
+        });
         setBooks(updatedBooks);
         setIsModalOpen(false);
         navigate('/profile');
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error updating quantity:', error);
@@ -105,7 +117,7 @@ const Cart = () => {
     subtotal - shippingDiscount + shippingHandling + (subtotal * tax) / 100;
 
   const handlePlaceOrder = () => {
-    navigate('/');
+    navigate('/order');
   };
 
   return (

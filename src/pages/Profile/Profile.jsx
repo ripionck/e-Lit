@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
 import Cart from './Cart';
 import Report from './Report';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -109,6 +110,9 @@ const Profile = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>E-Lit Emporium | Profile</title>
+      </Helmet>
       {/* -----------------Profile Update Modal--------------- */}
       <Modal
         show={openProfileModal}
@@ -155,7 +159,7 @@ const Profile = () => {
                 </button>
               </div>
               {/* ------------------Profile Form Fields--------------------- */}
-              <div className="flex gap-4">
+              <div className="flex">
                 <div className="w-full">
                   <Label htmlFor="username" value="Username" />
                   <TextInput
@@ -167,9 +171,10 @@ const Profile = () => {
                     onChange={(e) =>
                       setValues({ ...values, username: e.target.value })
                     }
-                    required
                   />
                 </div>
+              </div>
+              <div className="flex gap-4">
                 <div className="w-full">
                   <Label htmlFor="first_name" value="First Name" />
                   <TextInput
@@ -181,7 +186,6 @@ const Profile = () => {
                     onChange={(e) =>
                       setValues({ ...values, first_name: e.target.value })
                     }
-                    required
                   />
                 </div>
                 <div className="w-full">
@@ -195,25 +199,23 @@ const Profile = () => {
                     onChange={(e) =>
                       setValues({ ...values, last_name: e.target.value })
                     }
-                    required
                   />
                 </div>
               </div>
+              <div className="w-full">
+                <Label htmlFor="email" value="Email Address" />
+                <TextInput
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="example@gmail.com"
+                  value={values?.email}
+                  onChange={(e) =>
+                    setValues({ ...values, email: e.target.value })
+                  }
+                />
+              </div>
               <div className="flex gap-4">
-                <div className="w-full">
-                  <Label htmlFor="email" value="Email Address" />
-                  <TextInput
-                    id="email"
-                    type="email"
-                    name="email"
-                    placeholder="example@gmail.com"
-                    value={values?.email}
-                    onChange={(e) =>
-                      setValues({ ...values, email: e.target.value })
-                    }
-                    required
-                  />
-                </div>
                 <div className="w-full">
                   <Label htmlFor="phone" value="Phone Number" />
                   <TextInput
@@ -224,22 +226,20 @@ const Profile = () => {
                     onChange={(e) =>
                       setValues({ ...values, phone: e.target.value })
                     }
-                    required
                   />
                 </div>
-              </div>
-              <div>
-                <Label htmlFor="balance" value="Account Balance" />
-                <TextInput
-                  id="balance"
-                  type="number"
-                  name="balance"
-                  value={values?.balance}
-                  onChange={(e) =>
-                    setValues({ ...values, balance: e.target.value })
-                  }
-                  required
-                />
+                <div className="w-full">
+                  <Label htmlFor="balance" value="Account Balance" />
+                  <TextInput
+                    id="balance"
+                    type="number"
+                    name="balance"
+                    value={values?.balance}
+                    onChange={(e) =>
+                      setValues({ ...values, balance: e.target.value })
+                    }
+                  />
+                </div>
               </div>
               {/* -----------------Update Button----------------- */}
               <div className="w-full mt-4">
