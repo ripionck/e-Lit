@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Home from '../pages/Home/Home';
 import Main from '../Layout/Main';
+import Home from '../pages/Home/Home';
 import Register from '../pages/Auth/Register';
 import Login from '../pages/Auth/Login';
 import Profile from '../pages/Profile/Profile';
@@ -31,108 +31,36 @@ export const router = createBrowserRouter([
     path: '/',
     element: <Main />,
     children: [
-      {
-        path: '*',
-        element: <NotFound />,
-      },
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: 'register',
-        element: <Register />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'forgot-password',
-        element: <ForgotPassword />,
-      },
-      {
-        path: 'change-password',
-        element: <ChangePassword />,
-      },
-      {
-        path: 'profile',
-        element: <Profile />,
-      },
+      { path: '/', element: <Home /> },
+      { path: 'register', element: <Register /> },
+      { path: 'login', element: <Login /> },
+      { path: 'forgot-password', element: <ForgotPassword /> },
+      { path: 'change-password', element: <ChangePassword /> },
+      { path: 'profile', element: <Profile /> },
       {
         path: 'dashboard',
         element: <Dashboard />,
         children: [
-          {
-            path: 'authors',
-            element: <Authors />,
-          },
-          {
-            path: 'publishers',
-            element: <Publishers />,
-          },
-          {
-            path: 'users',
-            element: <Users />,
-          },
-          {
-            path: 'books',
-            element: <Books />,
-          },
-          {
-            path: 'categories',
-            element: <Categories />,
-          },
-          {
-            path: 'transactions',
-            element: <Transactions />,
-          },
+          { path: 'authors', element: <Authors /> },
+          { path: 'publishers', element: <Publishers /> },
+          { path: 'users', element: <Users /> },
+          { path: 'books', element: <Books /> },
+          { path: 'categories', element: <Categories /> },
+          { path: 'transactions', element: <Transactions /> },
         ],
       },
-      {
-        path: 'add-category',
-        element: <AddCategory />,
-      },
-      {
-        path: '/book/:id',
-        element: <BookDetail />,
-      },
-      {
-        path: 'books',
-        element: <BookList />,
-      },
-      {
-        path: '/books/:type/:id',
-        element: <FilterBooks />,
-      },
-      {
-        path: 'add-book',
-        element: <AddBook />,
-      },
-      {
-        path: '/edit-book/:id',
-        element: <EditBook />,
-      },
-      {
-        path: 'add-author',
-        element: <AddAuthor />,
-      },
-      {
-        path: '/edit-author/:id',
-        element: <EditAuthor />,
-      },
-      {
-        path: 'add-publisher',
-        element: <AddPublisher />,
-      },
-      {
-        path: '/edit-publisher/:id',
-        element: <EditPublisher />,
-      },
-      {
-        path: '/deposit',
-        element: <Deposit />,
-      },
+      { path: 'add-category', element: <AddCategory /> },
+      { path: 'books', element: <BookList /> },
+      { path: '/book/:id', element: <BookDetail /> },
+      { path: '/books/:type/:id', element: <FilterBooks /> },
+      { path: 'add-book', element: <AddBook /> },
+      { path: '/edit-book/:id', element: <EditBook /> },
+      { path: 'add-author', element: <AddAuthor /> },
+      { path: '/edit-author/:id', element: <EditAuthor /> },
+      { path: 'add-publisher', element: <AddPublisher /> },
+      { path: '/edit-publisher/:id', element: <EditPublisher /> },
+      { path: '/deposit', element: <Deposit /> },
+      { path: '*', element: <NotFound /> },
     ],
   },
 ]);
