@@ -41,14 +41,14 @@ const EditPublisher = () => {
 
     try {
       const formData = new FormData();
-      formData.append('name', formData.name);
-      formData.append('address', formData.address);
+      formData.append('name', publisherData.name);
+      formData.append('address', publisherData.address);
       formData.append('logo', logo);
 
       const response = await fetch(
         `https://e-library-z7s7.onrender.com/publisher/update/${id}/`,
         {
-          method: 'PUT',
+          method: 'PATCH',
           headers: {
             Authorization: `Bearer ${token}`,
           },
