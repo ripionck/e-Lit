@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
       { path: 'books', element: <BookList /> },
       { path: '/book/:id', element: <BookDetail /> },
       { path: '/books/search/:query', element: <SearchBooks /> },
-      { path: '/books/:type/:id', element: <FilterBooks /> },
+      { path: '/books/:filterType/:id', element: <FilterBooks /> },
       { path: 'add-book', element: <AddBook /> },
       { path: '/edit-book/:id', element: <EditBook /> },
       { path: 'add-author', element: <AddAuthor /> },
