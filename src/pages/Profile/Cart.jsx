@@ -105,7 +105,7 @@ const Cart = () => {
     subtotal - shippingDiscount + shippingHandling + (subtotal * tax) / 100;
 
   const handlePlaceOrder = () => {
-    navigate('/order', { state: { books: books } });
+    navigate('/');
   };
 
   return (

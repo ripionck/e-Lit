@@ -10,6 +10,7 @@ import Report from './Report';
 const Profile = () => {
   const navigate = useNavigate();
   const [openProfileModal, setOpenProfileModal] = useState(false);
+  const [openReportModal, setOpenReportModal] = useState(false);
   const [values, setValues] = useState({
     avater: null,
     username: '',
@@ -99,7 +100,13 @@ const Profile = () => {
       console.error('Error during profile update:', error);
     }
   };
+  const handleShowReport = () => {
+    setOpenReportModal(true);
+  };
 
+  const onCloseReportModal = () => {
+    setOpenReportModal(false);
+  };
   return (
     <>
       {/* -----------------Profile Update Modal--------------- */}
@@ -278,6 +285,13 @@ const Profile = () => {
                 >
                   Edit Profile
                 </button>
+                {/* --------------Transaction History Button------------- */}
+                <button
+                  onClick={handleShowReport}
+                  className="bg-gray-700 hover:bg-opacity-70 text-white px-2 ml-4 mb-2 rounded"
+                >
+                  Transaction History
+                </button>
                 {/* ---------Change Password Link----------- */}
                 <div>
                   <a
@@ -293,10 +307,21 @@ const Profile = () => {
           {/* -------Cart and Transaction Report------- */}
           <div className="w-2/3 ml-0 lg:ml-4 md:ml-4">
             <Cart />
-            <Report />
           </div>
         </div>
       )}
+      {/* ----------Transaction History Modal--------------- */}
+      <Modal
+        show={openReportModal}
+        size="xl"
+        onClose={onCloseReportModal}
+        popup
+      >
+        <Modal.Header>Transaction History</Modal.Header>
+        <Modal.Body>
+          <Report />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
