@@ -41,7 +41,7 @@ const Deposit = () => {
   return (
     <>
       <Helmet>
-        <title>E-Lit Emporium | Not Found</title>
+        <title>E-Lit Emporium | Deposit</title>
       </Helmet>
       <div className="mx-auto max-w-md mt-8">
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
