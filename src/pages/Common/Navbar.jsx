@@ -17,26 +17,27 @@ const CustomNavbar = () => {
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const token = localStorage.getItem('access_token');
 
-  const fetchUserData = () => {
-    const token = localStorage.getItem('access_token');
-    if (token) {
-      fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((data) => setUser(data))
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch(
+        'https://e-library-z7s7.onrender.com/accounts/profile/',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data);
+      setUser(data);
+    } catch (error) {
+      console.error('Error fetching profile data:', error);
     }
   };
 

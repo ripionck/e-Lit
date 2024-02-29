@@ -4,6 +4,7 @@ import { CiSearch } from 'react-icons/ci';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Spinner';
+import { Helmet } from 'react-helmet';
 
 const BookList = () => {
   const navigate = useNavigate();
@@ -110,6 +111,9 @@ const BookList = () => {
 
   return (
     <>
+      <Helmet>
+        <title>E-Lit Emporium | All Books</title>
+      </Helmet>
       {loading ? (
         <Loading />
       ) : (

@@ -3,9 +3,9 @@
 import { Card, Modal, Label, TextInput, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TransactionReport from './TransactionReport';
 import Spinner from '../../components/Spinner';
 import Cart from './Cart';
+import TransactionReport from './TransactionReport';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -21,6 +21,35 @@ const Profile = () => {
   });
   const [profileImage, setProfileImage] = useState('');
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('access_token');
+
+  useEffect(() => {
+    fetchProfileData();
+  }, []);
+
+  const fetchProfileData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        'https://e-library-z7s7.onrender.com/accounts/profile/',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setValues(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching profile data:', error);
+      setLoading(false);
+    }
+  };
 
   const handleProfileClick = () => {
     setOpenProfileModal(true);
@@ -29,30 +58,6 @@ const Profile = () => {
   const onCloseProfileModal = () => {
     setOpenProfileModal(false);
   };
-  const token = localStorage.getItem('access_token');
-
-  useEffect(() => {
-    setLoading(true);
-    fetch('https://e-library-z7s7.onrender.com/accounts/profile/', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setValues(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, []);
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
@@ -84,33 +89,20 @@ const Profile = () => {
         }
       );
       if (response.ok) {
-        // console.log('Profile updated successfully');
-        const updatedProfile = await fetch(
-          `https://e-library-z7s7.onrender.com/accounts/profile/`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const profile = await updatedProfile.json();
-        setValues(profile);
+        await fetchProfileData();
         onCloseProfileModal();
         navigate('/profile');
       } else {
         console.error('Failed to update profile');
-        // Handle error response here
       }
     } catch (error) {
       console.error('Error during profile update:', error);
-      // Handle error here
     }
   };
 
   return (
     <>
-      {/* --------------Profile Update Modal------------------ */}
+      {/* -----------------Profile Update Modal--------------- */}
       <Modal
         show={openProfileModal}
         size="xl"
@@ -121,6 +113,7 @@ const Profile = () => {
         <Modal.Body>
           <div className="space-y-6">
             <form onSubmit={handleUpdate}>
+              {/* -------------------Profile Image Upload------------------ */}
               <div className="flex flex-col">
                 <label
                   htmlFor="profile-image-upload"
@@ -154,28 +147,24 @@ const Profile = () => {
                   Upload Image
                 </button>
               </div>
-
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="username" value="Username" />
-                </div>
-                <TextInput
-                  id="username"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  value={values?.username}
-                  onChange={(e) =>
-                    setValues({ ...values, username: e.target.value })
-                  }
-                  required
-                />
-              </div>
+              {/* ------------------Profile Form Fields--------------------- */}
               <div className="flex gap-4">
                 <div className="w-full">
-                  <div className="mb-2 block">
-                    <Label htmlFor="first_name" value="First Name" />
-                  </div>
+                  <Label htmlFor="username" value="Username" />
+                  <TextInput
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={values?.username}
+                    onChange={(e) =>
+                      setValues({ ...values, username: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="w-full">
+                  <Label htmlFor="first_name" value="First Name" />
                   <TextInput
                     id="first_name"
                     name="first_name"
@@ -189,9 +178,7 @@ const Profile = () => {
                   />
                 </div>
                 <div className="w-full">
-                  <div className="mb-2 block">
-                    <Label htmlFor="last_name" value="Last Name" />
-                  </div>
+                  <Label htmlFor="last_name" value="Last Name" />
                   <TextInput
                     id="last_name"
                     type="text"
@@ -205,27 +192,23 @@ const Profile = () => {
                   />
                 </div>
               </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="email" value="Email Address" />
-                </div>
-                <TextInput
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="example@gmail.com"
-                  value={values?.email}
-                  onChange={(e) =>
-                    setValues({ ...values, email: e.target.value })
-                  }
-                  required
-                />
-              </div>
               <div className="flex gap-4">
                 <div className="w-full">
-                  <div className="mb-2 block">
-                    <Label htmlFor="phone" value="Phone Number" />
-                  </div>
+                  <Label htmlFor="email" value="Email Address" />
+                  <TextInput
+                    id="email"
+                    type="email"
+                    name="email"
+                    placeholder="example@gmail.com"
+                    value={values?.email}
+                    onChange={(e) =>
+                      setValues({ ...values, email: e.target.value })
+                    }
+                    required
+                  />
+                </div>
+                <div className="w-full">
+                  <Label htmlFor="phone" value="Phone Number" />
                   <TextInput
                     id="phone"
                     type="number"
@@ -237,23 +220,21 @@ const Profile = () => {
                     required
                   />
                 </div>
-                <div className="w-full">
-                  <div className="mb-2 block">
-                    <Label htmlFor="balance" value="Account Balance" />
-                  </div>
-                  <TextInput
-                    id="balance"
-                    type="number"
-                    name="balance"
-                    value={values?.balance}
-                    onChange={(e) =>
-                      setValues({ ...values, balance: e.target.value })
-                    }
-                    required
-                  />
-                </div>
               </div>
-
+              <div>
+                <Label htmlFor="balance" value="Account Balance" />
+                <TextInput
+                  id="balance"
+                  type="number"
+                  name="balance"
+                  value={values?.balance}
+                  onChange={(e) =>
+                    setValues({ ...values, balance: e.target.value })
+                  }
+                  required
+                />
+              </div>
+              {/* -----------------Update Button----------------- */}
               <div className="w-full mt-4">
                 <Button type="submit">Update Now</Button>
               </div>
@@ -261,11 +242,12 @@ const Profile = () => {
           </div>
         </Modal.Body>
       </Modal>
-      {/* -------------Update card----------------- */}
+      {/* ------------------Profile Card and Additional Details--------------- */}
       {loading ? (
         <Spinner />
       ) : (
         <div className="flex flex-col lg:flex-row sm:flex-col p-2">
+          {/* ----------------Profile Card----------------- */}
           <Card className="max-w-sm lg:w-80 lg:h-1/2 w-full">
             <div className="flex flex-col">
               <img
@@ -289,12 +271,14 @@ const Profile = () => {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Balance: {values.balance}$
                 </p>
+                {/* --------------Edit Profile Button------------- */}
                 <button
                   onClick={handleProfileClick}
                   className="bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-2 rounded"
                 >
                   Edit Profile
                 </button>
+                {/* ---------Change Password Link----------- */}
                 <div>
                   <a
                     href="change-password"
@@ -306,6 +290,7 @@ const Profile = () => {
               </div>
             </div>
           </Card>
+          {/* -------Cart and Transaction Report------- */}
           <div className="w-2/3 ml-0 lg:ml-4 md:ml-4">
             <Cart />
             <TransactionReport />
@@ -315,4 +300,5 @@ const Profile = () => {
     </>
   );
 };
+
 export default Profile;

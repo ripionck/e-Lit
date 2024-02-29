@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, Label, TextInput, Alert } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Spinner';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -71,6 +72,9 @@ const Login = () => {
 
   return (
     <>
+      <Helmet>
+        <title>E-Lit Emporium | Login</title>
+      </Helmet>
       {loading ? (
         <Loading />
       ) : (
@@ -125,12 +129,9 @@ const Login = () => {
                     </label>
                   </div>
                   <div className="block">
-                    <a
-                      href="auth-forgot-password-basic.html"
-                      className="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500"
-                    >
+                    <p className="cursor-pointer text-indigo-500 no-underline hover:text-indigo-500">
                       <a href="forgot-password">Forgot Password?</a>
-                    </a>
+                    </p>
                   </div>
                 </div>
                 <Button type="submit">Login</Button>
