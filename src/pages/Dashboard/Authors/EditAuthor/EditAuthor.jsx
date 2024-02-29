@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const EditAuthor = () => {
@@ -71,90 +72,97 @@ const EditAuthor = () => {
   };
 
   return (
-    <div className="mx-auto max-w-md mt-8">
-      <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
-        <div className="p-4 sm:p-7">
-          <p className="mt-2 mb-5 text-base text-gray-600">
-            Use the form to edit author
-          </p>
-          <form
-            onSubmit={handleSubmit}
-            encType="multipart/form-data"
-            className="flex max-w-md flex-col gap-1"
-          >
-            <div className="flex flex-col">
-              <label
-                htmlFor="profile-image-upload"
-                className="flex justify-center"
-              >
-                <img
-                  src={avater ? URL.createObjectURL(avater) : authorData.cover}
-                  alt={`${authorData.first_name} ${authorData.last_name}`}
-                  className="w-40 h-48 bg-gray-200 object-cover mb-2 cursor-pointer"
-                />
+    <>
+      <Helmet>
+        <title>E-Lit Emporium | Edit Author</title>
+      </Helmet>
+      <div className="mx-auto max-w-md mt-8">
+        <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+          <div className="p-4 sm:p-7">
+            <p className="mt-2 mb-5 text-base text-gray-600">
+              Use the form to edit author
+            </p>
+            <form
+              onSubmit={handleSubmit}
+              encType="multipart/form-data"
+              className="flex max-w-md flex-col gap-1"
+            >
+              <div className="flex flex-col">
+                <label
+                  htmlFor="profile-image-upload"
+                  className="flex justify-center"
+                >
+                  <img
+                    src={
+                      avater ? URL.createObjectURL(avater) : authorData.cover
+                    }
+                    alt={`${authorData.first_name} ${authorData.last_name}`}
+                    className="w-40 h-48 bg-gray-200 object-cover mb-2 cursor-pointer"
+                  />
+                  <input
+                    type="file"
+                    id="profile-image-upload"
+                    className="sr-only"
+                    accept="image/*"
+                    name="cover"
+                    onChange={handleChange}
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() =>
+                    document.getElementById('profile-image-upload').click()
+                  }
+                  className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
+                >
+                  Upload Image
+                </button>
+              </div>
+              <label>
+                First Name:
                 <input
-                  type="file"
-                  id="profile-image-upload"
-                  className="sr-only"
-                  accept="image/*"
-                  name="cover"
+                  className="w-full py-2 rounded px-4  bg-gray-100"
+                  type="text"
+                  name="first_name"
+                  value={authorData.first_name}
                   onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                Last Name:
+                <input
+                  className="w-full py-2 rounded px-4  bg-gray-100"
+                  type="text"
+                  name="last_name"
+                  value={authorData.last_name}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                Description:
+                <textarea
+                  className="w-full py-2 rounded px-4  bg-gray-100"
+                  rows="5"
+                  type="text"
+                  name="description"
+                  value={authorData.description}
+                  onChange={handleChange}
+                  required
                 />
               </label>
               <button
-                type="button"
-                onClick={() =>
-                  document.getElementById('profile-image-upload').click()
-                }
-                className="w-1/2 mx-auto bg-gray-700 hover:bg-opacity-70 text-white px-2 mb-4 rounded"
+                className="uppercase text-sm font-bold border-0 rounded px-4 py-2 bg-sky-500 hover:bg-sky-900"
+                type="submit"
               >
-                Upload Image
+                Update Author
               </button>
-            </div>
-            <label>
-              First Name:
-              <input
-                className="w-full py-2 rounded px-4  bg-gray-100"
-                type="text"
-                name="first_name"
-                value={authorData.first_name}
-                onChange={handleChange}
-                required
-              />
-            </label>
-            <label>
-              Last Name:
-              <input
-                className="w-full py-2 rounded px-4  bg-gray-100"
-                type="text"
-                name="last_name"
-                value={authorData.last_name}
-                onChange={handleChange}
-                required
-              />
-            </label>
-            <label>
-              Description:
-              <textarea
-                className="w-full py-2 rounded px-4  bg-gray-100"
-                rows="5"
-                type="text"
-                name="description"
-                value={authorData.description}
-                onChange={handleChange}
-                required
-              />
-            </label>
-            <button
-              className="uppercase text-sm font-bold border-0 rounded px-4 py-2 bg-sky-500 hover:bg-sky-900"
-              type="submit"
-            >
-              Update Author
-            </button>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
