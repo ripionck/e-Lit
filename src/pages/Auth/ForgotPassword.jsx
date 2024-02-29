@@ -1,5 +1,6 @@
 import { Alert } from 'flowbite-react';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
@@ -43,6 +44,9 @@ const ForgotPassword = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>E-Lit Emporium | Not Found</title>
+      </Helmet>
       <div className="h-screen mx-auto max-w-md mt-8">
         {showSuccessAlert && (
           <Alert color="success" onDismiss={() => setShowSuccessAlert(false)}>
