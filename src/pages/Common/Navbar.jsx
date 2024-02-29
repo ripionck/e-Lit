@@ -17,11 +17,22 @@ const CustomNavbar = () => {
   const [authors, setAuthors] = useState([]);
   const [publishers, setPublishers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  console.log(searchResults);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Redirect to the search results page with the search query as a parameter
-    navigate(`/book-list?search=${encodeURIComponent(searchQuery)}`);
+  const searchBooks = async () => {
+    try {
+      const response = await fetch(
+        `https://e-library-z7s7.onrender.com/book/?search=${searchQuery}`
+      );
+      if (!response.ok) {
+        throw new Error('Failed to fetch search results');
+      }
+      const data = await response.json();
+      setSearchResults(data.results);
+    } catch (error) {
+      console.error('Error searching books:', error);
+    }
   };
 
   // -----------getting user------------------//
@@ -84,19 +95,17 @@ const CustomNavbar = () => {
           />
         </Navbar.Brand>
         {/* ---------------Navbar search input---------------- */}
-        <form
-          className="max-w-md px-4 mx-auto flex-grow"
-          onSubmit={handleSearch}
-        >
+        <form className="max-w-md px-4 mx-auto flex-grow">
           <div className="relative">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by book, author, or language"
-              className="w-full py-2 pl-8 pr-2 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-gray-600"
+              className="w-full py-2 pl-4 pr-2 text-gray-500 border rounded-full outline-none bg-gray-50 focus:bg-white focus:border-gray-600"
             />
             <button
+              onClick={searchBooks}
               type="submit"
               className="absolute right-5 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-400"
             >
