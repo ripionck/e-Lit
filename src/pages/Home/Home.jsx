@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>E-Lit Emporium | Home</title>
+        <title>E-Lit Emporium</title>
       </Helmet>
       <CustomCarousel />
       <HomeBanner />
