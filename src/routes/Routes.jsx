@@ -24,6 +24,7 @@ import AddPublisher from '../pages/Dashboard/Publishers/AddPublisher/AddPublishe
 import AddCategory from '../pages/Dashboard/Categories/AddCategory/AddCategory';
 import NotFound from '../pages/NotFound/NotFound';
 import EditPublisher from '../pages/Dashboard/Publishers/EditPublisher/EditPublisher';
+import AuthorBooks from '../pages/BookList/AuthorBooks/AuthorBooks';
 
 export const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
       {
         path: 'books',
         element: <BookList />,
+      },
+      {
+        path: '/books/:id',
+        element: <AuthorBooks />,
       },
       {
         path: 'add-book',

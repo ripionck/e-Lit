@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 const DropdownMenu = ({ items, menuName }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMouseEnter = () => {
@@ -10,6 +12,10 @@ const DropdownMenu = ({ items, menuName }) => {
 
   const handleMouseLeave = () => {
     setIsOpen(false);
+  };
+
+  const handleFilter = (id) => {
+    navigate(`/books/${id}`);
   };
 
   return (
@@ -33,7 +39,10 @@ const DropdownMenu = ({ items, menuName }) => {
           <div className="py-2 text-sm text-gray-700 dark:text-gray-200 flex flex-wrap">
             {items.map((item) => (
               <div key={item.id} className="flex">
-                <button className="p-3 hover:text-blue-700">
+                <button
+                  onClick={() => handleFilter(item.id)}
+                  className="p-3 hover:text-blue-700"
+                >
                   {item.first_name && item.last_name
                     ? `${item.first_name} ${item.last_name}`
                     : null}
