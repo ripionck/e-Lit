@@ -98,6 +98,7 @@ const CustomNavbar = () => {
         >
           <div className="relative">
             <input
+              id="search"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
