@@ -8,6 +8,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
+  console.log(books);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const [bookId, setBookId] = useState(null);
@@ -98,6 +99,7 @@ const Cart = () => {
         <Spinner />
       ) : (
         <div className="w-full overflow-y-auto">
+          <h4 className="mb-1">Your Selected Book</h4>
           <Table striped>
             <Table.Head>
               <Table.HeadCell>Title</Table.HeadCell>

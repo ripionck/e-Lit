@@ -3,7 +3,7 @@
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 
-const TransactionReport = () => {
+const Report = () => {
   const [transactions, setTransactions] = useState([]);
 
   const token = localStorage.getItem('access_token');
@@ -30,6 +30,7 @@ const TransactionReport = () => {
 
   return (
     <div className="overflow-x-auto mt-2">
+      <h4 className="mb-1">Your Transaction History</h4>
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Transaction ID</Table.HeadCell>
@@ -50,4 +51,4 @@ const TransactionReport = () => {
     </div>
   );
 };
-export default TransactionReport;
+export default Report;

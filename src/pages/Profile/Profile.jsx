@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../components/Spinner';
 import Cart from './Cart';
-import TransactionReport from './TransactionReport';
+import Report from './Report';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -293,7 +293,7 @@ const Profile = () => {
           {/* -------Cart and Transaction Report------- */}
           <div className="w-2/3 ml-0 lg:ml-4 md:ml-4">
             <Cart />
-            <TransactionReport />
+            <Report />
           </div>
         </div>
       )}

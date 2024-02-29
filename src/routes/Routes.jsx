@@ -26,6 +26,7 @@ import NotFound from '../pages/NotFound/NotFound';
 import EditPublisher from '../pages/Dashboard/Publishers/EditPublisher/EditPublisher';
 import FilterBooks from '../pages/BookList/FilterBooks/FilterBooks';
 import SearchBooks from '../pages/BookList/SearchBooks/SearchBooks';
+import Order from '../pages/Profile/Order';
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,7 @@ export const router = createBrowserRouter([
       { path: 'add-publisher', element: <AddPublisher /> },
       { path: '/edit-publisher/:id', element: <EditPublisher /> },
       { path: '/deposit', element: <Deposit /> },
+      { path: '/order', element: <Order /> },
       { path: '*', element: <NotFound /> },
     ],
   },
