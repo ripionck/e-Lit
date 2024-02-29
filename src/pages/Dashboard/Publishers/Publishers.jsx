@@ -1,5 +1,3 @@
-'use client';
-
 import { Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import Loading from '../../../components/Spinner';

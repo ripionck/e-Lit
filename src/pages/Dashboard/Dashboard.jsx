@@ -1,5 +1,3 @@
-'use client';
-
 import { Sidebar } from 'flowbite-react';
 import { HiInbox, HiUser, HiBookOpen } from 'react-icons/hi';
 import { BiSolidCategory } from 'react-icons/bi';

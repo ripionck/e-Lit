@@ -1,5 +1,3 @@
-'use client';
-
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';

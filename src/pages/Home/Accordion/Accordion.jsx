@@ -1,5 +1,3 @@
-'use client';
-
 import { Accordion, Button, Card } from 'flowbite-react';
 
 const HomeAccordion = () => {
