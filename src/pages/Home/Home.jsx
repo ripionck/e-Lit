@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import HomeAccordion from './Accordion/Accordion';
 import HomeBanner from './Banner/Banner';
 import AwardWinners from './Books/AwardWinners';
@@ -9,6 +10,9 @@ import CustomCarousel from './Carousel/Carousel';
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>E-Lit Emporium | Not Found</title>
+      </Helmet>
       <CustomCarousel />
       <HomeBanner />
       <NewReleases />
