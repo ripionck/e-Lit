@@ -32,7 +32,6 @@ const Books = () => {
 
   const token = localStorage.getItem('access_token');
   const handleDelete = (id) => {
-    setLoading(true);
     fetch(`https://e-library-z7s7.onrender.com/book/${id}`, {
       method: 'DELETE',
       headers: {
@@ -48,9 +47,6 @@ const Books = () => {
       })
       .catch((error) => {
         console.error('Error deleting book:', error);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
   const onPageChange = (page) => setCurrentPage(page);

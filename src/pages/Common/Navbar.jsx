@@ -18,7 +18,7 @@ const CustomNavbar = () => {
   const [publishers, setPublishers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  // console.log(searchResults);
+  console.log(searchResults);
 
   const searchBooks = async () => {
     try {

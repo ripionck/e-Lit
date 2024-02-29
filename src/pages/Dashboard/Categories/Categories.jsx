@@ -24,13 +24,17 @@ const Categories = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  const token = localStorage.getItem('access_token');
   const handleDelete = async (categoryId) => {
-    setLoading(true);
     try {
       const response = await fetch(
         `https://e-library-z7s7.onrender.com/category/${categoryId}`,
         {
           method: 'DELETE',
+          headers: {
+            'content-type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -45,8 +49,6 @@ const Categories = () => {
       }
     } catch (error) {
       console.error('Error deleting category:', error);
-    } finally {
-      setLoading(false);
     }
   };
 

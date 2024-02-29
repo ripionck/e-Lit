@@ -26,37 +26,6 @@ const Publishers = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const token = localStorage.getItem('access_token');
-
-  const handleDelete = async (id) => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `https://e-library-z7s7.onrender.com/publisher/${id}`,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        // Remove the deleted publisher from the state
-        setPublishers((prevPublishers) =>
-          prevPublishers.filter((publisher) => publisher.id !== id)
-        );
-        console.log('Publisher deleted successfully');
-      } else {
-        console.error('Failed to delete publisher');
-      }
-    } catch (error) {
-      console.error('Error deleting publisher:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <>
       {loading ? (
@@ -94,12 +63,6 @@ const Publishers = () => {
                     >
                       Edit
                     </a>
-                    <button
-                      onClick={() => handleDelete(publisher.id)}
-                      className="font-medium text-red-600 hover:underline dark:text-red-500"
-                    >
-                      Delete
-                    </button>
                   </Table.Cell>
                 </Table.Row>
               ))}

@@ -231,6 +231,7 @@ const BookList = () => {
                       alt={book.title}
                       className="h-52 w-40 mb-2"
                     />
+                    <p>{book.title}</p>
                     <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                       <button
                         onClick={() => handleBookDetail(book.id)}
@@ -242,8 +243,6 @@ const BookList = () => {
                         </span>
                       </button>
                     </div>
-                    <p>{book.title}</p>
-                    <p className="italic">Price: {book.price}$</p>
                   </div>
                 ))}
               </div>
