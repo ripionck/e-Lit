@@ -4,38 +4,39 @@ import { useEffect, useState } from 'react';
 import { Pagination } from 'flowbite-react';
 import Spinner from '../../../components/Spinner';
 
-const AuthorBooks = () => {
+const FilterBooks = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id, filterType } = useParams();
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
   const onPageChange = (page) => setCurrentPage(page);
-  useEffect(() => {
-    fetchData();
-  }, [currentPage]);
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `https://e-library-z7s7.onrender.com/book/?p=${currentPage}&author=${id}`
-      );
-      const data = await response.json();
-      setBooks(data.results);
-      setTotalPages(data.total_pages);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    setLoading(true);
+
+    const fetchData = () => {
+      fetch(
+        `https://e-library-z7s7.onrender.com/book/?p=${currentPage}&${filterType}=${id}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setBooks(data.results);
+          setTotalPages(data.total_pages);
+        })
+        .finally(() => setLoading(false));
+    };
+
+    fetchData();
+  }, [id, filterType, currentPage]);
 
   const handleBookDetail = (id) => {
     navigate(`/book/${id}`);
   };
+
   return (
     <>
       {loading ? (
@@ -84,4 +85,4 @@ const AuthorBooks = () => {
   );
 };
 
-export default AuthorBooks;
+export default FilterBooks;

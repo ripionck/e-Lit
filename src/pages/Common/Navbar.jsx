@@ -18,7 +18,6 @@ const CustomNavbar = () => {
   const [publishers, setPublishers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  console.log(searchResults);
 
   const searchBooks = async () => {
     try {
@@ -198,9 +197,21 @@ const CustomNavbar = () => {
           <Navbar.Link href="/" className="text-lg">
             Home
           </Navbar.Link>
-          <DropdownMenu items={categories} menuName="Categories" />
-          <DropdownMenu items={authors} menuName="Authors" />
-          <DropdownMenu items={publishers} menuName="Publishers" />
+          <DropdownMenu
+            items={categories}
+            menuName="Categories"
+            filterType="category"
+          />
+          <DropdownMenu
+            items={authors}
+            menuName="Authors"
+            filterType="author"
+          />
+          <DropdownMenu
+            items={publishers}
+            menuName="Publishers"
+            filterType="publisher"
+          />
           <Navbar.Link href="/books" className="text-lg">
             Books
           </Navbar.Link>

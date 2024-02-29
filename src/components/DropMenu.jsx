@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { HiChevronDown } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
-const DropdownMenu = ({ items, menuName }) => {
+const DropdownMenu = ({ items, menuName, filterType }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,7 +15,7 @@ const DropdownMenu = ({ items, menuName }) => {
   };
 
   const handleFilter = (id) => {
-    navigate(`/books/${id}`);
+    navigate(`/books/${filterType}/${id}`);
   };
 
   return (
