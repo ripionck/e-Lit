@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Button, Label, TextInput, Alert } from 'flowbite-react';
+import { Button, Label, TextInput, Alert, Spinner } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../../components/Spinner';
 import { Helmet } from 'react-helmet';
 
 const Login = () => {
@@ -76,7 +75,9 @@ const Login = () => {
         <title>E-Lit Emporium | Login</title>
       </Helmet>
       {loading ? (
-        <Loading />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
         <div className="mx-auto max-w-md mt-8">
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm">

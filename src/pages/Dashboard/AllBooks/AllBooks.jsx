@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Pagination } from 'flowbite-react';
 import Loading from '../../../components/Spinner';
 
-const Books = () => {
+const AllBooks = () => {
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,4 +120,4 @@ const Books = () => {
     </>
   );
 };
-export default Books;
+export default AllBooks;

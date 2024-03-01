@@ -12,7 +12,6 @@ import { CiSearch } from 'react-icons/ci';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
@@ -22,7 +21,6 @@ const CustomNavbar = () => {
 
   const fetchUserData = async () => {
     try {
-      setLoading(true);
       const response = await fetch(
         'https://e-library-z7s7.onrender.com/accounts/profile/',
         {
@@ -38,7 +36,6 @@ const CustomNavbar = () => {
       const data = await response.json();
       // console.log(data);
       setUser(data);
-      setLoading(false);
     } catch (error) {
       console.error('Error fetching profile data:', error);
     }

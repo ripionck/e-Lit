@@ -5,17 +5,16 @@ import Register from '../pages/Auth/Register';
 import Login from '../pages/Auth/Login';
 import Profile from '../pages/Profile/Profile';
 import Dashboard from '../pages/Dashboard/Dashboard';
-import BookList from '../pages/BookList/BookList';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import ChangePassword from '../pages/Auth/ChangePassword';
 import Authors from '../pages/Dashboard/Authors/Authors';
 import Publishers from '../pages/Dashboard/Publishers/Publishers';
 import Users from '../pages/Dashboard/Users/Users';
-import Books from '../pages/Dashboard/Books/Books';
+import AllBooks from '../pages/Dashboard/AllBooks/AllBooks';
 import Categories from '../pages/Dashboard/Categories/Categories';
-import AddBook from '../pages/Dashboard/Books/AddBook/AddBook';
+import AddBook from '../pages/Dashboard/AllBooks/AddBook/AddBook';
 import AddAuthor from '../pages/Dashboard/Authors/AddAuthor/AddAuthor';
-import EditBook from '../pages/Dashboard/Books/EditBook/EditBook';
+import EditBook from '../pages/Dashboard/AllBooks/EditBook/EditBook';
 import EditAuthor from '../pages/Dashboard/Authors/EditAuthor/EditAuthor';
 import Transactions from '../pages/Dashboard/Transactions/Transactions';
 import Deposit from '../pages/Deposit/Deposit';
@@ -24,8 +23,9 @@ import AddPublisher from '../pages/Dashboard/Publishers/AddPublisher/AddPublishe
 import AddCategory from '../pages/Dashboard/Categories/AddCategory/AddCategory';
 import NotFound from '../pages/NotFound/NotFound';
 import EditPublisher from '../pages/Dashboard/Publishers/EditPublisher/EditPublisher';
-import FilterBooks from '../pages/BookList/FilterBooks/FilterBooks';
-import SearchBooks from '../pages/BookList/SearchBooks/SearchBooks';
+import Books from '../pages/Books/Books';
+import FilterBooks from '../pages/Books/FilterBooks/FilterBooks';
+import SearchBooks from '../pages/Books/SearchBooks/SearchBooks';
 
 export const router = createBrowserRouter([
   {
@@ -45,13 +45,13 @@ export const router = createBrowserRouter([
           { path: 'authors', element: <Authors /> },
           { path: 'publishers', element: <Publishers /> },
           { path: 'users', element: <Users /> },
-          { path: 'books', element: <Books /> },
+          { path: 'all-books', element: <AllBooks /> },
           { path: 'categories', element: <Categories /> },
           { path: 'transactions', element: <Transactions /> },
         ],
       },
       { path: 'add-category', element: <AddCategory /> },
-      { path: 'books', element: <BookList /> },
+      { path: 'books', element: <Books /> },
       { path: 'book/:id', element: <BookDetail /> },
       { path: 'books/search/:query', element: <SearchBooks /> },
       { path: 'books/:filterType/:id', element: <FilterBooks /> },

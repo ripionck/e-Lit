@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet';
 import HomeAccordion from './Accordion/Accordion';
 import HomeBanner from './Banner/Banner';
-import AwardWinners from './Books/AwardWinners';
-import BestSellers from './Books/BestSellers';
-import CommingSoon from './Books/CommingSoon';
-import NewReleases from './Books/NewReleases';
+import AwardWinners from './BooksSlide/AwardWinners';
+import BestSellers from './BooksSlide/BestSellers';
+import CommingSoon from './BooksSlide/CommingSoon';
+import NewReleases from './BooksSlide/NewReleases';
 import CustomCarousel from './Carousel/Carousel';
 
 const Home = () => {

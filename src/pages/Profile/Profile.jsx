@@ -1,9 +1,8 @@
-import { Card, Modal, Label, TextInput, Button } from 'flowbite-react';
+import { Card, Modal, Label, TextInput, Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../../components/Spinner';
-import Cart from './Cart';
-import Report from './Report';
+import Cart from './Cart/Cart';
+import Report from './Report/Report';
 import { Helmet } from 'react-helmet';
 
 const Profile = () => {
@@ -249,7 +248,9 @@ const Profile = () => {
       </Modal>
       {/* ------------------Profile Card and Additional Details--------------- */}
       {loading ? (
-        <Spinner />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
         <div className="flex flex-col lg:flex-row sm:flex-col p-2">
           {/* ----------------Profile Card----------------- */}

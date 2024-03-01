@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Table } from 'flowbite-react';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../../components/Spinner';
 import { HiOutlineX } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 

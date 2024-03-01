@@ -1,6 +1,5 @@
-import { Table } from 'flowbite-react';
+import { Spinner, Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
-import Loading from '../../../components/Spinner';
 
 const Categories = () => {
   const [loading, setLoading] = useState(true);
@@ -55,7 +54,9 @@ const Categories = () => {
   return (
     <>
       {loading ? (
-        <Loading />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
         <div className="h-screen overflow-y-auto">
           <Table striped>

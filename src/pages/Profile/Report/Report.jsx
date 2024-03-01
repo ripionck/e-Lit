@@ -1,6 +1,5 @@
-import { Table } from 'flowbite-react';
+import { Spinner, Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
-import Spinner from '../../components/Spinner';
 
 const Report = () => {
   const [loading, setLoading] = useState(true);
@@ -28,12 +27,14 @@ const Report = () => {
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [token]);
 
   return (
     <>
       {loading ? (
-        <Spinner />
+        <div className="h-48 flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
         <div className="overflow-x-auto mt-2">
           <Table striped>

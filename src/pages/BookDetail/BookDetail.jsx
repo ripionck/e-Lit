@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Loading from '../../components/Spinner';
 import Review from './Review/Review';
 import BookInfo from './BookInfo/BookInfo';
 import { HiShoppingCart } from 'react-icons/hi';
+import { Spinner } from 'flowbite-react';
 
 const BookDetail = () => {
   const navigate = useNavigate();
@@ -53,56 +53,59 @@ const BookDetail = () => {
   return (
     <>
       {loading ? (
-        <Loading />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
-        <div className="container mx-auto px-4 py-8 mb-6">
-          <div className="flex flex-col md:flex-row items-center md:gap-4">
-            <div className="w-full md:w-72 md:h-96 max-w-md mb-4 md:mb-0">
-              {book.cover && (
-                <img
-                  src={book.cover}
-                  alt={book.title}
-                  className="w-full h-auto rounded-lg shadow-md"
-                />
-              )}
-            </div>
+        <>
+          <div className="container mx-auto px-4 py-8 mb-6">
+            <div className="flex flex-col md:flex-row items-center md:gap-4">
+              <div className="w-full md:w-72 md:h-96 max-w-md mb-4 md:mb-0">
+                {book.cover && (
+                  <img
+                    src={book.cover}
+                    alt={book.title}
+                    className="w-full h-auto rounded-lg shadow-md"
+                  />
+                )}
+              </div>
 
-            <div className="w-full md:w-1/2 max-w-md px-4">
-              <h1 className="text-2xl font-semibold mb-2">{book.title}</h1>
-              <p className="text-lg mb-1 italic">
-                {`${book?.author?.first_name} ${book?.author?.last_name}`}
-              </p>
-              <p className="text-lg mb-1">
-                {book.edition}
-                <span className="px-1">Edition</span>
-              </p>
-              <p className="mb-1">
-                ISBN: <span className="px-1">{book?.isbn}</span>
-              </p>
-              <p className="text-gray-700 mb-2">Price: {book.price}$</p>
-              <div className="flex flex-col gap-4">
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
-                  min="1"
-                  className="px-2 py-1 border border-gray-300 rounded-lg w-20 text-center"
-                />
-                <button
-                  onClick={addToCart}
-                  className="w-1/2 md:w-1/3 pl-2 flex items-center gap-1 text-orange-500 text-xl border border-black hover:cursor-pointer hover:bg-white"
-                >
-                  Add to Cart
-                  <HiShoppingCart className="pt-1 text-3xl" />
-                </button>
+              <div className="w-full md:w-1/2 max-w-md px-4">
+                <h1 className="text-2xl font-semibold mb-2">{book.title}</h1>
+                <p className="text-lg mb-1 italic">
+                  {`${book?.author?.first_name} ${book?.author?.last_name}`}
+                </p>
+                <p className="text-lg mb-1">
+                  {book.edition}
+                  <span className="px-1">Edition</span>
+                </p>
+                <p className="mb-1">
+                  ISBN: <span className="px-1">{book?.isbn}</span>
+                </p>
+                <p className="text-gray-700 mb-2">Price: {book.price}$</p>
+                <div className="flex flex-col gap-4">
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    min="1"
+                    className="px-2 py-1 border border-gray-300 rounded-lg w-20 text-center"
+                  />
+                  <button
+                    onClick={addToCart}
+                    className="w-1/2 md:w-1/3 pl-2 flex items-center gap-1 text-orange-500 text-xl border border-black hover:cursor-pointer hover:bg-white"
+                  >
+                    Add to Cart
+                    <HiShoppingCart className="pt-1 text-3xl" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          <BookInfo book={book} />
+          <Review />
+        </>
       )}
-
-      <BookInfo book={book} />
-      <Review />
     </>
   );
 };

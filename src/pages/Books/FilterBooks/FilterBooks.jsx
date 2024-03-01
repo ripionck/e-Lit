@@ -1,8 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { useEffect, useState } from 'react';
-import { Pagination } from 'flowbite-react';
-import Spinner from '../../../components/Spinner';
+import { Pagination, Spinner } from 'flowbite-react';
 
 const FilterBooks = () => {
   const navigate = useNavigate();
@@ -40,7 +39,9 @@ const FilterBooks = () => {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
         <>
           <div className="flex flex-col w-3/4 mt-4 overflow-y-auto">

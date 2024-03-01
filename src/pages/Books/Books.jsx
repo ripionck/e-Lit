@@ -1,12 +1,11 @@
-import { Pagination } from 'flowbite-react';
+import { Pagination, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { HiArrowNarrowRight } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../../components/Spinner';
 import { Helmet } from 'react-helmet';
 
-const BookList = () => {
+const Books = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
@@ -115,7 +114,9 @@ const BookList = () => {
         <title>E-Lit Emporium | All Books</title>
       </Helmet>
       {loading ? (
-        <Loading />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
         <>
           <div className="flex flex-row ml-4 mt-2">
@@ -267,4 +268,4 @@ const BookList = () => {
   );
 };
 
-export default BookList;
+export default Books;
