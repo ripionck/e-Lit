@@ -112,7 +112,7 @@ const HomeAccordion = () => {
       <Card
         className="w-full lg:w-1/3"
         imgAlt="Meaningful alt text for an image that is not purely decorative"
-        imgSrc="/src/assets/books/book3.jpg"
+        imgSrc="/public/books/book3.jpg"
       >
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           Noteworthy technology acquisitions 2021

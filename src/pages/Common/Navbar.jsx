@@ -86,7 +86,7 @@ const CustomNavbar = () => {
         {/* -------------------Logo----------------- */}
         <Navbar.Brand>
           <img
-            src="/src/assets/E-Lit_Emporium.png"
+            src="/public/E-Lit_Emporium.png"
             className="lg:w-2/3 md:1/2 w-full"
             alt="Logo"
           />
