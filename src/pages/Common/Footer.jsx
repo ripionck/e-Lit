@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="mb-6 md:mb-0">
             <a href="#" className="flex items-center">
               <img
-                src="/public/E-Lit_Emporium.png"
+                src="/E-Lit_Emporium.png"
                 className="h-20 me-3"
                 alt="FlowBite Logo"
               />

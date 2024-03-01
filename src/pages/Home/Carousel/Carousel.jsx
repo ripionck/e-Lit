@@ -8,28 +8,28 @@ const CustomCarousel = () => {
       >
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/public/carousel/97803086165.jpg"
+            src="/carousel/97803086165.jpg"
             alt="slide 1"
             className="w-full h-full"
           />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/public/carousel/97803850165.jpg"
+            src="/carousel/97803850165.jpg"
             alt="slide 2"
             className="w-full h-full"
           />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/public/carousel/97803850861.jpg"
+            src="/carousel/97803850861.jpg"
             alt="slide 3"
             className="w-full h-full"
           />
         </div>
         <div className="flex h-full items-center justify-center bg-gray-400 dark:bg-gray-700 dark:text-white">
           <img
-            src="/public/carousel/97885086165.jpg"
+            src="/carousel/97885086165.jpg"
             alt="slide 4"
             className="w-full h-full"
           />
