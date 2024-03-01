@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Table } from 'flowbite-react';
-import Spinner from '../../../components/Spinner';
+import { Spinner, Table } from 'flowbite-react';
 import { HiOutlineX } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
@@ -123,7 +122,9 @@ const Cart = () => {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner aria-label="Extra large spinner example" size="xl" />
+        </div>
       ) : (
         <div className="w-full overflow-y-auto">
           <Table striped>
