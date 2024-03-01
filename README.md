@@ -1,8 +1,20 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# E-Lit Emporium
 
-Currently, two official plugins are available:
+The project is a dynamic book shopping website built using React for the frontend and Django for the backend, featuring a powerful REST API. Users can register, login, and manage their accounts securely. With an extensive book catalog, users can easily search, filter, and explore books by genre, author, and title. Secure payment gateways and a convenient shopping cart system ensure smooth and reliable transactions for purchasing books online.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
+https://e-lit-emporium.netlify.app/
+
+## 🛠 Technologies & Tools
+React, Tailwind CSS, Django REST API, NPM, Git, Postman
+
+## Run
+
+To run, run the following command
+
+```bash
+  npm run dev
+```
+
+
