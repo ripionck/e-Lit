@@ -12,6 +12,7 @@ import { CiSearch } from 'react-icons/ci';
 
 const CustomNavbar = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
@@ -21,6 +22,7 @@ const CustomNavbar = () => {
 
   const fetchUserData = async () => {
     try {
+      setLoading(true);
       const response = await fetch(
         'https://e-library-z7s7.onrender.com/accounts/profile/',
         {
@@ -36,6 +38,7 @@ const CustomNavbar = () => {
       const data = await response.json();
       // console.log(data);
       setUser(data);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching profile data:', error);
     }
@@ -123,16 +126,18 @@ const CustomNavbar = () => {
                 inline
                 label={
                   <img
-                    src={user?.avater}
-                    alt={user?.username}
+                    src={user.avater}
+                    alt={user.username}
                     className="w-12 h-12 bg-gray-200 rounded-full object-cover"
                   />
                 }
               >
                 <Dropdown.Header>
-                  <span className="block text-sm">{user?.username}</span>
+                  <span className="block text-sm">
+                    {user.first_name} {user.last_name}
+                  </span>
                   <span className="block truncate text-sm font-medium">
-                    {user?.email}
+                    {user.email}
                   </span>
                 </Dropdown.Header>
                 <Dropdown.Item href="/profile" icon={HiUser}>
