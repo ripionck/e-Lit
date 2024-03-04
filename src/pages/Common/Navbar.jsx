@@ -123,18 +123,18 @@ const CustomNavbar = () => {
                 inline
                 label={
                   <img
-                    src={user.avater}
-                    alt={user.username}
+                    src={user?.avater}
+                    alt={user?.username}
                     className="w-12 h-12 bg-gray-200 rounded-full object-cover"
                   />
                 }
               >
                 <Dropdown.Header>
                   <span className="block text-sm">
-                    {user.first_name} {user.last_name}
+                    {user?.first_name} {user?.last_name}
                   </span>
                   <span className="block truncate text-sm font-medium">
-                    {user.email}
+                    {user?.email}
                   </span>
                 </Dropdown.Header>
                 <Dropdown.Item href="/profile" icon={HiUser}>
