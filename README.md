@@ -9,12 +9,5 @@ https://e-lit-emporium.netlify.app/
 ## 🛠 Technologies & Tools
 React, Tailwind CSS, Django REST API, NPM, Git, Postman
 
-## Run
-
-To run, run the following command
-
-```bash
-  npm run dev
-```
 
 
